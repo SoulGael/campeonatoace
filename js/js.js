@@ -4,7 +4,6 @@ $(document).on("ready", inicio);
 //var idRol=$("#idRol").val();
 function inicio(){
 	$('#clickIngreso').on('click', ingresoSistema);
-    //$('#clickUsuario').on('click', ingresoUsuario);
 
     //Control de Usuarios
     var parametros = {
@@ -114,6 +113,16 @@ function cambiarClassMenu(idNueva, idVieja){
 
 	var elemento = document.querySelector('#'+idVieja+'');
 	elemento.removeAttribute("class");
+}
+
+function mensa(){
+    $.gritter.add({
+        // (string | mandatory) the heading of the notification
+        title: 'This is a notice without an image!',
+        // (string | mandatory) the text inside the notification
+        text: 'This will fade out after a certain amount of time. Vivamus eget tincidunt velit. Cum sociis natoque penatibus et <a href="#" class="orange">magnis dis parturient</a> montes, nascetur ridiculus mus.',
+        class_name: 'gritter-success' 
+    });
 }
 
 function datos(select, from, where, onclick){

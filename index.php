@@ -46,23 +46,6 @@ session_destroy();
 		<!--[if !IE]> -->
 		<script src="assets/js/jquery-2.1.4.min.js"></script>
 		<script src="assets/js/ace-extra.min.js"></script>
-
-		<script type="text/javascript">
-			jQuery(function($) {
-				$('#gritter-without-image').on(ace.click_event, function(){
-					console.log("sd");
-					$.gritter.add({
-						// (string | mandatory) the heading of the notification
-						title: 'This is a notice without an image!',
-						// (string | mandatory) the text inside the notification
-						text: 'This will fade out after a certain amount of time. Vivamus eget tincidunt velit. Cum sociis natoque penatibus et <a href="#" class="orange">magnis dis parturient</a> montes, nascetur ridiculus mus.',
-						class_name: 'gritter-success' + (!$('#gritter-light').get(0).checked ? ' gritter-light' : '')
-					});
-			
-					return false;
-				});
-				});
-		</script>
 	</head>
 
 	<body class="login-layout">
@@ -111,7 +94,7 @@ session_destroy();
 													<div class="space"></div>
 
 													<div class="clearfix">
-														<button type="button" id="clickIngreso" name="clickIngreso" class="width-35 pull-right btn btn-sm btn-primary">
+														<button type="button" onclick=mensa() id="clickIngreso" name="clickIngreso" class="width-35 pull-right btn btn-sm btn-primary">
 															<i class="ace-icon fa fa-key"></i>
 															<span class="bigger-110">Ingresar</span>
 														</button>
