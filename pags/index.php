@@ -13,11 +13,12 @@ autenticar();
 		<meta name="description" content="Aplicación web realizada para la Universidad Reginal Autónoma de los Andes 'Uniandes' ext Ibarra />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
-		<!-- bootstrap & fontawesome -->
 		<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 
 		<!-- page specific plugin styles -->
+		<link rel="stylesheet" href="../assets/css/jquery-ui.custom.min.css" />
+		<link rel="stylesheet" href="../assets/css/jquery.gritter.min.css" />
 
 		<!-- text fonts -->
 		<link rel="stylesheet" href="../assets/css/fonts.googleapis.com.css" />
@@ -26,33 +27,33 @@ autenticar();
 		<link rel="stylesheet" href="../assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 
 		<!--[if lte IE 9]>
-			<link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+			<link rel="stylesheet" href="../assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
 		<![endif]-->
 		<link rel="stylesheet" href="../assets/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="../assets/css/ace-rtl.min.css" />
 
 		<!--[if lte IE 9]>
-		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		  <link rel="stylesheet" href="../assets/css/ace-ie.min.css" />
 		<![endif]-->
-
-		<!-- inline styles related to this page -->
 
 		<!-- ace settings handler -->
 		<script src="../assets/js/ace-extra.min.js"></script>
-
-		<!--Extencion javascript donde estan todas la funciones del sistema-->
+		<script src="../assets/js/jquery-2.1.4.min.js"></script>
 		<script src="../js/js.js"></script>
+		<script src="../assets/js/bootstrap.min.js"></script>
 
-		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+		<!-- page specific plugin scripts -->
+		<script src="../assets/js/jquery.gritter.min.js"></script>
 
-		<!--[if lte IE 8]>
-		<script src="assets/js/html5shiv.min.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
+		<!-- ace scripts -->
+		<script src="../assets/js/ace-elements.min.js"></script>
+		<script src="../assets/js/ace.min.js"></script>
 	</head>
 
 	<body class="no-skin">
 		<div id="navbar" class="navbar navbar-default          ace-save-state">
+			<input type="hidden" id="id" name="id" value="<?php echo $_SESSION['usu']; ?>">
+			<input type="hidden" id="idRol" name="idRol" value="<?php echo $_SESSION['idrol']; ?>">
 			<div class="navbar-container ace-save-state" id="navbar-container">
 				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
 					<span class="sr-only">Menu Principal</span>
@@ -78,10 +79,10 @@ autenticar();
 
 						<li class="light-blue dropdown-modal">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="../assets/images/avatars/user.jpg" alt="Jason's Photo" />
+								<!--<img class="nav-user-photo" src="../assets/images/avatars/user.jpg" alt="Jason's Photo" />-->
 								<span class="user-info">
-									<small>Welcome,</small>
-									Jason
+									<small>Bienvenido,</small>
+									<?php echo $_SESSION['usu']; ?>
 								</span>
 
 								<i class="ace-icon fa fa-caret-left"></i>
@@ -132,41 +133,7 @@ autenticar();
 					</div>
 				</div> /.sidebar-shortcuts -->
 
-				<ul class="nav nav-list">
-					<!--<li class="">
-						<a href="index.html">
-							<i class="menu-icon fa fa-tachometer"></i>
-							<span class="menu-text"> Dashboard </span>
-						</a>
-
-						<b class="arrow"></b>
-					</li>-->
-
-					<li class="active open">
-						<a href="#" class="dropdown-toggle">
-							<i class="menu-icon fa fa-file-o"></i>
-
-							<span class="menu-text">
-								ADMINISTRADOR
-								<!--<span class="badge badge-primary">5</span>-->
-							</span>
-
-							<b class="arrow fa fa-angle-down"></b>
-						</a>
-
-						<b class="arrow"></b>
-
-						<ul class="submenu">
-							<li class="active">
-								<a>
-									<i class="menu-icon fa fa-caret-right"></i>
-									FAQ
-								</a>
-
-								<b class="arrow"></b>
-							</li>
-						</ul>
-					</li>
+				<ul id="divOpciones" class="nav nav-list">
 				</ul><!-- /.nav-list -->
 
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -255,7 +222,7 @@ autenticar();
 													<div class="panel-heading">
 														<a href="#faq-2-1" data-parent="#faq-list-2" data-toggle="collapse" class="accordion-toggle collapsed">
 															<i class="ace-icon fa fa-chevron-right smaller-80" data-icon-hide="ace-icon fa fa-chevron-down align-top" data-icon-show="ace-icon fa fa-chevron-right"></i>&nbsp;
-						Enim eiusmod high life accusamus terry richardson?
+					Enim eiusmod high life accusamus terry richardson?
 														</a>
 													</div>
 
@@ -302,33 +269,5 @@ autenticar();
 					</div>
 				</div>
 			</div>-->
-
-			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-			</a>
-		</div><!-- /.main-container -->
-
-		<!-- basic scripts -->
-
-		<!--[if !IE]> -->
-		<script src="../assets/js/jquery-2.1.4.min.js"></script>
-
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-<script src="assets/js/jquery-1.11.3.min.js"></script>
-<![endif]-->
-		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='../assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
-		<script src="../assets/js/bootstrap.min.js"></script>
-
-		<!-- page specific plugin scripts -->
-
-		<!-- ace scripts -->
-		<script src="../assets/js/ace-elements.min.js"></script>
-		<script src="../assets/js/ace.min.js"></script>
-
-		<!-- inline scripts related to this page -->
 	</body>
 </html>

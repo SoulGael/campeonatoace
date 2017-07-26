@@ -11,7 +11,7 @@ function inicio(){
         //"idRol" : $("#idRol").val(),
         //"valorCaja2" : valorCaja2
     };
-    
+
     $.ajax({
         data:  parametros,
         url:   'privilegios.php',
@@ -22,7 +22,7 @@ function inicio(){
         },
             success:  function (response) {
                // console.log(response[0]['Roles']);
-                cadenaPrivilegio=response[0]['Roles'];                
+                cadenaPrivilegio=response[0]['Roles'];
                 cadenaPrivilegio=cadenaPrivilegio.substring(0, cadenaPrivilegio.length-1);
                 inicioPrivilegio();
             }
@@ -46,63 +46,103 @@ function menus(completa, buscar){
 function inicioPrivilegio(){
     var html="";
 
-    html+='<li class="uk-text-center"><a href="#">CAMPEONATO UNIANDES</a></li>';
-
-    if(menus(cadenaPrivilegio, 'admUsuario')||menus(cadenaPrivilegio, 'admRoles')||menus(cadenaPrivilegio, 'admEstudiantes')){
-        
-        html+='<li class="uk-parent">'+
-                '<a><span class="uk-margin-small-right" uk-icon="icon: settings"></span>ADMINISTRACION</a>'+
-                    '<ul class="uk-nav-sub">';
-                 if(menus(cadenaPrivilegio, 'admRoles')){
-                    html+='<li><a onclick="admRoles()">Roles</a></li>';
-                 }
-                 if(menus(cadenaPrivilegio, 'admUsuario')){
-                    html+='<li><a onclick="admUsuario()">Usuarios</a></li>';
-                 }
-                 if(menus(cadenaPrivilegio, 'admEstudiantes')){
-                    html+='<li><a onclick="admEstudiantes()">Administracion de Estudiantes</a></li>';
-                 }
-        html+='</ul></li>';        
+		if(menus(cadenaPrivilegio, 'admUsuario')||menus(cadenaPrivilegio, 'admRoles')||menus(cadenaPrivilegio, 'admEstudiantes')){
+			html += '<li class="">'+
+								'<a href="#" class="dropdown-toggle">'+
+									'<i class="menu-icon fa fa-user"></i>'+
+									'<span class="menu-text">ADMINISTRADOR</span>'+
+									'<b class="arrow fa fa-angle-down"></b>'+
+								'</a>'+
+								'<b class="arrow"></b><ul class="submenu">';
+					if(menus(cadenaPrivilegio, 'admRoles')){
+						html +=		'<li>'+
+													'<a onclick="admRoles()"><i class="menu-icon fa fa-caret-right"></i>Roles</a>'+
+													'<b class="arrow"></b>'+
+												'</li>';
+					}
+					if(menus(cadenaPrivilegio, 'admUsuario')){
+						html +=	'<li>'+
+											'<a onclick="admUsuario()"><i class="menu-icon fa fa-caret-right"></i>Usuarios</a>'+
+											'<b class="arrow"></b>'+
+										'</li>';
+					}
+					if(menus(cadenaPrivilegio, 'admEstudiantes')){
+						html +=		'<li>'+
+												'<a onclick="admEstudiantes()"><i class="menu-icon fa fa-caret-right"></i>Administración de Estudiantes</a>'+
+												'<b class="arrow"></b>'+
+											'</li>';
+					}
+			html += '</ul></li>';
     }
 
     if(menus(cadenaPrivilegio, 'admDiciplinas')||menus(cadenaPrivilegio, 'admCampeonato')||menus(cadenaPrivilegio, 'admFaseGrupos')||menus(cadenaPrivilegio,
         'admCalendario')||menus(cadenaPrivilegio, 'admFichaControl')){
-        
-        html+='<li class="uk-parent">'+
-                '<a><span class="uk-margin-small-right" uk-icon="icon: settings"></span>CAMPEONATO</a>'+
-                    '<ul class="uk-nav-sub">';
+
+					html += '<li class="">'+
+										'<a href="#" class="dropdown-toggle">'+
+											'<i class="menu-icon fa fa-bookmark"></i>'+
+											'<span class="menu-text">CAMPEONATO</span>'+
+											'<b class="arrow fa fa-angle-down"></b>'+
+										'</a>'+
+										'<b class="arrow"></b><ul class="submenu">';
+
                  if(menus(cadenaPrivilegio, 'admDiciplinas')){
-                    html+='<li><a onclick="admDiciplina()">Diciplinas</a></li>';
+									 html +=		'<li>'+
+			 													'<a onclick="admDiciplina()"><i class="menu-icon fa fa-caret-right"></i>Diciplinas</a>'+
+			 													'<b class="arrow"></b>'+
+			 												'</li>';
                  }
                  if(menus(cadenaPrivilegio, 'admCampeonato')){
-                    html+='<li><a onclick="admCampeonato()">Campeonato</a></li>';
+									 html +=		'<li>'+
+			 													'<a onclick="admCampeonato()"><i class="menu-icon fa fa-caret-right"></i>Campeonato</a>'+
+			 													'<b class="arrow"></b>'+
+			 												'</li>';
                  }
                  if(menus(cadenaPrivilegio, 'admFaseGrupos')){
-                    html+='<li><a onclick="admFaseGrupos()">Crear Fase de Grupos</a></li>';
-                 }                 
+									 html +=		'<li>'+
+			 													'<a onclick="admFaseGrupos()"><i class="menu-icon fa fa-caret-right"></i>Crear Fase de Grupos</a>'+
+			 													'<b class="arrow"></b>'+
+			 												'</li>';
+                 }
                  if(menus(cadenaPrivilegio, 'admCalendario')){
-                    html+='<li><a onclick="admCalendario()">Administracion de Calendario</a></li>';
+									 html +=		'<li>'+
+			 													'<a onclick="admCalendario()"><i class="menu-icon fa fa-caret-right"></i>Administración de Calendario</a>'+
+			 													'<b class="arrow"></b>'+
+			 												'</li>';
                  }
                  if(menus(cadenaPrivilegio, 'admFichaControl')){
-                    html+='<li><a onclick="admFichaControl()">Administracion de Fichas de Control</a></li>';
+									 html +=		'<li>'+
+			 													'<a onclick="admFichaControl()"><i class="menu-icon fa fa-caret-right"></i>Administración de Fichas de Control</a>'+
+			 													'<b class="arrow"></b>'+
+			 												'</li>';
                  }
-        html+='</ul></li>';        
+        html += '</ul></li>';
     }
-    
 
     if (menus(cadenaPrivilegio, 'admEquipos')) {
-        html+='<li class="uk-parent">'+
-        '<a><span class="uk-margin-small-right" uk-icon="icon: bookmark"></span>EQUIPOS</a>'+
-            '<ul class="uk-nav-sub">';
+			html += '<li class="">'+
+								'<a href="#" class="dropdown-toggle">'+
+									'<i class="menu-icon fa fa-futbol-o"></i>'+
+									'<span class="menu-text">EQUIPOS</span>'+
+									'<b class="arrow fa fa-angle-down"></b>'+
+								'</a>'+
+								'<b class="arrow"></b><ul class="submenu">';
             if(menus(cadenaPrivilegio, 'admEquipos')){
-                    html+='<li><a onclick="admEquipos()">Nuevo Equipo</a></li>';
+							html +=		'<li>'+
+													 '<a onclick="admEquipos()"><i class="menu-icon fa fa-caret-right"></i>Administración de Equipos</a>'+
+													 '<b class="arrow"></b>'+
+												 '</li>';
                  }
         html+='</ul></li>';
     }
-    
 
-    html+='<li class="uk-nav-divider"></li>'+
-        '<li><a href="../index.php"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span>CERRAR SESION</a></li>';
+		html+='<li class="">'+
+						'<a href="../index.php">'+
+							'<i class="menu-icon fa fa-power-off red"></i>'+
+							'<span class="menu-text red"> CERRAR SESION </span>'+
+						'</a>'+
+						'<b class="arrow"></b>'+
+					'</li>';
 
     document.getElementById("divOpciones").innerHTML=html;
 }
@@ -115,14 +155,26 @@ function cambiarClassMenu(idNueva, idVieja){
 	elemento.removeAttribute("class");
 }
 
-function mensa(){
+function mensajeError(mensaje){
     $.gritter.add({
         // (string | mandatory) the heading of the notification
-        title: 'This is a notice without an image!',
+        title: 'Error',
         // (string | mandatory) the text inside the notification
-        text: 'This will fade out after a certain amount of time. Vivamus eget tincidunt velit. Cum sociis natoque penatibus et <a href="#" class="orange">magnis dis parturient</a> montes, nascetur ridiculus mus.',
-        class_name: 'gritter-success' 
+        text: mensaje,
+        class_name: 'gritter-error'
     });
+    return false;
+}
+
+function mensajeCorrecto(mensaje){
+    $.gritter.add({
+        // (string | mandatory) the heading of the notification
+        title: 'Correcto',
+        // (string | mandatory) the text inside the notification
+        text: mensaje,
+        class_name: 'gritter-successss'
+    });
+    return false;
 }
 
 function datos(select, from, where, onclick){
@@ -212,20 +264,24 @@ function ingresoSistema(){
         if (xmlhttp.readyState==4 && xmlhttp.status==200){
             var id=xmlhttp.responseText;
             if(document.getElementById("usuario").value==""){
-                document.getElementById("usuario").className += ' uk-form-danger';
-                UIkit.notification("<span uk-icon='icon: warning'></span> El campo usuario esta vacio",{status:'warning'});
+                document.getElementById("usuariolabel").className += ' has-error ';
+                document.getElementById("usuarioicon").className += ' red ';
+                mensajeError("El campo usuario esta vacio");
             }
             if(document.getElementById("pass").value==""){
-                document.getElementById("pass").className += ' uk-form-danger';
-                UIkit.notification("<span uk-icon='icon: warning'></span> El campo Contraseña esta vacia.",{status:'warning'});
+                document.getElementById("passlabel").className += ' has-error ';
+                document.getElementById("passicon").className += ' red ';
+                mensajeError("El campo de Contraseña esta vacia");
             }
             else{
                 if(id=='0'){
                     window.open('pags/index.php', '_parent');
                 }
-                mensajeError(id);
+                else{
+                    mensajeError(id);
+                }
             }
-            
+
             //document.getElementById("datos").innerHTML=xmlhttp.responseText;
         }
     }
@@ -239,7 +295,7 @@ function enviarFormGuardar(form, valores){
 
     var json = JSON.parse(valores);
     //console.log(json);
-    
+
     $.ajax({
         data:  json,
         url:   form+'.php',
@@ -289,7 +345,7 @@ function enviarForm(form,send){
 
 function getids(tab){
     var lista = '';
-    $("input[name="+tab+"]").each(function (index) {  
+    $("input[name="+tab+"]").each(function (index) {
        if($(this).is(':checked')){
           lista += $(this).val()+',';
        }
@@ -300,10 +356,10 @@ function getids(tab){
 
 function getidsText(tab){
     var lista = '';
-    $("input[name="+tab+"]").each(function (index) {  
+    $("input[name="+tab+"]").each(function (index) {
         if($(this).val()!=('')){
           lista += $(this).val()+',';
-       }       
+       }
     });
     lista = lista.substring(0, lista.length-1);
     return lista;
@@ -431,7 +487,7 @@ function admUsuario(){
 }
 
 function busquedaUsuario(){
-    
+
     var where = "";
     if ($("#buscar_usuario").val()!="") {
         where = " where lower(alias) like lower('%"+$("#buscar_usuario").val()+"%') ";
@@ -476,7 +532,7 @@ function admCampeonato(){
 }
 
 function busquedaCampeonato(){
-    
+
     var where = "";
     if ($("#buscar_campeonato").val()!="") {
         where += " where lower(campeonato) like lower('%"+$("#buscar_campeonato").val()+"%') ";
@@ -502,7 +558,7 @@ function admCampeonatoForm(id){
 }
 
 function admCampeonatoGuardar(){
-    
+
     /*console.log($("#arbitraje").val());
     console.log(document.getElementById("ch").checked);
     console.log(document.getElementById("cm").checked);
@@ -522,7 +578,7 @@ function admCampeonatoGuardar(){
     console.log($("#p_equipos").val());
     console.log($("#v_garantia").val());
     console.log($("#v_inscripcion").val());*/
-    
+
     idsDiciplina = getids("diciplinaTab");
     enviarFormGuardar('usuarios/frmCampeonatoGuardar','{"id": "'+$("#id_campeonato").val()+'", "nombre_campeonato" : "'+$("#nombre_campeonato").val()+'", '+
         ' "f_inicio" : "'+$("#f_inicio").val()+'", "f_inscripcion" : "'+$("#f_inscripcion").val()+'", "diciplina" : "'+idsDiciplina+'", '+
@@ -559,7 +615,7 @@ function admEquipos(){
 }
 
 function busquedaEquipo(){
-    
+
     var where = " ";
     if ($("#buscar_equipos").val()!="") {
         where += " where lower(equipo) like lower('%"+$("#buscar_equipos").val()+"%') ";
@@ -618,7 +674,7 @@ function admFutbolGuardar(){
     //console.log(idsa);
 
     enviarFormGuardar('usuarios/frmEquipoGuardar','{"id": "'+$("#id_futbol").val()+'", "nuevo_equipo" : "'+$("#nuevo_equipo").val()+'", '+
-        ' "cmbCampeonato" : "'+$("#cmbCampeonato").val()+'", "cmbCarrea" : "'+$("#cmbCarrea").val()+'", "cmbDiciplina" : "'+$("#cmbDiciplina").val()+'", "ids" : "'+ids+'", '+ 
+        ' "cmbCampeonato" : "'+$("#cmbCampeonato").val()+'", "cmbCarrea" : "'+$("#cmbCarrea").val()+'", "cmbDiciplina" : "'+$("#cmbDiciplina").val()+'", "ids" : "'+ids+'", '+
         ' "idsNum" : "'+idsNum+'", "genero" : "'+sexo+'", "modalidad" : "'+modalidad+'" }');
 }
 
@@ -658,7 +714,7 @@ function admEstudiantes(){
 }
 
 function busquedaEstudiantes(){
-    
+
     var where = "";
     if ($("#buscar_estudiantes").val()!="") {
         where += " where lower(razon_social) like lower('%"+$("#buscar_estudiantes").val()+"%') ";
@@ -719,7 +775,7 @@ function admFaseGrupos(){
 }
 
 function busquedaFaseGrupo(){
-    
+
     var where = "";
     /*if ($("#buscar_estudiantes").val()!="") {
         where += " where lower(razon_social) like lower('%"+$("#buscar_estudiantes").val()+"%') ";
@@ -852,7 +908,7 @@ function admFichaControl(){
 }
 
 function busquedaFicha(){
-    
+
     var where = "";
     if ($("#buscar_ficha").val()!="") {
         where += " where lower(razon_social) like lower('%"+$("#buscar_ficha").val()+"%') ";
