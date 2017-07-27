@@ -48,17 +48,17 @@ function inicioPrivilegio(){
 
 		if(menus(cadenaPrivilegio, 'admUsuario')||menus(cadenaPrivilegio, 'admRoles')||menus(cadenaPrivilegio, 'admEstudiantes')){
 			html += '<li class="">'+
-								'<a href="#" class="dropdown-toggle">'+
-									'<i class="menu-icon fa fa-user"></i>'+
-									'<span class="menu-text">ADMINISTRADOR</span>'+
-									'<b class="arrow fa fa-angle-down"></b>'+
-								'</a>'+
-								'<b class="arrow"></b><ul class="submenu">';
+					   '<a href="#" class="dropdown-toggle">'+
+						  '<i class="menu-icon fa fa-user"></i>'+
+						  '<span class="menu-text">ADMINISTRADOR</span>'+
+						  '<b class="arrow fa fa-angle-down"></b>'+
+						'</a>'+
+						'<b class="arrow"></b><ul class="submenu">';
 					if(menus(cadenaPrivilegio, 'admRoles')){
 						html +=		'<li>'+
-													'<a onclick="admRoles()"><i class="menu-icon fa fa-caret-right"></i>Roles</a>'+
-													'<b class="arrow"></b>'+
-												'</li>';
+										'<a onclick="admRoles()"><i class="menu-icon fa fa-caret-right"></i>Roles</a>'+
+										'<b class="arrow"></b>'+
+									'</li>';
 					}
 					if(menus(cadenaPrivilegio, 'admUsuario')){
 						html +=	'<li>'+
@@ -202,8 +202,7 @@ function datos(select, from, where, onclick){
 function encerar(){
     document.getElementById("div1").innerHTML="";
     document.getElementById("div2").innerHTML="";
-    document.getElementById("divInfo").innerHTML="";
-    UIkit.tab("#js-control").show(0);
+    //document.getElementById("divInfo").innerHTML="";
 }
 
 function uploadAjax(){
@@ -371,23 +370,20 @@ function admRoles(){
     var html="";
     var html2="";
 
-    html += '<div class="uk-margin uk-padding uk-padding-remove-left">'+
-                '<div class="uk-inline">'+
-                    '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
-                    '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_rol" name="buscar_rol" onKeypress="if(event.keyCode == 13) {busquedaRol();}"/>'+
-                '</div>'+
-                '<button class="uk-button uk-button-default" onclick=UIkit.tab("#js-control").show(0);busquedaRol(); >Buscar</button>'+
+    html += '<div class="input-group col-xs-4">'+
+                '<input type="text" class="form-control"  id="buscar_rol" name="buscar_rol" onKeypress="if(event.keyCode == 13) {busquedaRol();}" placeholder="Buscar.." />'+
+                '<span class="input-group-btn">'+
+                    '<button onclick=busquedaRol(); type="button" class="btn btn-primary btn-sm">'+
+                        '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
+                    '</button>'+
+                '</span>'+
             '</div>';
-    /*'<div class="uk-grid-small uk-padding" uk-grid>'+
-                '<input class="uk-form-width-medium" placeholder="Buscar..." type="text" >'+
-                '<button class="uk-button uk-button-default" onclick=busquedaRol() >Buscar</button>'+
-            '</div>';*/
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="uk-button uk-button-primary " onclick=UIkit.tab("#js-control").show(1);admRolForm(-1);>Nuevo</button>';
+    html2 += '<button class="btn btn-success" onclick=admRolForm(-1);>Nuevo</button>';
     document.getElementById("divMenu2").innerHTML=html2;
-    document.getElementById("divInfo").innerHTML="ROLES";
+    //document.getElementById("divInfo").innerHTML="ROLES";
     busquedaRol();
     admRolForm(-1);
 }
