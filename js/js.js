@@ -394,7 +394,7 @@ function busquedaRol(){
         where = " where lower(rol) like lower('%"+$("#buscar_rol").val()+"%') ";
     }
     where += " order by rol";
-    datos("id_rol,rol", "tbl_rol", where,"UIkit.tab('#js-control').show(1);admRolForm");
+    datos("id_rol,rol", "tbl_rol", where,"admRolForm");
 }
 
 function admRolForm(id){
