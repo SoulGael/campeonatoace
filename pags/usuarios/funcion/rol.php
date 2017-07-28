@@ -21,7 +21,7 @@ function getRol($id) {
 function rolGuardar($rol) {
 	
 	$resultado = "";
-	if($resultado = pg_query("insert into tbl_rol (rol) values ('".$rol."');") or die (pg_last_error())){
+	if($resultado = pg_query("insert into tbl_rol (rol) values UPPER('".$rol."');") or die (pg_last_error())){
 		return true;
 	}
 
@@ -83,7 +83,7 @@ function rolRepetido($rol) {
 function rolModificar($idrol, $rol) {
 	
 	$resultado = "";
-	if($resultado = pg_query("update tbl_rol set rol='".$rol."' where id_rol=".$idrol." ") or die (pg_last_error())){
+	if($resultado = pg_query("update tbl_rol set rol=UPPER('".$rol."') where id_rol=".$idrol." ") or die (pg_last_error())){
 		return true;
 	}
 

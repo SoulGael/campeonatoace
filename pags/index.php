@@ -16,6 +16,10 @@ autenticar();
 		<link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 
+		<!-- page specific plugin styles -->
+		<link rel="stylesheet" href="../assets/css/jquery-ui.custom.min.css" />
+		<link rel="stylesheet" href="../assets/css/jquery.gritter.min.css" />
+
 		<!-- text fonts -->
 		<link rel="stylesheet" href="../assets/css/fonts.googleapis.com.css" />
 
@@ -66,7 +70,7 @@ autenticar();
 				</button>
 
 				<div class="navbar-header pull-left">
-					<a href="index.html" class="navbar-brand">
+					<a href="#" class="navbar-brand">
 						<small>
 							<i class="fa fa-futbol-o"></i>
 							Campeonato
@@ -161,28 +165,9 @@ autenticar();
 					</div><!-- /.page-content -->
 				</div>
 			</div><!-- /.main-content -->
-
-			<script type="text/javascript">
-				jQuery(function($) {
-					//initiate dataTables plugin
-					var myTable =
-					$('#dynamic-table')
-					//.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
-					.DataTable( {
-						bAutoWidth: false,
-						"aoColumns": [
-						  { "bSortable": false },
-						  null, null,null, null, null,
-						  { "bSortable": false }
-						],
-						"aaSorting": [],
-						select: {
-							style: 'multi'
-						}
-				    } );
-
-				})
-			</script>
-
+<script type="text/javascript">
+			$('#id-text2').attr('class', 'white');
+			$('#id-company-text').attr('class', 'light-blue');
+		</script>
 	</body>
 </html>

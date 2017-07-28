@@ -28,7 +28,7 @@ else {
 	}
 }
 
-$resultadoArray[] = array('msg' => $mensaje, 'res' => $res, 'select' => "id_rol,rol", 'from' => "tbl_rol", 'where' => " order by rol", 'onclick' => "admRolForm");
+$resultadoArray[] = array('msg' => $mensaje, 'res' => $res, 'select' => "id_rol,rol", 'head' => ",ROL", 'tamanio' => ",100", 'from' => "tbl_rol", 'where' => " order by rol", 'onclick' => "admRolForm");
 echo $_GET['callback']."(".json_encode($resultadoArray).");";
 
 pg_close();

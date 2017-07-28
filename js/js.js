@@ -55,22 +55,22 @@ function inicioPrivilegio(){
 						'</a>'+
 						'<b class="arrow"></b><ul class="submenu">';
 					if(menus(cadenaPrivilegio, 'admRoles')){
-						html +=		'<li>'+
-										'<a onclick="admRoles()"><i class="menu-icon fa fa-caret-right"></i>Roles</a>'+
-										'<b class="arrow"></b>'+
-									'</li>';
+						html +=	'<li>'+
+									'<a onclick="admRoles()"><i class="menu-icon fa fa-caret-right"></i>Roles</a>'+
+									'<b class="arrow"></b>'+
+								'</li>';
 					}
 					if(menus(cadenaPrivilegio, 'admUsuario')){
 						html +=	'<li>'+
-											'<a onclick="admUsuario()"><i class="menu-icon fa fa-caret-right"></i>Usuarios</a>'+
-											'<b class="arrow"></b>'+
-										'</li>';
+									'<a onclick="admUsuario()"><i class="menu-icon fa fa-caret-right"></i>Usuarios</a>'+
+									'<b class="arrow"></b>'+
+								'</li>';
 					}
 					if(menus(cadenaPrivilegio, 'admEstudiantes')){
-						html +=		'<li>'+
-												'<a onclick="admEstudiantes()"><i class="menu-icon fa fa-caret-right"></i>Administración de Estudiantes</a>'+
-												'<b class="arrow"></b>'+
-											'</li>';
+						html +=	'<li>'+
+									'<a onclick="admEstudiantes()"><i class="menu-icon fa fa-caret-right"></i>Administración de Estudiantes</a>'+
+									'<b class="arrow"></b>'+
+								'</li>';
 					}
 			html += '</ul></li>';
     }
@@ -79,42 +79,42 @@ function inicioPrivilegio(){
         'admCalendario')||menus(cadenaPrivilegio, 'admFichaControl')){
 
 					html += '<li class="">'+
-										'<a href="#" class="dropdown-toggle">'+
-											'<i class="menu-icon fa fa-bookmark"></i>'+
-											'<span class="menu-text">CAMPEONATO</span>'+
-											'<b class="arrow fa fa-angle-down"></b>'+
-										'</a>'+
-										'<b class="arrow"></b><ul class="submenu">';
+								'<a href="#" class="dropdown-toggle">'+
+									'<i class="menu-icon fa fa-bookmark"></i>'+
+									'<span class="menu-text">CAMPEONATO</span>'+
+									'<b class="arrow fa fa-angle-down"></b>'+
+								'</a>'+
+								'<b class="arrow"></b><ul class="submenu">';
 
                  if(menus(cadenaPrivilegio, 'admDiciplinas')){
-									 html +=		'<li>'+
-			 													'<a onclick="admDiciplina()"><i class="menu-icon fa fa-caret-right"></i>Diciplinas</a>'+
-			 													'<b class="arrow"></b>'+
-			 												'</li>';
+                    html +='<li>'+
+			 		          '<a onclick="admDiciplina()"><i class="menu-icon fa fa-caret-right"></i>Diciplinas</a>'+
+                              '<b class="arrow"></b>'+
+			 				'</li>';
                  }
                  if(menus(cadenaPrivilegio, 'admCampeonato')){
-									 html +=		'<li>'+
-			 													'<a onclick="admCampeonato()"><i class="menu-icon fa fa-caret-right"></i>Campeonato</a>'+
-			 													'<b class="arrow"></b>'+
-			 												'</li>';
+                    html +=	'<li>'+
+			 				    '<a onclick="admCampeonato()"><i class="menu-icon fa fa-caret-right"></i>Campeonato</a>'+
+			 					'<b class="arrow"></b>'+
+			 				'</li>';
                  }
                  if(menus(cadenaPrivilegio, 'admFaseGrupos')){
-									 html +=		'<li>'+
-			 													'<a onclick="admFaseGrupos()"><i class="menu-icon fa fa-caret-right"></i>Crear Fase de Grupos</a>'+
-			 													'<b class="arrow"></b>'+
-			 												'</li>';
+					 html +='<li>'+
+			 				    '<a onclick="admFaseGrupos()"><i class="menu-icon fa fa-caret-right"></i>Crear Fase de Grupos</a>'+
+			 					'<b class="arrow"></b>'+
+			 				'</li>';
                  }
                  if(menus(cadenaPrivilegio, 'admCalendario')){
-									 html +=		'<li>'+
-			 													'<a onclick="admCalendario()"><i class="menu-icon fa fa-caret-right"></i>Administración de Calendario</a>'+
-			 													'<b class="arrow"></b>'+
-			 												'</li>';
+                     html +='<li>'+
+			 					'<a onclick="admCalendario()"><i class="menu-icon fa fa-caret-right"></i>Administración de Calendario</a>'+
+			 					'<b class="arrow"></b>'+
+			 				'</li>';
                  }
                  if(menus(cadenaPrivilegio, 'admFichaControl')){
-									 html +=		'<li>'+
-			 													'<a onclick="admFichaControl()"><i class="menu-icon fa fa-caret-right"></i>Administración de Fichas de Control</a>'+
-			 													'<b class="arrow"></b>'+
-			 												'</li>';
+                    html +=	'<li>'+
+			 				    '<a onclick="admFichaControl()"><i class="menu-icon fa fa-caret-right"></i>Administración de Fichas de Control</a>'+
+			 					'<b class="arrow"></b>'+
+			 				'</li>';
                  }
         html += '</ul></li>';
     }
@@ -128,21 +128,21 @@ function inicioPrivilegio(){
 								'</a>'+
 								'<b class="arrow"></b><ul class="submenu">';
             if(menus(cadenaPrivilegio, 'admEquipos')){
-							html +=		'<li>'+
-													 '<a onclick="admEquipos()"><i class="menu-icon fa fa-caret-right"></i>Administración de Equipos</a>'+
-													 '<b class="arrow"></b>'+
-												 '</li>';
+                html +=	'<li>'+
+						  '<a onclick="admEquipos()"><i class="menu-icon fa fa-caret-right"></i>Administración de Equipos</a>'+
+						  '<b class="arrow"></b>'+
+						'</li>';
                  }
         html+='</ul></li>';
     }
 
 		html+='<li class="">'+
-						'<a href="../index.php">'+
-							'<i class="menu-icon fa fa-power-off red"></i>'+
-							'<span class="menu-text red"> CERRAR SESION </span>'+
-						'</a>'+
-						'<b class="arrow"></b>'+
-					'</li>';
+				    '<a href="../index.php">'+
+					   '<i class="menu-icon fa fa-power-off red"></i>'+
+						'<span class="menu-text red"> CERRAR SESION </span>'+
+					'</a>'+
+					'<b class="arrow"></b>'+
+				'</li>';
 
     document.getElementById("divOpciones").innerHTML=html;
 }
@@ -177,7 +177,16 @@ function mensajeCorrecto(mensaje){
     return false;
 }
 
-function datos(select, from, where, onclick){
+/**
+ * @param  var select datos seleccionados de la tabla
+ * @param  var head Cabecera de la tabla
+ * @param  var tamanio tamanio de la columna representada en %
+ * @param  var from nombre de la tabla
+ * @param  var where opciones a escojer
+ * @param  var onclick funcion que va a realizar al hacer click
+ * @return Datos de la tabla
+ */
+function datos(select, head, tamanio, from, where, onclick){ 
     var xmlhttp;
     if (window.XMLHttpRequest){
         xmlhttp=new XMLHttpRequest();
@@ -189,16 +198,22 @@ function datos(select, from, where, onclick){
         if (xmlhttp.readyState==4 && xmlhttp.status==200){
             //var id=xmlhttp.responseText;
             document.getElementById("div1").innerHTML=xmlhttp.responseText;
+            tablaPagination("dynamic-table");
         }
     }
     xmlhttp.open("POST","WEB/busqueda.php",true);
     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded;");
     xmlhttp.send("select="+encodeURIComponent(select)
+        +"&head="+encodeURIComponent(head)
         +"&from="+encodeURIComponent(from)
         +"&where="+encodeURIComponent(where)
+        +"&tamanio="+encodeURIComponent(tamanio)
         +"&onclick="+encodeURIComponent(onclick));
 }
 
+/**
+ * @return vacia todo los datos de la pantalla principal
+ */
 function encerar(){
     document.getElementById("div1").innerHTML="";
     document.getElementById("div2").innerHTML="";
@@ -311,13 +326,15 @@ function enviarFormGuardar(form, valores){
                 var from = response[0]['from'];
                 var where = response[0]['where'];
                 var onclick = response[0]['onclick'];
+                var head = response[0]['head'];
+                var tamanio = response[0]['tamanio'];
 
                if(res==true){
-                    UIkit.notification("<span uk-icon='icon: check'></span>"+msg+"",{status:'success'});
-                    datos(select, from, where, onclick);
+                    mensajeCorrecto(msg);
+                    datos(select, head, tamanio, from, where, onclick);
                }
                if(res==false){
-                    UIkit.notification("<span uk-icon='icon: check'></span>"+msg+"",{status:'danger'});
+                    mensajeError(msg);
                }
 
             }
@@ -364,6 +381,13 @@ function getidsText(tab){
     return lista;
 }
 
+function tablaPagination(name){
+    //$('#dynamic-table').DataTable();
+    //Inicializa el plugion del dataTable
+    var myTable =
+        $('#'+name+'').DataTable();
+}
+
 //ROLES
 function admRoles(){
     encerar();
@@ -394,7 +418,7 @@ function busquedaRol(){
         where = " where lower(rol) like lower('%"+$("#buscar_rol").val()+"%') ";
     }
     where += " order by rol";
-    datos("id_rol,rol", "tbl_rol", where,"admRolForm");
+    datos("id_rol,rol", ",ROL", ",100", "tbl_rol", where,"admRolForm");
 }
 
 function admRolForm(id){

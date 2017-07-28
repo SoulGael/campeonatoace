@@ -1,0 +1,72 @@
+/(PARA LOS INPUTS CON ICONOS)
+<div class="form-group">
+	<label class="col-sm-3 control-label no-padding-right">Input with Icon</label>
+	<div class="col-sm-9">
+		<span class="input-icon input-icon-right">
+			<input id="nuevo_rol" name="nuevo_rol" type="text" id="form-field-icon-2" value="'.$rol.'"/>
+			<i class="ace-icon fa fa-leaf green"></i>
+		</span>
+	</div>
+</div>
+
+//PARA LOS BOTONOS CON ICONOS
+<button type="button" onclick="admRolGuardar()" class="btn btn-info btn-sm">
+	<i class="ace-icon fa fa-key bigger-110"></i>Guardar
+</button>
+
+MENUS CON SWITCH
+<div class="tabbable">
+	<ul class="nav nav-tabs" id="myTab">
+		<li class="active">
+			<a data-toggle="tab" href="#home">
+				<i class="green ace-icon fa fa-home bigger-120"></i>
+				Home
+			</a>
+		</li>
+		<li>
+			<a data-toggle="tab" href="#messages">
+				Messages
+				<span class="badge badge-danger">4</span>
+			</a>
+		</li>
+		<li class="dropdown">
+			<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+				Dropdown &nbsp;
+				<i class="ace-icon fa fa-caret-down bigger-110 width-auto"></i>
+			</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div id="home" class="tab-pane fade in active">
+			<p>Raw denim you probably haven't heard of them jean shorts Austin.</p>
+		</div>
+		<div id="messages" class="tab-pane fade">
+			<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
+		</div>
+	</div>
+</div>
+
+//TABLA SIMPLE
+<table id="simple-table" class="table  table-bordered table-hover">
+	<thead>
+		<tr>
+			<th class="center">
+				<label class="pos-rel">
+					<input type="checkbox" class="ace" />
+					<span class="lbl"></span>
+				</label>
+			</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr>
+			<td class="center">
+				<label class="pos-rel">
+				<input type="checkbox" class="ace" />
+				<span class="lbl"></span>
+				</label>
+			</td>
+		</tr>
+	</tbody>
+</table>
