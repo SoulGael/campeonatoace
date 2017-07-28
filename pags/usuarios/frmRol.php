@@ -23,21 +23,21 @@ if(strcmp($id, '-1')!=0){
 	$privilegio = getPromovidos($id);
 
 	if(pg_num_rows($privilegio)!=0){
-		
+
 		$revocar = '<tbody>';
 		while($filaPrivilegio=pg_fetch_array($privilegio)){
-			
+
 			$id_pagina=$filaPrivilegio['id_pagina'];
 			$descripcion=$filaPrivilegio['descripcion'];
 			$revocar.='<tr>
 						<td class="center" width="10%">
 							<input type="checkbox" class="ace" value="'.$id_pagina.'" name="revocarTab">
 							<span class="lbl"></span>
-						</td> 
+						</td>
 						<td>
-							<p>'.$descripcion.' </p> 
-						</td> 
-					   </tr>';			
+							<p>'.$descripcion.' </p>
+						</td>
+					   </tr>';
 		}
 		$revocar .= '<tr><td colspan=2>
 						<button type="button" onclick="admRevocarGuardar()" class="btn btn-primary btn-sm">
@@ -49,21 +49,21 @@ if(strcmp($id, '-1')!=0){
 	$allPrivilegio = getPromover($id);
 
 	if(pg_num_rows($allPrivilegio)!=0){
-		
+
 		$promover = '<tbody>';
 		while($filaPrivilegio=pg_fetch_array($allPrivilegio)){
-			
+
 			$id_pagina=$filaPrivilegio['id_pagina'];
 			$descripcion=$filaPrivilegio['descripcion'];
 			$promover.='<tr>
 							<td class="center" width="10%">
 								<input type="checkbox" class="ace" value="'.$id_pagina.'" name="promoverTab">
 								<span class="lbl"></span>
-							</td> 
+							</td>
 							<td>
-								<p>'.$descripcion.' </p> 
-							</td> 
-						</tr>';			
+								<p>'.$descripcion.' </p>
+							</td>
+						</tr>';
 		}
 		$promover .= '<tr><td colspan=2>
 						<button class="btn btn-primary btn-sm" onclick="admPromoverGuardar()">
@@ -92,17 +92,17 @@ $html .= '<ul class="nav nav-tabs" id="myTab">'.
 			'<div class="tab-content">'.
 				'<div id="roles" class="tab-pane fade in active">'.
 						'<div class="form-group">
-						<label for="inputWarning" class="col-xs-12 col-sm-1 control-label no-padding-right">ROLES</label>
-						<div class="col-xs-12 col-sm-3">
-							<span class="block input-icon input-icon-right">
-								<input id="nuevo_rol" name="nuevo_rol" type="text" id="inputWarning" class="width-100" value='.$rol.'>
-								<i class="ace-icon fa fa-leaf"></i>
-							</span>
-						</div>
-						<button onclick="admRolGuardar()" class="btn btn-primary">
-							<i class="ace-icon fa fa-floppy-o bigger-120 "></i>
-							Guardar
-						</button>
+							<label for="inputWarning" class="col-xs-12 col-sm-1 control-label no-padding-right">ROLES</label>
+							<div class="col-xs-12 col-sm-3">
+								<span class="block input-icon input-icon-right">
+									<input id="nuevo_rol" name="nuevo_rol" type="text" id="inputWarning" class="width-100" value='.$rol.'>
+									<i class="ace-icon fa fa-leaf"></i>
+								</span>
+							</div>
+							<button onclick="admRolGuardar()" class="btn btn-primary">
+								<i class="ace-icon fa fa-floppy-o bigger-120 "></i>
+								Guardar
+							</button>
 					</div>'.
 				'</div>';
 		if (getPermiso($idRol, "admPrivilegios")) {
@@ -110,8 +110,8 @@ $html .= '<ul class="nav nav-tabs" id="myTab">'.
 				$html .= '<div id="promover" class="tab-pane fade"><table id="promoverTable" class="table  table-bordered table-hover">'.$promover.'</table></div>'.
 		        		 '<div id="revocar" class="tab-pane fade"><table id="revocarTable" class="table  table-bordered table-hover">'.$revocar.'</table></div>';
 			}
-		}		
-	        	
+		}
+
 $html .= '</div>';
 
 echo $html;

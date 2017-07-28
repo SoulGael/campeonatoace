@@ -70,3 +70,24 @@ MENUS CON SWITCH
 		</tr>
 	</tbody>
 </table>
+
+//NUEVO BOTON
+html += '<div class="input-group col-xs-4">'+
+            '<input type="text" class="form-control" id="buscar_diciplina" name="buscar_diciplina" onKeypress="if(event.keyCode == 13) busquedaDiciplina()" placeholder="Buscar.." />'+
+            '<span class="input-group-btn">'+
+                '<button onclick=activaTab("div1");busquedaDiciplina(); type="button" class="btn btn-primary btn-sm">'+
+                    '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
+                '</button>'+
+            '</span>'+
+        '</div>';
+
+html2 += '<button class="btn btn-success" onclick=admRolForm(-1);activaTab("div2");>Nuevo</button>';
+//
+<div class="space-4"></div>
+//BUSQUEDA NUEVO BOTON
+var where = "";
+if ($("#buscar_rol").val()!="") {
+		where = " where lower(rol) like lower('%"+$("#buscar_rol").val()+"%') ";
+}
+where += " order by rol";
+datos("id_rol,rol", ",ROL", ",100", "tbl_rol", where,"activaTab('div2');admRolForm");

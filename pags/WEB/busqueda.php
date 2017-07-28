@@ -19,9 +19,10 @@ $html = "";
 $html .= '<table id="dynamic-table" class="table table-striped table-bordered table-hover">'.
 			'<thead>'.
 				'<tr>';
+$selectArray = explode(",", $select);
 $headArray = explode(",", $head);
 $tamanioArray = explode(",", $tamanio);
-for ($i=1; $i < count($headArray); $i++) {
+for ($i=0; $i < count($headArray); $i++) {
 	$html .= '<th width="'.$tamanioArray[$i].'%">'.$headArray[$i].'</th>';
 }
 
@@ -35,7 +36,7 @@ if(pg_num_rows($resultado)!=0){
 		else{
 			$html.='<tr onclick='.$onclick.'("'.$fila[0].'")>';
 		}
-		for ($i=1; $i < count($headArray); $i++) {
+		for ($i=1; $i < count($selectArray); $i++) {
 			$html.='<td>'.$fila[$i].'</td>';
 		}
     	$html.='</tr>';

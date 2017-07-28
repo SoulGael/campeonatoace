@@ -19,7 +19,7 @@ if(strcmp($id, '-1')==0){
 	}else{
 		$mensaje = "Rol Repetido";
 		$res=false;
-	}	
+	}
 }
 else {
 	if(rolModificar($id, $rol)){
@@ -28,7 +28,7 @@ else {
 	}
 }
 
-$resultadoArray[] = array('msg' => $mensaje, 'res' => $res, 'select' => "id_rol,rol", 'head' => ",ROL", 'tamanio' => ",100", 'from' => "tbl_rol", 'where' => " order by rol", 'onclick' => "admRolForm");
+$resultadoArray[] = array('msg' => $mensaje, 'res' => $res, 'select' => "id_rol,rol", 'head' => ",ROL", 'tamanio' => ",100", 'from' => "tbl_rol", 'where' => " order by rol", 'onclick' => "activaTab('div2');admRolForm");
 echo $_GET['callback']."(".json_encode($resultadoArray).");";
 
 pg_close();

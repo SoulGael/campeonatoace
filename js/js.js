@@ -47,7 +47,7 @@ function inicioPrivilegio(){
     var html="";
 
 		if(menus(cadenaPrivilegio, 'admUsuario')||menus(cadenaPrivilegio, 'admRoles')||menus(cadenaPrivilegio, 'admEstudiantes')){
-			html += '<li class="">'+
+			html += '<li class="active">'+
 					   '<a href="#" class="dropdown-toggle">'+
 						  '<i class="menu-icon fa fa-user"></i>'+
 						  '<span class="menu-text">ADMINISTRADOR</span>'+
@@ -56,19 +56,19 @@ function inicioPrivilegio(){
 						'<b class="arrow"></b><ul class="submenu">';
 					if(menus(cadenaPrivilegio, 'admRoles')){
 						html +=	'<li>'+
-									'<a onclick="admRoles()"><i class="menu-icon fa fa-caret-right"></i>Roles</a>'+
+									'<a onclick=activaTab("div1");admRoles()><i class="menu-icon fa fa-caret-right"></i>Roles</a>'+
 									'<b class="arrow"></b>'+
 								'</li>';
 					}
 					if(menus(cadenaPrivilegio, 'admUsuario')){
 						html +=	'<li>'+
-									'<a onclick="admUsuario()"><i class="menu-icon fa fa-caret-right"></i>Usuarios</a>'+
+									'<a onclick=activaTab("div1");admUsuario()><i class="menu-icon fa fa-caret-right"></i>Usuarios</a>'+
 									'<b class="arrow"></b>'+
 								'</li>';
 					}
 					if(menus(cadenaPrivilegio, 'admEstudiantes')){
 						html +=	'<li>'+
-									'<a onclick="admEstudiantes()"><i class="menu-icon fa fa-caret-right"></i>Administración de Estudiantes</a>'+
+									'<a onclick=activaTab("div1");admEstudiantes()><i class="menu-icon fa fa-caret-right"></i>Administración de Estudiantes</a>'+
 									'<b class="arrow"></b>'+
 								'</li>';
 					}
@@ -88,7 +88,7 @@ function inicioPrivilegio(){
 
                  if(menus(cadenaPrivilegio, 'admDiciplinas')){
                     html +='<li>'+
-			 		          '<a onclick="admDiciplina()"><i class="menu-icon fa fa-caret-right"></i>Diciplinas</a>'+
+			 		          '<a onclick=activaTab("div1");admDiciplina()><i class="menu-icon fa fa-caret-right"></i>Diciplinas</a>'+
                               '<b class="arrow"></b>'+
 			 				'</li>';
                  }
@@ -147,12 +147,8 @@ function inicioPrivilegio(){
     document.getElementById("divOpciones").innerHTML=html;
 }
 
-function cambiarClassMenu(idNueva, idVieja){
-	var elemento = document.querySelector('#'+idNueva+'');
-	elemento.setAttribute("class","active");
-
-	var elemento = document.querySelector('#'+idVieja+'');
-	elemento.removeAttribute("class");
+function activaTab(tab){
+	$('a[href="#'+tab+'"]').tab('show');
 }
 
 function mensajeError(mensaje){
@@ -186,7 +182,7 @@ function mensajeCorrecto(mensaje){
  * @param  var onclick funcion que va a realizar al hacer click
  * @return Datos de la tabla
  */
-function datos(select, head, tamanio, from, where, onclick){ 
+function datos(select, head, tamanio, from, where, onclick){
     var xmlhttp;
     if (window.XMLHttpRequest){
         xmlhttp=new XMLHttpRequest();
@@ -405,9 +401,8 @@ function admRoles(){
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="btn btn-success" onclick=admRolForm(-1);>Nuevo</button>';
+    html2 += '<button class="btn btn-success" onclick=admRolForm(-1);activaTab("div2");>Nuevo</button>';
     document.getElementById("divMenu2").innerHTML=html2;
-    //document.getElementById("divInfo").innerHTML="ROLES";
     busquedaRol();
     admRolForm(-1);
 }
@@ -418,7 +413,7 @@ function busquedaRol(){
         where = " where lower(rol) like lower('%"+$("#buscar_rol").val()+"%') ";
     }
     where += " order by rol";
-    datos("id_rol,rol", ",ROL", ",100", "tbl_rol", where,"admRolForm");
+    datos("id_rol,rol", "ROL", "100", "tbl_rol", where,"activaTab('div2');admRolForm");
 }
 
 function admRolForm(id){
@@ -447,19 +442,19 @@ function admDiciplina(){
     var html="";
     var html2="";
 
-    html += '<div class="uk-margin uk-padding uk-padding-remove-left">'+
-                '<div class="uk-inline">'+
-                    '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
-                    '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_diciplina" name="buscar_diciplina" onKeypress="if(event.keyCode == 13) busquedaDiciplina()"/>'+
-                '</div>'+
-                '<button class="uk-button uk-button-default" onclick=UIkit.tab("#js-control").show(0);busquedaDiciplina();>Buscar</button>'+
+		html += '<div class="input-group col-xs-4">'+
+                '<input type="text" class="form-control" id="buscar_diciplina" name="buscar_diciplina" onKeypress="if(event.keyCode == 13) busquedaDiciplina()" placeholder="Buscar.." />'+
+                '<span class="input-group-btn">'+
+                    '<button onclick=activaTab("div1");busquedaDiciplina(); type="button" class="btn btn-primary btn-sm">'+
+                        '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
+                    '</button>'+
+                '</span>'+
             '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="uk-button uk-button-primary " onclick=UIkit.tab("#js-control").show(1);admDiciplinaForm(-1);>Nuevo</button>';
+		html2 += '<button class="btn btn-success" onclick=activaTab("div2");admDiciplinaForm(-1);>Nuevo</button>';
     document.getElementById("divMenu2").innerHTML=html2;
-    document.getElementById("divInfo").innerHTML="DICIPLINAS";
     busquedaDiciplina();
     admDiciplinaForm(-1);
 }
@@ -470,7 +465,7 @@ function busquedaDiciplina(){
         where = " where lower(diciplina) like lower('%"+$("#buscar_diciplina").val()+"%') ";
     }
     where += " order by diciplina";
-    datos("id_diciplina,diciplina, txt_estado", "vta_diciplina", where,"UIkit.tab('#js-control').show(1);admDiciplinaForm");
+    datos("id_diciplina,diciplina,txt_estado", "DICIPLINA, ESTADO","40,60","vta_diciplina", where,"activaTab('div2');admDiciplinaForm");
 }
 
 function admDiciplinaForm(id){
@@ -493,12 +488,12 @@ function admUsuario(){
                     '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
                     '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_usuario" name="buscar_usuario" onKeypress="if(event.keyCode == 13) busquedaUsuario()"/>'+
                 '</div>'+
-                '<button class="uk-button uk-button-default" onclick=UIkit.tab("#js-control").show(0);busquedaUsuario();>Buscar</button>'+
+                '<button class="uk-button uk-button-default" onclick=activaTab("div1");busquedaUsuario();>Buscar</button>'+
             '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="uk-button uk-button-primary" onclick=UIkit.tab("#js-control").show(1);admUsuarioForm(-1);>Nuevo</button>';
+    html2 += '<button class="uk-button uk-button-primary" onclick=activaTab("div2");admUsuarioForm(-1);>Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
     document.getElementById("divInfo").innerHTML="USUARIOS";
@@ -513,7 +508,7 @@ function busquedaUsuario(){
         where = " where lower(alias) like lower('%"+$("#buscar_usuario").val()+"%') ";
     }
     where += " order by alias";
-    datos("alias,alias", "tbl_usuario", where,"UIkit.tab('#js-control').show(1);admUsuarioForm");
+    datos("alias,alias", "tbl_usuario", where,"activaTab('div2');admUsuarioForm");
 }
 
 function admUsuarioForm(id){
@@ -538,12 +533,12 @@ function admCampeonato(){
                     '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
                     '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_campeonato" name="buscar_campeonato" onKeypress="if(event.keyCode == 13) busquedaCampeonato()"/>'+
                 '</div>'+
-                '<button class="uk-button uk-button-default" onclick=UIkit.tab("#js-control").show(0);busquedaCampeonato(); >Buscar</button>'+
+                '<button class="uk-button uk-button-default" onclick=activaTab("div1");busquedaCampeonato(); >Buscar</button>'+
             '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="uk-button uk-button-primary" onclick=UIkit.tab("#js-control").show(1);admCampeonatoForm(-1);>Nuevo</button>';
+    html2 += '<button class="uk-button uk-button-primary" onclick=activaTab("div2");admCampeonatoForm(-1);>Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
     document.getElementById("divInfo").innerHTML="CAMPEONATO";
@@ -558,7 +553,7 @@ function busquedaCampeonato(){
         where += " where lower(campeonato) like lower('%"+$("#buscar_campeonato").val()+"%') ";
     }
     where += " order by id_campeonato";
-    datos("id_campeonato,campeonato", "tbl_campeonato", where,"UIkit.tab('#js-control').show(1);admCampeonatoForm");
+    datos("id_campeonato,campeonato", "tbl_campeonato", where,"activaTab('div2');admCampeonatoForm");
 }
 
 function admCampeonatoForm(id){
@@ -621,12 +616,12 @@ function admEquipos(){
                     '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
                     '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_equipos" name="buscar_equipos" onKeypress="if(event.keyCode == 13) busquedaEquipo()"/>'+
                 '</div>'+
-                '<button class="uk-button uk-button-default" onclick=UIkit.tab("#js-control").show(0);busquedaEquipo();>Buscar</button>'+
+                '<button class="uk-button uk-button-default" onclick=activaTab("div1");busquedaEquipo();>Buscar</button>'+
             '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="uk-button uk-button-primary" onclick=UIkit.tab("#js-control").show(1);admEquipoForm(-1);>Nuevo</button>';
+    html2 += '<button class="uk-button uk-button-primary" onclick=activaTab("div2");admEquipoForm(-1);>Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
     document.getElementById("divInfo").innerHTML="EQUIPOS";
@@ -641,7 +636,7 @@ function busquedaEquipo(){
         where += " where lower(equipo) like lower('%"+$("#buscar_equipos").val()+"%') ";
     }
     where += " order by diciplina, genero";
-    datos("id_equipo,equipo, diciplina, txt_genero ", " vta_equipo_solo ", where,"UIkit.tab('#js-control').show(1);admEquipoForm");
+    datos("id_equipo,equipo, diciplina, txt_genero ", " vta_equipo_solo ", where,"activaTab('div2');admEquipoForm");
 }
 
 function admEquipoForm(id){
@@ -720,12 +715,12 @@ function admEstudiantes(){
                     '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
                     '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_estudiantes" name="buscar_estudiantes" onKeypress="if(event.keyCode == 13) busquedaEstudiantes()"/>'+
                 '</div>'+
-                '<button class="uk-button uk-button-default" onclick=UIkit.tab("#js-control").show(0);busquedaEstudiantes();>Buscar</button>'+
+                '<button class="uk-button uk-button-default" onclick=activaTab("div1");busquedaEstudiantes();>Buscar</button>'+
             '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="uk-button uk-button-primary" onclick=UIkit.tab("#js-control").show(1);admEstudianteForm(-1);>Nuevo</button>';
+    html2 += '<button class="uk-button uk-button-primary" onclick=activaTab("div2");admEstudianteForm(-1);>Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
     document.getElementById("divInfo").innerHTML="ESTUDIANTES";
@@ -740,7 +735,7 @@ function busquedaEstudiantes(){
         where += " where lower(razon_social) like lower('%"+$("#buscar_estudiantes").val()+"%') ";
     }
     where += " limit 10";
-    datos("id_alumno,razon_social,carrera,nivel", "vta_alumno_carrera", where,"UIkit.tab('#js-control').show(1);admEstudianteForm");
+    datos("id_alumno,razon_social,carrera,nivel", "vta_alumno_carrera", where,"activaTab('div2');admEstudianteForm");
 }
 
 function admEstudianteForm(id){
@@ -777,7 +772,7 @@ function admFaseGrupos(){
 
     html += '<div class="uk-margin uk-padding uk-padding-remove-left uk-width-1-2@s">'+
                 '<select class="uk-select" name="cmbCampeonato" id="cmbCampeonato">'+cmbFaseCampeonato+
-                '</select><button class="uk-button uk-button-primary uk-button-small" onclick=UIkit.tab("#js-control").show(0);busquedaFaseGrupo();>Buscar</button>'+
+                '</select><button class="uk-button uk-button-primary uk-button-small" onclick=activaTab("div1");busquedaFaseGrupo();>Buscar</button>'+
                 /*'<div class="uk-inline">'+
                     '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
                     '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_equipos" name="buscar_equipos" onKeypress="if(event.keyCode == 13) busquedaBasquet()"/>'+
@@ -787,7 +782,7 @@ function admFaseGrupos(){
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="uk-button uk-button-primary" onclick=UIkit.tab("#js-control").show(1);admFaseGrupo(-1);>Generar Nuevo</button>';
+    html2 += '<button class="uk-button uk-button-primary" onclick=activaTab("div2");admFaseGrupo(-1);>Generar Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
     document.getElementById("divInfo").innerHTML="FASE DE GRUPOS";
@@ -805,7 +800,7 @@ function busquedaFaseGrupo(){
     }
     where += " order by diciplina";
     //datos("id_equipo,equipo,diciplina, grupo_futbol, txt_genero", "vta_grupo_futbol", where,"admFaseGrupoForm");
-    datos("id_diciplina,diciplina", "vta_diciplina_campeonato", where,"UIkit.tab('#js-control').show(1);admFaseGrupoForm");
+    datos("id_diciplina,diciplina", "vta_diciplina_campeonato", where,"activaTab('div2');admFaseGrupoForm");
 }
 
 function admFaseGrupo(id){
@@ -862,7 +857,7 @@ function admCalendario(){
     html2 += ':<input id="id_minutoi" name="id_minutoi" class="uk-input uk-form-width-xsmall" type="text" placeholder="mm">';
     html2 += ' Hora Final: <input id="id_horaf" name="id_horaf" class="uk-input uk-form-width-xsmall" type="text" placeholder="hh">';
     html2 += ':<input id="id_minutof" name="id_minutof" class="uk-input uk-form-width-xsmall" type="text" placeholder="mm">';
-    html2 += '<br><button class="uk-button uk-button-primary" onclick=UIkit.tab("#js-control").show(1);admCalendarios(-1);>Generar Nuevo</button>';
+    html2 += '<br><button class="uk-button uk-button-primary" onclick=activaTab("div2");admCalendarios(-1);>Generar Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
     busquedaCalendario();
@@ -893,7 +888,7 @@ function busquedaCalendario(){
     }
     where += " order by diciplina";
     //datos("id_equipo,equipo,diciplina, grupo_futbol, txt_genero", "vta_grupo_futbol", where,"admFaseGrupoForm");
-    datos("id_diciplina,diciplina", "vta_diciplina_campeonato", where,"UIkit.tab('#js-control').show(1);admCalendarioForm");
+    datos("id_diciplina,diciplina", "vta_diciplina_campeonato", where,"activaTab('div2');admCalendarioForm");
 }
 
 function admCalendarioForm(id){
@@ -914,12 +909,12 @@ function admFichaControl(){
                     '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
                     '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_ficha" name="buscar_ficha" onKeypress="if(event.keyCode == 13) busquedaFicha()"/>'+
                 '</div>'+
-                '<button class="uk-button uk-button-default" onclick=UIkit.tab("#js-control").show(0);busquedaFicha();>Buscar</button>'+
+                '<button class="uk-button uk-button-default" onclick=activaTab("div1");busquedaFicha();>Buscar</button>'+
             '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="uk-button uk-button-primary" onclick=UIkit.tab("#js-control").show(1);admFichaForm(-1);>Nuevo</button>';
+    html2 += '<button class="uk-button uk-button-primary" onclick=activaTab("div2");admFichaForm(-1);>Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
     document.getElementById("divInfo").innerHTML="FICHA DE CONTROL";
@@ -934,7 +929,7 @@ function busquedaFicha(){
         where += " where lower(razon_social) like lower('%"+$("#buscar_ficha").val()+"%') ";
     }
     where += " order by estado desc, fecha, hora limit 10";
-    datos("id_ficha_control,equipo_a,equipo_b,diciplina, fecha, hora, txt_estado", "vta_ficha_control", where,"UIkit.tab('#js-control').show(1);admFichaForm");
+    datos("id_ficha_control,equipo_a,equipo_b,diciplina, fecha, hora, txt_estado", "vta_ficha_control", where,"activaTab('div2');admFichaForm");
 }
 
 function admFichaForm(id){
