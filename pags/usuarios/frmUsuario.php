@@ -26,24 +26,64 @@ $combo = rolcombo($idRol);
 
 $html = "";
 
-$html .= "USUARIOS <hr class='uk-divider-icon'>";
+$html .= '<input type="hidden" id="id_usuario" name="id_usuario" value="'.$id.'">';
 
-$html .= '<div class="uk-margin uk-text-left" >'.
-			'<div class="uk-margin uk-form-small">'.
-			            '<select class="uk-select  uk-width-1-2@s" name="cmbRol" id="cmbRol">';
-$html .= $combo.
-			            '</select>'.
-			        '</div>'.
-			'<input type="hidden" id="id_usuario" name="id_usuario" value="'.$id.'">'.
-	        '<input id="nuevo_usuario" name="nuevo_usuario" placeholder="Usuario" class="uk-input uk-form-width-medium uk-form-small" type="text" value="'.$usuario.'"><br><br>'.
-	        '<input id="nuevo_clave" placeholder="Contraseña" name="nuevo_clave" class="uk-input uk-form-width-medium uk-form-small" type="password" ">'.
-	        '<div class="uk-margin uk-grid-small uk-child-width-auto" uk-grid>'.
-				'<label><input class="uk-radio" type="radio" name="estado" id="estadot" value="true" '.($estado== 't' ? 'checked' : '').'> Activo</label>'.
-				'<label><input class="uk-radio" type="radio" name="estado" id="estadof" value="false" '.($estado== 'f' ? 'checked' : '').'> Inactivo</label>'.
-			'</div>'.
-	        '<hr class="uk-divider-icon">'.
-	        '<button class="uk-button uk-button-primary" onclick="admUsuarioGuardar()">Guardar</button>'.
-	    '</div>';
+$html .= '<form class="form-horizontal" role="form">
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right">ROL</label>
+				<div class="col-sm-9">
+					<span class="input-icon input-icon-right">
+					<select class="uk-select  uk-width-1-2@s" name="cmbRol" id="cmbRol">
+					 '.$combo.'
+					</select>
+					</span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right">Usuario</label>
+				<div class="col-sm-9">
+					<span class="input-icon input-icon-right">
+						<input id="nuevo_usuario" name="nuevo_usuario" placeholder="Usuario" type="text" value="'.$usuario.'"/>
+						<i class="ace-icon fa fa-leaf green"></i>
+					</span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-3 control-label no-padding-right">Input with Icon</label>
+				<div class="col-sm-9">
+					<span class="input-icon input-icon-right">
+						<input id="nuevo_clave" placeholder="Contraseña" name="nuevo_clave" type="password" id="form-field-icon-2"/>
+						<i class="ace-icon fa fa-leaf green"></i>
+					</span>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Estado</label>
+
+				<div class="col-sm-10">
+					<span class="input-icon">
+						<div class="radio">
+							<label>
+								<input type="radio" class="ace" name="estado" id="estadoa" value="true" '.($estado== 't' ? 'checked' : '').' />
+								<span class="lbl">Activo</span>
+							</label>
+							<label>
+								<input type="radio" class="ace" name="estado" id="estadoi" value="false" '.($estado== 'f' ? 'checked' : '').' />
+								<span class="lbl">Inactivo</span>
+							</label>
+						</div>
+					</span>
+				</div>
+			</div>
+</form>
+
+<button type="button" onclick="admUsuarioGuardar()" class="btn btn-info btn-sm">
+	<i class="ace-icon fa fa-key bigger-110"></i>Guardar
+</button>';
 
 echo $html;
 pg_close();

@@ -22,7 +22,7 @@ if(strcmp($id, '-1')==0){
 	}else{
 		$mensaje = "Usuario Repetido";
 		$res=false;
-	}	
+	}
 }
 else {
 	//if (!igualPass($usuario,$pass)) {
@@ -36,10 +36,10 @@ else {
 			$mensaje = "Modificado Correctamente";
 			$res = true;
 		}
-	}		
+	}
 }
 
-$resultadoArray[] = array('msg' => $mensaje, 'res' => $res, 'select' => "alias,alias", 'from' => "tbl_usuario", 'where' => " order by alias", 'onclick' => "admUsuarioForm");
+$resultadoArray[] = array('msg' => $mensaje, 'res' => $res, 'select' => "alias, alias, rol, txt_estado", 'head' => "USUARIO, ROL, ESTADO", 'tamanio' => "40,30,30", 'from' => "vta_usuario", 'where' => " order by alias", 'onclick' => "activaTab('div2');admUsuarioForm");
 echo $_GET['callback']."(".json_encode($resultadoArray).");";
 
 pg_close();

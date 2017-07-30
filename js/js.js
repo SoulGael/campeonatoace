@@ -151,6 +151,22 @@ function activaTab(tab){
 	$('a[href="#'+tab+'"]').tab('show');
 }
 
+function timepicker(time){
+	$('#'+time+'').timepicker({
+		minuteStep: 1,
+		showSeconds: true,
+		showMeridian: false,
+		disableFocus: true,
+		icons: {
+			up: 'fa fa-chevron-up',
+			down: 'fa fa-chevron-down'
+		}
+	}).on('focus', function() {
+		$('#'+time+'').timepicker('showWidget');
+	}).next().on(ace.click_event, function(){
+		$(this).prev().focus();
+	});
+}
 function mensajeError(mensaje){
     $.gritter.add({
         // (string | mandatory) the heading of the notification
@@ -465,7 +481,7 @@ function busquedaDiciplina(){
         where = " where lower(diciplina) like lower('%"+$("#buscar_diciplina").val()+"%') ";
     }
     where += " order by diciplina";
-    datos("id_diciplina,diciplina,txt_estado", "DICIPLINA, ESTADO","40,60","vta_diciplina", where,"activaTab('div2');admDiciplinaForm");
+    datos("id_diciplina,diciplina,hora,txt_estado", "DICIPLINA, DURACION ESTIMADA, ESTADO","40,30,30","vta_diciplina", where,"activaTab('div2');admDiciplinaForm");
 }
 
 function admDiciplinaForm(id){
@@ -474,8 +490,9 @@ function admDiciplinaForm(id){
 
 function admDiciplinaGuardar(){
     var estado=$('input:radio[name=estado]:checked').val();
+		console.log(estado);
     enviarFormGuardar('usuarios/frmDiciplinaGuardar','{"id": "'+$("#id_diciplina").val()+'", "estado" : "'+estado+'", "hora" : "'+$("#id_hora").val()+'", '+
-        ' "minuto" : "'+$("#id_minuto").val()+'", "diciplina" : "'+$("#nuevo_diciplina").val()+'"}');
+        ' "diciplina" : "'+$("#nuevo_diciplina").val()+'"}');
 }
 //USUARIOS
 function admUsuario(){
@@ -483,20 +500,20 @@ function admUsuario(){
     var html="";
     var html2="";
 
-    html += '<div class="uk-margin uk-padding uk-padding-remove-left">'+
-                '<div class="uk-inline">'+
-                    '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
-                    '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_usuario" name="buscar_usuario" onKeypress="if(event.keyCode == 13) busquedaUsuario()"/>'+
-                '</div>'+
-                '<button class="uk-button uk-button-default" onclick=activaTab("div1");busquedaUsuario();>Buscar</button>'+
-            '</div>';
+		html += '<div class="input-group col-xs-4">'+
+		            '<input type="text" class="form-control" id="buscar_usuario" name="buscar_usuario" onKeypress="if(event.keyCode == 13) busquedaUsuario()" placeholder="Buscar.." />'+
+		            '<span class="input-group-btn">'+
+		                '<button onclick=activaTab("div1");busquedaUsuario(); type="button" class="btn btn-primary btn-sm">'+
+		                    '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
+		                '</button>'+
+		            '</span>'+
+		        '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="uk-button uk-button-primary" onclick=activaTab("div2");admUsuarioForm(-1);>Nuevo</button>';
+		html2 += '<button class="btn btn-success" onclick=admUsuarioForm(-1);activaTab("div2");>Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
-    document.getElementById("divInfo").innerHTML="USUARIOS";
     busquedaUsuario();
     admUsuarioForm(-1);
 }
@@ -507,8 +524,8 @@ function busquedaUsuario(){
     if ($("#buscar_usuario").val()!="") {
         where = " where lower(alias) like lower('%"+$("#buscar_usuario").val()+"%') ";
     }
-    where += " order by alias";
-    datos("alias,alias", "tbl_usuario", where,"activaTab('div2');admUsuarioForm");
+    where += " order by alias ";
+		datos("alias, alias, rol, txt_estado", "USUARIO, ROL, ESTADO", "40,30,30", "vta_usuario", where,"activaTab('div2');admUsuarioForm");
 }
 
 function admUsuarioForm(id){
@@ -528,20 +545,20 @@ function admCampeonato(){
     var html="";
     var html2="";
 
-    html += '<div class="uk-margin uk-padding uk-padding-remove-left">'+
-                '<div class="uk-inline">'+
-                    '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
-                    '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_campeonato" name="buscar_campeonato" onKeypress="if(event.keyCode == 13) busquedaCampeonato()"/>'+
-                '</div>'+
-                '<button class="uk-button uk-button-default" onclick=activaTab("div1");busquedaCampeonato(); >Buscar</button>'+
-            '</div>';
+		html += '<div class="input-group col-xs-4">'+
+		            '<input type="text" class="form-control" id="buscar_campeonato" name="buscar_campeonato" onKeypress="if(event.keyCode == 13) busquedaCampeonato()" placeholder="Buscar.." />'+
+		            '<span class="input-group-btn">'+
+		                '<button onclick=activaTab("div1");busquedaCampeonato(); type="button" class="btn btn-primary btn-sm">'+
+		                    '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
+		                '</button>'+
+		            '</span>'+
+		        '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="uk-button uk-button-primary" onclick=activaTab("div2");admCampeonatoForm(-1);>Nuevo</button>';
+		html2 += '<button class="btn btn-success" onclick=admCampeonatoForm(-1);activaTab("div2");>Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
-    document.getElementById("divInfo").innerHTML="CAMPEONATO";
     busquedaCampeonato();
     admCampeonatoForm(-1);
 }
@@ -553,7 +570,7 @@ function busquedaCampeonato(){
         where += " where lower(campeonato) like lower('%"+$("#buscar_campeonato").val()+"%') ";
     }
     where += " order by id_campeonato";
-    datos("id_campeonato,campeonato", "tbl_campeonato", where,"activaTab('div2');admCampeonatoForm");
+		datos("id_campeonato,campeonato", "CAMPEONATO", "100", "tbl_campeonato", where,"activaTab('div2');admCampeonatoForm");
 }
 
 function admCampeonatoForm(id){

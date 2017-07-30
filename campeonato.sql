@@ -17,6 +17,15 @@ CREATE TABLE tbl_usuario
   sesion character varying(100)
 );
 
+create or replace view vta_usuario as
+select u.*, r.rol,
+case u.estado
+ when true then 'ACTIVO'
+ else 'INACTIVO'
+end as txt_estado
+from tbl_usuario u
+join tbl_rol r on u.id_rol=r.id_rol 
+
 insert into tbl_rol (rol) values ('Administrador');
 insert into tbl_rol (rol) values ('Estudiante');
 
@@ -104,11 +113,12 @@ CREATE TABLE tbl_campeonato
 create table tbl_diciplina(
 id_diciplina serial,
 diciplina character varying (100),
-hora integer,
-minuto integer,
+hora time without time zone,
 estado boolean default true,
 CONSTRAINT pk_id_diciplina PRIMARY KEY (id_diciplina)
 );
+
+--drop table tbl_diciplina cascade
 --alter table tbl_diciplina add column hora integer;
 --alter table tbl_diciplina add column minuto integer;
 
@@ -117,8 +127,7 @@ select d.*,
 case d.estado
   when true then 'Activo'
   when false then 'Inactivo'
-end as txt_estado,
-d.hora||':'||d.minuto as hora_total
+end as txt_estado
 from tbl_diciplina d;
 
 -- drop view vta_diciplina

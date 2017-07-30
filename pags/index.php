@@ -31,6 +31,10 @@ autenticar();
 		<![endif]-->
 		<link rel="stylesheet" href="../assets/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="../assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="../assets/css/bootstrap-datepicker3.min.css" />
+		<link rel="stylesheet" href="../assets/css/bootstrap-timepicker.min.css" />
+		<link rel="stylesheet" href="../assets/css/daterangepicker.min.css" />
+		<link rel="stylesheet" href="../assets/css/bootstrap-datetimepicker.min.css" />
 
 		<!--[if lte IE 9]>
 		  <link rel="stylesheet" href="../assets/css/ace-ie.min.css" />
@@ -49,6 +53,13 @@ autenticar();
 		<script src="../assets/js/jquery.dataTables.min.js"></script>
 		<script src="../assets/js/jquery.dataTables.bootstrap.min.js"></script>
 		<script src="../assets/js/dataTables.buttons.min.js"></script>
+
+		<!--DATE TIME PICKER-->
+		<script src="../assets/js/bootstrap-datepicker.min.js"></script>
+		<script src="../assets/js/bootstrap-timepicker.min.js"></script>
+		<script src="../assets/js/moment.min.js"></script>
+		<script src="../assets/js/daterangepicker.min.js"></script>
+		<script src="../assets/js/bootstrap-datetimepicker.min.js"></script>
 		<!-- ace scripts -->
 		<script src="../assets/js/ace-elements.min.js"></script>
 		<script src="../assets/js/ace.min.js"></script>
@@ -150,7 +161,7 @@ autenticar();
 
 									<div class="tab-content no-border padding-24">
 										<div id="div1" class="tab-pane fade in active">
-											
+																						
 										</div>
 
 										<div id="div2" class="tab-pane fade">
@@ -165,7 +176,7 @@ autenticar();
 					</div><!-- /.page-content -->
 				</div>
 			</div><!-- /.main-content -->
-<script type="text/javascript">
+			<script type="text/javascript">
 			$('#id-text2').attr('class', 'white');
 			$('#id-company-text').attr('class', 'light-blue');
 		</script>

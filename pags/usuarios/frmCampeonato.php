@@ -61,28 +61,49 @@ $p_equipos=str_replace('<br>', "\r\n", $p_equipos);
 
 $html = "";
 
-$html .= "CAMPEONATO <hr class='uk-divider-icon'>";
-$html .= '<div class="uk-margin uk-text-left uk-overflow-auto" >'.
-			'<input type="hidden"  id="id_campeonato" name="id_campeonato" value="'.$id.'">'.
-			'<table class="uk-table uk-table-small uk-table-divider">'.
+$html .= '<input type="hidden"  id="id_campeonato" name="id_campeonato" value="'.$id.'">';
+$html .= '<form class="form-horizontal" role="form">
+						<p class="label label-info arrowed-right arrowed-in">SOCIALIZACIÓN</p>
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right">Nombre del Campeonato</label>
+							<div class="col-sm-9">
+								<span class="input-icon input-icon-right">
+									<input id="nombre_campeonato" name="nombre_campeonato" type="text" value="'.$campeonato.'"/>
+									<i class="ace-icon fa fa-leaf green"></i>
+								</span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label no-padding-right">Input with Icon</label>
+							<div class="col-sm-9">
+								<span class="input-icon input-icon-right">
+									<input id="f_inicio" name="f_inicio" type="text" value="'.$f_inicio.'"/>
+									<i class="ace-icon fa fa-leaf green"></i>
+								</span>
+							</div>
+						</div>
+					</form>
+
+			<table class="uk-table uk-table-small uk-table-divider">'.
 			'<tr class="uk-align-center"><td coslpan="2">SOCIALIZACIÓN</td></tr>'.
-			'<tr><td class="uk-table-shrink uk-text-nowrap">Nombre Campeonato</td><td><input type="text" id="nombre_campeonato" name="nombre_campeonato" class="uk-input uk-form-width-medium uk-form-small" placeholder="Campeonato" value="'.$campeonato.'"></td></tr>'.
-			'<tr><td class="uk-table-shrink uk-text-nowrap">Fecha Inicio: </td><td><input type="text" id="f_inicio" name="f_inicio" value="'.$f_inicio.'" placeholder="dd/mm/YYYY..." class="uk-input uk-form-width-medium uk-form-small"></td></tr>'.
+			'<tr><td class="uk-table-shrink uk-text-nowrap">Fecha Inicio: </td><td>
+			<input type="text" id="f_inicio" name="f_inicio" value="'.$f_inicio.'" placeholder="dd/mm/YYYY..." class="uk-input uk-form-width-medium uk-form-small"></td></tr>'.
 			'<tr><td class="uk-table-shrink uk-text-nowrap">Fecha Maxima de Inscripcion: </td><td><input type="text" id="f_inscripcion" name="f_inscripcion" value="'.$f_inscripcion.'" placeholder="dd/mm/YYYY..." class="uk-input uk-form-width-medium uk-form-small"></td></tr>'.
-	        '<tr><td>Diciplinas</td><td><table class="uk-table uk-table-hover uk-table-middle uk-table-divider">'.$diciplina.'</table></td></tr>'.	        
+	        '<tr><td>Diciplinas</td><td><table class="uk-table uk-table-hover uk-table-middle uk-table-divider">'.$diciplina.'</table></td></tr>'.
 	        '<tr><td>Categorias</td><td>'.
 		        '<div class="uk-margin uk-grid-small uk-child-width-auto" uk-grid>'.
 	            '<label><input class="uk-checkbox check" name="ch" id="ch" type="checkbox" value="1" '.($ch== 't' ? 'checked' : '').'> Hombres</label>'.
 	            '<label><input class="uk-checkbox check" name="cm" id="cm" type="checkbox" value="2" '.($cm== 't' ? 'checked' : '').'> Mujeres</label>'.
 	        '</div>'.
-	        '</td></tr>'.	        
+	        '</td></tr>'.
 	        '<tr><td>Conformacion de Equipos </td><td><textarea id="c_equipos" name="c_equipos" placeholder="El equipo puede estar conformado..." class="uk-textarea" >'.$c_equipos.'</textarea></td></tr>'.
-	        
+
 	        '<tr><td coslpan="2">REQUISITOS</td></tr>'.
 	        '<tr><td>Valor de Inscripcion </td><td><input type="text" id="v_inscripcion" name="v_inscripcion" value="'.$v_inscripcion.'" placeholder="Valor Inscripcion..." class="uk-input uk-form-width-medium uk-form-small"  ></td></tr>'.
 	        '<tr><td>Valor Garantia </td><td><input type="text" id="v_garantia" name="v_garantia" value="'.$v_garantia.'" placeholder="Valor Garantia..." class="uk-input uk-form-width-medium uk-form-small"  ></td></tr>'.
 	        '<tr><td>Documentos Habilitantes </td><td><textarea id="d_habilitantes" name="d_habilitantes" placeholder="1.- Ficha de Inscripcripcion...." class="uk-textarea" >'.$d_habilitantes.'</textarea></td></tr>'.
-	        
+
 	        '<tr><td coslpan="2">DE LA INAUGURACION</td></tr>'.
 	        '<tr><td>Fecha de Inauguracion: </td><td><input type="text" id="f_inauguracion" name="f_inauguracion" value="'.$f_inauguracion.'" placeholder="dd/mm/YYYY..." class="uk-input uk-form-width-medium uk-form-small"></td></tr>'.
 	        '<tr><td>Presentacion de Equipos</td><td><textarea id="p_equipos" name="p_equipos" placeholder="Los equipos deberan..." class="uk-textarea" >'.$p_equipos.'</textarea></td></tr>'.
