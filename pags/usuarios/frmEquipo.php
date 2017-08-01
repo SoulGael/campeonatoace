@@ -81,8 +81,8 @@ $html .= '
 			<div id="home" class="tab-pane fade in active">
 				<form class="form-horizontal" role="form">
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right">Nombre del Equipo:</label>
-						<div class="col-sm-9">
+						<label class="col-sm-2 control-label no-padding-right">Nombre del Equipo:</label>
+						<div class="col-sm-10">
 							<span class="input-icon input-icon-right">
 								<input id="nuevo_equipo" name="nuevo_equipo" placeholder="Equipo..." type="text" value="'.$equipo.'"/>
 								<i class="ace-icon fa fa-leaf green"></i>
@@ -91,8 +91,8 @@ $html .= '
 					</div>
 
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right">Campeonato:</label>
-						<div class="col-sm-9">
+						<label class="col-sm-2 control-label no-padding-right">Campeonato:</label>
+						<div class="col-sm-10">
 							<span class="input-icon input-icon-right">
 								<select class="form-control" name="cmbCampeonato" id="cmbCampeonato"  onchange="cargarDiciplinaEquipo()">'.$comboCampeonato.'</select>
 							</span>
@@ -125,11 +125,11 @@ $html .= '
 							<span class="input-icon">
 								<div class="radio">
 									<label>
-										<input type="radio" class="ace" name="modalidad" id="modalidadp" onclick=cargarCarreraEquipo(); value="true" '.($modalidad== 'p' ? 'checked' : '').' />
+										<input type="radio" class="ace" name="modalidad" id="modalidadp" onclick=cargarCarreraEquipo(); value="p" '.($modalidad== 'p' ? 'checked' : '').' />
 										<span class="lbl">Presencial</span>
 									</label>
 									<label>
-										<input type="radio" class="ace" name="modalidad" id="modalidads" onclick=cargarCarreraEquipo(); value="false" '.($modalidad== 's' ? 'checked' : '').' />
+										<input type="radio" class="ace" name="modalidad" id="modalidads" onclick=cargarCarreraEquipo(); value="s" '.($modalidad== 's' ? 'checked' : '').' />
 										<span class="lbl">Semi-Presencial</span>
 									</label>
 								</div>
@@ -138,8 +138,8 @@ $html .= '
 					</div>
 
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right">Diciplina:</label>
-						<div class="col-sm-9">
+						<label class="col-sm-2 control-label no-padding-right">Diciplina:</label>
+						<div class="col-sm-10">
 							<span class="input-icon input-icon-right">
 								<select class="form-control" name="cmbDiciplina" id="cmbDiciplina" >'.$comboDiciplina.'</select>
 							</span>
@@ -147,8 +147,8 @@ $html .= '
 					</div>
 
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right">Carrera:</label>
-						<div class="col-sm-9">
+						<label class="col-sm-2 control-label no-padding-right">Carrera:</label>
+						<div class="col-sm-10">
 							<span class="input-icon input-icon-right">
 								<select class="form-control" name="cmbCarrea" id="cmbCarrea" onchange="cargarCarrera()">'.$comboCarrea.'</select>
 							</span>
@@ -157,8 +157,10 @@ $html .= '
 
 				</form>
 
-				<div id="divEquipos"></div>
-				
+				<div class="hr hr-double hr-dotted hr18"></div>
+				<div class="row" id="divEquipos"></div>
+				<div class="hr hr-double hr-dotted hr18"></div>
+
 				<button type="button" onclick="admFutbolGuardar()" class="btn btn-primary btn-sm">
 					<i class="ace-icon fa fa-key bigger-110"></i>Guardar
 				</button>

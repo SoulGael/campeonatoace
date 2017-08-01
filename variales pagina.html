@@ -114,6 +114,7 @@ html += '<div class="input-group col-xs-4">'+
 
 html2 += '<button class="btn btn-success" onclick=admRolForm(-1);activaTab("div2");>Nuevo</button>';
 <div class="space-4"></div>
+<div class="hr hr-double hr-dotted hr18"></div>
 
 //BUSQUEDA NUEVO BOTON
 var where = "";
@@ -125,3 +126,77 @@ datos("id_rol,rol", ",ROL", ",100", "tbl_rol", where,"activaTab('div2');admRolFo
 
 //PARA EL RETORNO DEL GUARDADO
 $resultadoArray[] = array('msg' => $mensaje, 'res' => $res, 'select' => "id_rol,rol", 'head' => ",ROL", 'tamanio' => ",100", 'from' => "tbl_rol", 'where' => " order by rol", 'onclick' => "activaTab('div2');admRolForm");
+
+//Menus a la izquiera
+<div class="tabbable tabs-left">
+	<ul class="nav nav-tabs" id="myTab3">
+		<li class="active">
+			<a data-toggle="tab" href="#home3">
+				<i class="pink ace-icon fa fa-tachometer bigger-110"></i>
+				ou
+			</a>
+		</li>
+
+		<li>
+			<a data-toggle="tab" href="#profile3">
+				<i class="blue ace-icon fa fa-user bigger-110"></i>
+				Profile
+			</a>
+		</li>
+
+		<li>
+			<a data-toggle="tab" href="#dropdown13">
+				<i class="ace-icon fa fa-rocket"></i>
+				More
+			</a>
+		</li>
+	</ul>
+
+	<div class="tab-content">
+		<div id="home3" class="tab-pane in active">
+			<p>Raw denim you probably haven't heard of them jean shorts Austin.</p>
+			<p>Raw denim you probably haven't heard of them jean shorts Austin.</p>
+		</div>
+
+		<div id="profile3" class="tab-pane">
+			<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
+			<p>Raw denim you probably haven't heard of them jean shorts Austin.</p>
+		</div>
+
+		<div id="dropdown13" class="tab-pane">
+			<p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.</p>
+			<p>Raw denim you probably haven't heard of them jean shorts Austin.</p>
+		</div>
+	</div>
+</div>
+
+//acordeon
+<div class="tabbable">
+	<ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
+		<li class="active">
+			<a data-toggle="tab" href="#home4">Home</a>
+		</li>
+
+		<li>
+			<a data-toggle="tab" href="#profile4">Profile</a>
+		</li>
+
+		<li>
+			<a data-toggle="tab" href="#dropdown14">More</a>
+		</li>
+	</ul>
+
+	<div class="tab-content">
+		<div id="home4" class="tab-pane in active">
+			<p>Raw denim you probably haven't heard of them jean shorts Austin.</p>
+		</div>
+
+		<div id="profile4" class="tab-pane">
+			<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
+		</div>
+
+		<div id="dropdown14" class="tab-pane">
+			<p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade.</p>
+		</div>
+	</div>
+</div>

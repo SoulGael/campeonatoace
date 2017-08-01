@@ -88,7 +88,7 @@ function inicioPrivilegio(){
 
                  if(menus(cadenaPrivilegio, 'admDiciplinas')){
                     html +='<li>'+
-			 		          '<a onclick=activaTab("div1");admDiciplina()><i class="menu-icon fa fa-caret-right"></i>Diciplinas</a>'+
+			 		          '<a onclick=activaTab("div1");admDiciplina()><i class="menu-icon fa fa-caret-right"></i>Disciplinas</a>'+
                               '<b class="arrow"></b>'+
 			 				'</li>';
                  }
@@ -482,7 +482,7 @@ function busquedaDiciplina(){
         where = " where lower(diciplina) like lower('%"+$("#buscar_diciplina").val()+"%') ";
     }
     where += " order by diciplina";
-    datos("id_diciplina,diciplina,hora,txt_estado", "DICIPLINA, DURACION ESTIMADA, ESTADO","40,30,30","vta_diciplina", where,"activaTab('div2');admDiciplinaForm");
+    datos("id_diciplina,diciplina,hora,txt_estado", "DISCIPLINA, DURACION ESTIMADA, ESTADO","40,30,30","vta_diciplina", where,"activaTab('div2');admDiciplinaForm");
 }
 
 function admDiciplinaForm(id){
@@ -491,7 +491,7 @@ function admDiciplinaForm(id){
 
 function admDiciplinaGuardar(){
     var estado=$('input:radio[name=estado]:checked').val();
-		console.log(estado);
+		//console.log(estado);
     enviarFormGuardar('usuarios/frmDiciplinaGuardar','{"id": "'+$("#id_diciplina").val()+'", "estado" : "'+estado+'", "hora" : "'+$("#id_hora").val()+'", '+
         ' "diciplina" : "'+$("#nuevo_diciplina").val()+'"}');
 }
