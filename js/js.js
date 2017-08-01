@@ -154,7 +154,7 @@ function activaTab(tab){
 function timepicker(time){
 	$('#'+time+'').timepicker({
 		minuteStep: 1,
-		showSeconds: true,
+		showSeconds: false,
 		showMeridian: false,
 		disableFocus: true,
 		icons: {
@@ -162,11 +162,12 @@ function timepicker(time){
 			down: 'fa fa-chevron-down'
 		}
 	}).on('focus', function() {
-		$('#'+time+'').timepicker('showWidget');
+		//$('#'+time+'').timepicker('showWidget');
 	}).next().on(ace.click_event, function(){
 		$(this).prev().focus();
 	});
 }
+
 function mensajeError(mensaje){
     $.gritter.add({
         // (string | mandatory) the heading of the notification
@@ -570,7 +571,7 @@ function busquedaCampeonato(){
         where += " where lower(campeonato) like lower('%"+$("#buscar_campeonato").val()+"%') ";
     }
     where += " order by id_campeonato";
-		datos("id_campeonato,campeonato", "CAMPEONATO", "100", "tbl_campeonato", where,"activaTab('div2');admCampeonatoForm");
+		datos("id_campeonato,campeonato, fecha_inicio, fecha_max_inscripcion, fecha_inauguracion", "CAMPEONATO, F. DE INICIO, F. MAX DE INSCRIPCIÓN, F. DE INAUGURACIÓN", "40,20,20,20", "tbl_campeonato", where,"activaTab('div2');admCampeonatoForm");
 }
 
 function admCampeonatoForm(id){
@@ -581,9 +582,10 @@ function admCampeonatoForm(id){
        },
        complete: function(){
          // Handle the complete event
-         $( "#f_inicio" ).datepicker({ dateFormat: 'dd-mm-yy' }).val();
-         $( "#f_inscripcion" ).datepicker({ dateFormat: 'dd-mm-yy' }).val();
-         $( "#f_inauguracion" ).datepicker({ dateFormat: 'dd-mm-yy' }).val();
+         // $( "#f_inicio" ).datepicker({ dateFormat: 'dd-mm-yy', minDate: -0 }).val();
+         $( "#f_inicio" ).datepicker({ startDate: '-0d' }).val();
+         $( "#f_inscripcion" ).datepicker({ startDate: '-0d' }).val();
+         $( "#f_inauguracion" ).datepicker({ startDate: '-0d' }).val();
        }
        // ......
      });
@@ -628,20 +630,20 @@ function admEquipos(){
     var html="";
     var html2="";
 
-    html += '<div class="uk-margin uk-padding uk-padding-remove-left">'+
-                '<div class="uk-inline">'+
-                    '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
-                    '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_equipos" name="buscar_equipos" onKeypress="if(event.keyCode == 13) busquedaEquipo()"/>'+
-                '</div>'+
-                '<button class="uk-button uk-button-default" onclick=activaTab("div1");busquedaEquipo();>Buscar</button>'+
-            '</div>';
+    html += '<div class="input-group col-xs-4">'+
+            '<input type="text" class="form-control" id="buscar_equipos" name="buscar_equipos" onKeypress="if(event.keyCode == 13) busquedaEquipo()" placeholder="Buscar.." />'+
+            '<span class="input-group-btn">'+
+                '<button onclick=activaTab("div1");busquedaEquipo(); type="button" class="btn btn-primary btn-sm">'+
+                    '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
+                '</button>'+
+            '</span>'+
+        '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="uk-button uk-button-primary" onclick=activaTab("div2");admEquipoForm(-1);>Nuevo</button>';
+    html2 += '<button class="btn btn-success" onclick=admEquipoForm(-1);activaTab("div2");>Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
-    document.getElementById("divInfo").innerHTML="EQUIPOS";
     busquedaEquipo();
     admEquipoForm(-1);
 }
@@ -652,8 +654,8 @@ function busquedaEquipo(){
     if ($("#buscar_equipos").val()!="") {
         where += " where lower(equipo) like lower('%"+$("#buscar_equipos").val()+"%') ";
     }
-    where += " order by diciplina, genero";
-    datos("id_equipo,equipo, diciplina, txt_genero ", " vta_equipo_solo ", where,"activaTab('div2');admEquipoForm");
+    where += " order by equipo, genero";
+    datos("id_equipo,equipo, diciplina, txt_genero", "EQUIPO, DISCIPLINA, GENERO", "60,40,40", "vta_equipo_solo", where,"activaTab('div2');admEquipoForm");
 }
 
 function admEquipoForm(id){

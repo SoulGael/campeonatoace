@@ -46,10 +46,10 @@ $html .= '<form class="form-horizontal" role="form">
 
 		<div class="col-sm-10">
 			<span class="input-icon">
-				<div class="input-group bootstrap-timepicker">
+				<div class="input-group bootstrap-timepicker input-xlarge">
 					<input id="id_hora" name="id_hora" type="text" class="form-control" value="'.$hora.'" />
-					<span class="input-group-addon">
-						<i onclick=timepicker("id_hora"); class="fa fa-clock-o bigger-110"></i>
+					<span onclick=timepicker("id_hora"); class="input-group-addon">
+						<i class="fa fa-clock-o bigger-110"></i>
 					</span>
 				</div>
 			</span>

@@ -52,7 +52,7 @@ $html .= '<form class="form-horizontal" role="form">
 			</div>
 
 			<div class="form-group">
-				<label class="col-sm-3 control-label no-padding-right">Input with Icon</label>
+				<label class="col-sm-3 control-label no-padding-right">Contraseña</label>
 				<div class="col-sm-9">
 					<span class="input-icon input-icon-right">
 						<input id="nuevo_clave" placeholder="Contraseña" name="nuevo_clave" type="password" id="form-field-icon-2"/>

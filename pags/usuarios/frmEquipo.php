@@ -62,47 +62,113 @@ $html = "";
 
 $html .= "EQUIPOS <hr class='uk-divider-icon'>";
 
-$html .= '<div class="uk-margin uk-text-left" >'.
-			'<input type="hidden" id="id_futbol" name="id_futbol" value="'.$id.'">'.
-			'<ul uk-tab>'.
-			    '<li><a href="#">Creacion de Equipo</a></li>'.
-			    '<li ><a href="#">Jugadores Seleccionados</a></li>'.
-			'</ul>'.
-			'<ul class="uk-switcher uk-margin">'.
-			    '<li><table class="uk-table uk-table-hover uk-table-small uk-table-middle uk-table-divider">'.
-			    		'<tr><td>Nombre del Equipo: </td><td><input id="nuevo_equipo" name="nuevo_equipo" placeholder="Equipo..." class="uk-input uk-form-width-medium uk-form-small" type="text" value="'.$equipo.'"></td></tr>'.
-						'<tr><td>Campeonato: </td><td><div class="uk-margin uk-form-small">'.
-				            '<select class="uk-select" name="cmbCampeonato" id="cmbCampeonato" onchange="cargarDiciplinaEquipo()">';
-							$html .= $comboCampeonato.
-				            '</select>'.
-				        '</div></td></tr>'.
-				        '<tr><td>Genero: </td><td><div class="uk-margin uk-grid-small uk-child-width-auto" uk-grid>'.
-				            '<label><input class="uk-radio" type="radio" name="sexo" id="sexom" value="true" '.($sexo== 't' ? 'checked' : '').'> Masculino</label>'.
-				            '<label><input class="uk-radio" type="radio" name="sexo" id="sexof" value="false" '.($sexo== 'f' ? 'checked' : '').'> Femenino</label>'.
-				        '</div></td></tr>'.
-				         '<tr><td>Modalidad: </td><td><div class="uk-margin uk-grid-small uk-child-width-auto" uk-grid>'.
-				            '<label><input class="uk-radio" type="radio" name="modalidad" onclick=cargarCarreraEquipo(); id="modalidadp" value="p" '.($modalidad== 'p' ? 'checked' : '').'> Presencial</label>'.
-				            '<label><input class="uk-radio" type="radio" name="modalidad" onclick=cargarCarreraEquipo(); id="modalidads" value="s" '.($modalidad== 's' ? 'checked' : '').'> Semi-Presencial</label>'.
-				        '</div></td></tr>'.
-				        '<tr><td>Diciplina: </td><td><div class="uk-margin uk-form-small">'.
-				            '<select class="uk-select" name="cmbDiciplina" id="cmbDiciplina">';
-							$html .= $comboDiciplina.
-				            '</select>'.
-				        '</div><td></tr>'.
-						'<tr><td>Carrera: </td><td><div class="uk-margin uk-form-small">'.
-				            '<select class="uk-select" name="cmbCarrea" id="cmbCarrea" onchange="cargarCarrera()">';
-							$html .= $comboCarrea.
-				            '</select>'.
-				        '</div><td></tr>'.
-				        '<tr><td colspan=2><div id="divEquipos"></div></td></tr>'.
-			        	'<tr><td colspan=2><button class="uk-button uk-button-primary" onclick="admFutbolGuardar()">Guardar</button></td></tr>'.
-			     '</table></li>'.
-			    '<li>'.
-				    '<table class="uk-table uk-table-hover uk-table-middle uk-table-small uk-table-divider">'.$Seleccionados.'</table>'.
-	        	'</li>'.
-			'</ul>'.
-	        
-	    '</div>';
+$html .= '
+	<div class="tabbable">
+		<ul class="nav nav-tabs" id="myTab">
+			<li class="active">
+				<a data-toggle="tab" href="#home">
+					<i class="green ace-icon fa fa-home bigger-120"></i>
+					Datos del Equipo
+				</a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#messages">
+					Jugadores Seleccionados
+				</a>
+			</li>
+		</ul>
+		<div class="tab-content">
+			<div id="home" class="tab-pane fade in active">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right">Nombre del Equipo:</label>
+						<div class="col-sm-9">
+							<span class="input-icon input-icon-right">
+								<input id="nuevo_equipo" name="nuevo_equipo" placeholder="Equipo..." type="text" value="'.$equipo.'"/>
+								<i class="ace-icon fa fa-leaf green"></i>
+							</span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right">Campeonato:</label>
+						<div class="col-sm-9">
+							<span class="input-icon input-icon-right">
+								<select class="form-control" name="cmbCampeonato" id="cmbCampeonato"  onchange="cargarDiciplinaEquipo()">'.$comboCampeonato.'</select>
+							</span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Genero:</label>
+
+						<div class="col-sm-10">
+							<span class="input-icon">
+								<div class="radio">
+									<label>
+										<input type="radio" class="ace" name="sexo" id="sexom" value="true" '.($sexo== 't' ? 'checked' : '').' />
+										<span class="lbl">Masculino</span>
+									</label>
+									<label>
+										<input type="radio" class="ace" name="sexo" id="sexof" value="false" '.($sexo== 'f' ? 'checked' : '').' />
+										<span class="lbl">Femenino</span>
+									</label>
+								</div>
+							</span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Modalidad:</label>
+
+						<div class="col-sm-10">
+							<span class="input-icon">
+								<div class="radio">
+									<label>
+										<input type="radio" class="ace" name="modalidad" id="modalidadp" onclick=cargarCarreraEquipo(); value="true" '.($modalidad== 'p' ? 'checked' : '').' />
+										<span class="lbl">Presencial</span>
+									</label>
+									<label>
+										<input type="radio" class="ace" name="modalidad" id="modalidads" onclick=cargarCarreraEquipo(); value="false" '.($modalidad== 's' ? 'checked' : '').' />
+										<span class="lbl">Semi-Presencial</span>
+									</label>
+								</div>
+							</span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right">Diciplina:</label>
+						<div class="col-sm-9">
+							<span class="input-icon input-icon-right">
+								<select class="form-control" name="cmbDiciplina" id="cmbDiciplina" >'.$comboDiciplina.'</select>
+							</span>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right">Carrera:</label>
+						<div class="col-sm-9">
+							<span class="input-icon input-icon-right">
+								<select class="form-control" name="cmbCarrea" id="cmbCarrea" onchange="cargarCarrera()">'.$comboCarrea.'</select>
+							</span>
+						</div>
+					</div>
+
+				</form>
+
+				<div id="divEquipos"></div>
+				
+				<button type="button" onclick="admFutbolGuardar()" class="btn btn-primary btn-sm">
+					<i class="ace-icon fa fa-key bigger-110"></i>Guardar
+				</button>
+
+			</div>
+			<div id="messages" class="tab-pane fade">
+				<table class="table  table-bordered table-hover">'.$Seleccionados.'</table>
+			</div>
+		</div>
+	</div>';
 
 echo $html;
 pg_close();

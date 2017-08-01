@@ -51,7 +51,8 @@ else {
 		}	
 }
 
-$resultadoArray[] = array('msg' => $mensaje, 'res' => $res, 'select' => "id_campeonato,campeonato", 'from' => "tbl_campeonato", 'where' => " order by id_campeonato", 'onclick' => "admCampeonatoForm");
+$resultadoArray[] = array('msg' => $mensaje, 'res' => $res, 'select' => "id_campeonato,campeonato, fecha_inicio, fecha_max_inscripcion, fecha_inauguracion", 'head' => "CAMPEONATO, F. DE INICIO, F. MAX DE INSCRIPCIÓN, F. DE INAUGURACIÓN", 'tamanio' => "40,20,20,20", 'from' => "tbl_campeonato", 'where' => " order by id_campeonato ", 'onclick' => "activaTab('div2');admCampeonatoForm");
+
 echo $_GET['callback']."(".json_encode($resultadoArray).");";
 
 pg_close();

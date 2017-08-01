@@ -277,7 +277,12 @@ function getDiciplina($id){
 		while($fila=pg_fetch_array($resultado)){
 			$id_diciplina=$fila['id_diciplina'];
 			$diciplina=$fila['diciplina'];
-			$html.='<tr><td class="uk-table-shrink uk-text-nowrap"><input class="uk-checkbox" type="checkbox" value="'.$id_diciplina.'" name="diciplinaTab"></td> <td class="uk-table-link"><a class="uk-link-reset" >'.$diciplina.' </a> </td> </tr>';
+			$html.='<div class="checkbox">
+						<label>
+							<input type="checkbox" class="ace" value="'.$id_diciplina.'" name="diciplinaTab" />
+							<span class="lbl">'.$diciplina.'</span>
+						</label>
+					</div>';
 	    }
 
 	}
@@ -297,14 +302,25 @@ function getDiciplina($id){
 					$id_diciplinaSelecionada=$filaDis['id_diciplina'];
 
 					if(strcmp($id_diciplina, $id_diciplinaSelecionada)==0){
-						$html.='<tr><td class="uk-table-shrink uk-text-nowrap"><input class="uk-checkbox" type="checkbox" value="'.$id_diciplina.'" name="diciplinaTab" checked ></td> <td class="uk-table-link"><a class="uk-link-reset" >'.$diciplina.' </a> </td> </tr>';
+
+						$html.='<div class="checkbox">
+									<label>
+										<input type="checkbox" class="ace" value="'.$id_diciplina.'" name="diciplinaTab" checked/>
+										<span class="lbl">'.$diciplina.'</span>
+									</label>
+								</div>';
 						$ban=1;
 						break;
 					}
 				}
 
 			if(strcmp($ban, 0)==0){
-				$html.='<tr><td><input class="uk-checkbox" type="checkbox" value="'.$id_diciplina.'" name="diciplinaTab"></td> <td class="uk-table-link"><a class="uk-link-reset" >'.$diciplina.' </a> </td> </tr>';
+				$html.='<div class="checkbox">
+						<label>
+							<input type="checkbox" class="ace" value="'.$id_diciplina.'" name="diciplinaTab" />
+							<span class="lbl">'.$diciplina.'</span>
+						</label>
+					</div>';
 			}
 
 	    }

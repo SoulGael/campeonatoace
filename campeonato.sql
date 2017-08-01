@@ -536,4 +536,5 @@ join vta_equipo_solo e on f.id_equipo=e.id_equipo
 group by e.diciplina, f.grupo_futbol order by e.diciplina 
 
 select * from vta_grupo_solo
+select * from tbl_campeonato
 

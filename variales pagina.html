@@ -1,4 +1,5 @@
-/(PARA LOS INPUTS CON ICONOS)
+/(PARA LOS INPUTS CON ICONOS) input-xlarge
+
 <form class="form-horizontal" role="form">
 	<div class="form-group">
 		<label class="col-sm-3 control-label no-padding-right">Input with Icon</label>
@@ -17,7 +18,7 @@
 </button>
 
 MENUS CON SWITCH
-<div class="tabbable">
+'<div class="tabbable">
 	<ul class="nav nav-tabs" id="myTab">
 		<li class="active">
 			<a data-toggle="tab" href="#home">
@@ -31,12 +32,6 @@ MENUS CON SWITCH
 				<span class="badge badge-danger">4</span>
 			</a>
 		</li>
-		<li class="dropdown">
-			<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-				Dropdown &nbsp;
-				<i class="ace-icon fa fa-caret-down bigger-110 width-auto"></i>
-			</a>
-		</li>
 	</ul>
 	<div class="tab-content">
 		<div id="home" class="tab-pane fade in active">
@@ -46,10 +41,10 @@ MENUS CON SWITCH
 			<p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
 		</div>
 	</div>
-</div>
+</div>'
 
 //TABLA SIMPLE
-<table id="simple-table" class="table  table-bordered table-hover">
+'<table id="simple-table" class="table  table-bordered table-hover">
 	<thead>
 		<tr>
 			<th class="center">
@@ -71,26 +66,14 @@ MENUS CON SWITCH
 			</td>
 		</tr>
 	</tbody>
-</table>
+</table>'
 
-//NUEVO BOTON
-html += '<div class="input-group col-xs-4">'+
-            '<input type="text" class="form-control" id="buscar_diciplina" name="buscar_diciplina" onKeypress="if(event.keyCode == 13) busquedaDiciplina()" placeholder="Buscar.." />'+
-            '<span class="input-group-btn">'+
-                '<button onclick=activaTab("div1");busquedaDiciplina(); type="button" class="btn btn-primary btn-sm">'+
-                    '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
-                '</button>'+
-            '</span>'+
-        '</div>';
-
-html2 += '<button class="btn btn-success" onclick=admRolForm(-1);activaTab("div2");>Nuevo</button>';
-<div class="space-4"></div>
 
 //COMBO BOX
-'<select class="form-control" id="form-field-select-1"></select>'
+<select class="form-control" id="form-field-select-1"></select>
 
 //RADIO BUTONS
-<div class="form-group">
+'<div class="form-group">
 	<label class="col-sm-2 control-label">Estado</label>
 
 	<div class="col-sm-10">
@@ -107,7 +90,30 @@ html2 += '<button class="btn btn-success" onclick=admRolForm(-1);activaTab("div2
 			</div>
 		</span>
 	</div>
+</div>'
+
+//TEXT AREA
+<div class="form-group">
+	<label class="col-sm-2 control-label">Disciplinas</label>
+	<div class="col-sm-10">
+		<span class="input-icon">
+			<textarea class="form-control" id="form-field-8" placeholder="Default Text"></textarea>
+		</span>
+	</div>
 </div>
+
+//NUEVO BOTON
+html += '<div class="input-group col-xs-4">'+
+            '<input type="text" class="form-control" id="buscar_diciplina" name="buscar_diciplina" onKeypress="if(event.keyCode == 13) busquedaDiciplina()" placeholder="Buscar.." />'+
+            '<span class="input-group-btn">'+
+                '<button onclick=activaTab("div1");busquedaDiciplina(); type="button" class="btn btn-primary btn-sm">'+
+                    '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
+                '</button>'+
+            '</span>'+
+        '</div>';
+
+html2 += '<button class="btn btn-success" onclick=admRolForm(-1);activaTab("div2");>Nuevo</button>';
+<div class="space-4"></div>
 
 //BUSQUEDA NUEVO BOTON
 var where = "";
