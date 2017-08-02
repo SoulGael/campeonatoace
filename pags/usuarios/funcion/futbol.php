@@ -171,7 +171,7 @@ function diciplinaCombo($diciplina) {
 
 function getAlumnosCarreras($carrera, $nivel,$diciplina,$campeonato,$genero, $modalidad) {
 
-	$consulta="select * from vta_alumno_carrera where carrera='".$carrera."' and sexo=".$genero." and modalidad='".$modalidad."' and nivel='".$nivel."' and id_alumno not in (select id_alumno from vta_equipo where id_campeonato=".$campeonato." and id_diciplina=".$diciplina." order by paralelo, razon_social); "; 
+	$consulta="select * from vta_alumno_carrera where carrera='".$carrera."' and sexo=".$genero." and modalidad='".$modalidad."' and nivel='".$nivel."' and id_alumno not in (select id_alumno from vta_equipo where id_campeonato=".$campeonato." and id_diciplina=".$diciplina." ) order by nivel, paralelo, razon_social;; "; 
 	$resultado=pg_query($consulta) or die (pg_last_error());
 
 	return $resultado;

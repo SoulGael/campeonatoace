@@ -12,8 +12,11 @@ $Seleccionados = "";
 $cont = 0;
 $contCa = 1;
 
-$htmlCabecera = 'FASE DE GRUPOS | <button class="uk-button uk-button-primary  uk-button-small" onclick="admFaseGrupoGuardar()">Guardar</button> <hr class="uk-divider-icon"><ul uk-tab>';
-$htmlCuerpo = "<ul class='uk-switcher uk-margin'>";
+$htmlCabecera = 'FASE DE GRUPOS | <button class="btn btn-success" onclick="admFaseGrupoGuardar()">Guardar</button> 
+				<div class="tabbable"> 
+					<ul class="nav nav-tabs padding-12 tab-color-blue background-blue">';
+
+$htmlCuerpo = '<div class="tab-content">';
 
 if(strcmp($id, '-1')!=0){
 
@@ -23,7 +26,7 @@ if(strcmp($id, '-1')!=0){
 		$idDiciplina = $filaDiciplina['id_diciplina'];
 		$diciplina = $filaDiciplina['diciplina'];
 
-		$htmlCabecera .= "<li><a href='#'>".$diciplina."</a></li>";
+		$htmlCabecera .= '<li><a data-toggle="tab" href="#'.$diciplina.'">'.$diciplina.'</a></li>';
 		
 		$htmlVarones = "";
 		$htmlMujeres = "";
@@ -32,14 +35,12 @@ if(strcmp($id, '-1')!=0){
 		$contCa = 1;
 		//$limite = pg_num_rows($resultado);
 
-		$htmlCuerpo .= '<li>'.
-						  '<ul uk-tab><li><a href="#">MASCULINO</a></li>'.
-						  '<li><a href="#">FEMENINO</a></li></ul><ul class="uk-switcher uk-margin">'.
+		$htmlCuerpo .= '<div id="'.$diciplina.'" class="tab-pane">';
 						
-		$htmlVarones .=	'<li><table class="uk-table uk-table-divider">'.
+		$htmlVarones .=	'<table id="simple-table" class="table  table-bordered table-hover">'.
 					    '<tbody>';
 
-		$htmlMujeres .=	'<li><table class="uk-table uk-table-divider">'.
+		$htmlMujeres .=	'<table id="simple-table" class="table  table-bordered table-hover">'.
 					    '<tbody>';
 
 		$resultadoVarones=getEquiposCampeonato($id, $idDiciplina,"true");
@@ -54,12 +55,14 @@ if(strcmp($id, '-1')!=0){
 		while($filaVarones=pg_fetch_array($resultadoVarones)){
 			$equipo = $filaVarones['equipo'];
 			if($cont%$modulo==0){
-				$htmlVarones .= '<tr><td class="uk-text-left uk-text-primary">Grupo '.($contCa).'</td></tr>';
-				$htmlVarones .= '<tr><td>'. $equipo .'</td></tr>';
+				$por= rand(0, 84);
+				$htmlVarones .= '<tr><td class="red" colspan=2>Grupo '.($contCa).' - VARONES</td></tr>';
+				$htmlVarones .= '<tr><td>'. $equipo .'</td><td><div class="progress pos-rel" data-percent="'.$por.'%"><div class="progress-bar" style="width:'.$por.'%;"></div></div></td></tr>';
 				$contCa++;
 			}
 			else{
-				$htmlVarones .= '<tr><td>'. $equipo .'</td></tr>';
+				$por= rand(0, 84);
+				$htmlVarones .= '<tr><td>'. $equipo .'</td><td><div class="progress pos-rel" data-percent="'.$por.'%"><div class="progress-bar" style="width:'.$por.'%;"></div></div></td></tr>';
 			}
 			$cont++;	
 		}
@@ -76,25 +79,27 @@ if(strcmp($id, '-1')!=0){
 			
 			$equipo = $filaMujeres['equipo'];
 			if($cont%$modulo==0){
-				$htmlMujeres .= '<tr><td class="uk-text-left uk-text-primary">Grupo '.($contCa).'</td></tr>';
-				$htmlMujeres .= '<tr><td>'. $equipo .'</td></tr>';
+				$por= rand(0, 73);
+				$htmlMujeres .= '<tr><td class="pink" colspan=2>Grupo '.($contCa).' - MUJERES</td></tr>';
+				$htmlMujeres .= '<tr><td>'. $equipo .'</td><td><div class="progress pos-rel" data-percent="'.rand(0, 100).'%"><div class="progress-bar" style="width:'.$por.'%;"></div></div></td></tr>';
 				$contCa++;
 			}
 			else{
-				$htmlMujeres .= '<tr><td>'. $equipo .'</td></tr>';
+				$por= rand(0, 72);
+				$htmlMujeres .= '<tr><td>'. $equipo .'</td><td><div class="progress pos-rel" data-percent="'.rand(0, 100).'%"><div class="progress-bar" style="width:'.$por.'%;"></div></div></td></tr>';
 			}
 			$cont++;	
 		}
 		$htmlVarones .= '</tbody></table></li>';
 		$htmlMujeres .= "</tbody></table></li>";
 		$htmlCuerpo .= $htmlVarones;
-		$htmlCuerpo .= $htmlMujeres."</ul></li>";
+		$htmlCuerpo .= $htmlMujeres."</div>";
 
 	}
 		
 }
-$htmlCabecera .= "</ul>";
-$htmlCuerpo .= "</ul>";
+$htmlCabecera .= "</ul></div>";
+$htmlCuerpo .= "</div>";
 
 //
 
@@ -103,6 +108,7 @@ $html = "";
 $html .= $htmlCabecera;
 
 $html .= $htmlCuerpo;
+
 		
 
 echo $html;

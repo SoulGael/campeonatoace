@@ -39,7 +39,7 @@ else {
 	}
 }
 
-$resultadoArray[] = array('msg' => $mensaje, 'res' => $res, 'select' => "id_equipo,equipo, diciplina, txt_genero", 'from' => "vta_equipo_solo", 'where' => " order by diciplina, genero", 'onclick' => "admEquipoForm");
+$resultadoArray[] = array('msg' => $mensaje, 'res' => $res, 'select' => "id_equipo,equipo, diciplina, txt_genero", 'head' => "EQUIPO, DISCIPLINA, GENERO", 'tamanio' => "60,40,40", 'from' => "vta_equipo_solo", 'where' => " order by equipo, genero", 'onclick' => "activaTab('div2');admEquipoForm");
 echo $_GET['callback']."(".json_encode($resultadoArray).");";
 
 pg_close();

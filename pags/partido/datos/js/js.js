@@ -4,6 +4,7 @@ $(document).on("ready", inicio);
 //var idRol=$("#idRol").val();
 function inicio(){
 	$('#clickIngreso').on('click', ingresoSistema);
+    //$('#clickUsuario').on('click', ingresoUsuario);
 
     //Control de Usuarios
     var parametros = {
@@ -11,7 +12,7 @@ function inicio(){
         //"idRol" : $("#idRol").val(),
         //"valorCaja2" : valorCaja2
     };
-
+    
     $.ajax({
         data:  parametros,
         url:   'privilegios.php',
@@ -22,7 +23,7 @@ function inicio(){
         },
             success:  function (response) {
                // console.log(response[0]['Roles']);
-                cadenaPrivilegio=response[0]['Roles'];
+                cadenaPrivilegio=response[0]['Roles'];                
                 cadenaPrivilegio=cadenaPrivilegio.substring(0, cadenaPrivilegio.length-1);
                 inicioPrivilegio();
             }
@@ -46,160 +47,67 @@ function menus(completa, buscar){
 function inicioPrivilegio(){
     var html="";
 
-		if(menus(cadenaPrivilegio, 'admUsuario')||menus(cadenaPrivilegio, 'admRoles')||menus(cadenaPrivilegio, 'admEstudiantes')){
-			html += '<li class="active">'+
-					   '<a href="#" class="dropdown-toggle">'+
-						  '<i class="menu-icon fa fa-user"></i>'+
-						  '<span class="menu-text">ADMINISTRADOR</span>'+
-						  '<b class="arrow fa fa-angle-down"></b>'+
-						'</a>'+
-						'<b class="arrow"></b><ul class="submenu">';
-					if(menus(cadenaPrivilegio, 'admRoles')){
-						html +=	'<li>'+
-									'<a onclick=activaTab("div1");admRoles()><i class="menu-icon fa fa-caret-right"></i>Roles</a>'+
-									'<b class="arrow"></b>'+
-								'</li>';
-					}
-					if(menus(cadenaPrivilegio, 'admUsuario')){
-						html +=	'<li>'+
-									'<a onclick=activaTab("div1");admUsuario()><i class="menu-icon fa fa-caret-right"></i>Usuarios</a>'+
-									'<b class="arrow"></b>'+
-								'</li>';
-					}
-					if(menus(cadenaPrivilegio, 'admEstudiantes')){
-						html +=	'<li>'+
-									'<a onclick=activaTab("div1");admEstudiantes()><i class="menu-icon fa fa-caret-right"></i>Administración de Estudiantes</a>'+
-									'<b class="arrow"></b>'+
-								'</li>';
-					}
-			html += '</ul></li>';
+    html+='<li class="uk-text-center"><a href="#">CAMPEONATO UNIANDES</a></li>';
+
+    if(menus(cadenaPrivilegio, 'admUsuario')||menus(cadenaPrivilegio, 'admRoles')||menus(cadenaPrivilegio, 'admEstudiantes')){
+        
+        html+='<li class="uk-parent">'+
+                '<a><span class="uk-margin-small-right" uk-icon="icon: settings"></span>ADMINISTRACION</a>'+
+                    '<ul class="uk-nav-sub">';
+                 if(menus(cadenaPrivilegio, 'admRoles')){
+                    html+='<li><a onclick="admRoles()">Roles</a></li>';
+                 }
+                 if(menus(cadenaPrivilegio, 'admUsuario')){
+                    html+='<li><a onclick="admUsuario()">Usuarios</a></li>';
+                 }
+                 if(menus(cadenaPrivilegio, 'admEstudiantes')){
+                    html+='<li><a onclick="admEstudiantes()">Administracion de Estudiantes</a></li>';
+                 }
+        html+='</ul></li>';        
     }
 
     if(menus(cadenaPrivilegio, 'admDiciplinas')||menus(cadenaPrivilegio, 'admCampeonato')||menus(cadenaPrivilegio, 'admFaseGrupos')||menus(cadenaPrivilegio,
         'admCalendario')||menus(cadenaPrivilegio, 'admFichaControl')){
-
-					html += '<li class="">'+
-								'<a href="#" class="dropdown-toggle">'+
-									'<i class="menu-icon fa fa-bookmark"></i>'+
-									'<span class="menu-text">CAMPEONATO</span>'+
-									'<b class="arrow fa fa-angle-down"></b>'+
-								'</a>'+
-								'<b class="arrow"></b><ul class="submenu">';
-
+        
+        html+='<li class="uk-parent">'+
+                '<a><span class="uk-margin-small-right" uk-icon="icon: settings"></span>CAMPEONATO</a>'+
+                    '<ul class="uk-nav-sub">';
                  if(menus(cadenaPrivilegio, 'admDiciplinas')){
-                    html +='<li>'+
-			 		          '<a onclick=activaTab("div1");admDiciplina()><i class="menu-icon fa fa-caret-right"></i>Disciplinas</a>'+
-                              '<b class="arrow"></b>'+
-			 				'</li>';
+                    html+='<li><a onclick="admDiciplina()">Diciplinas</a></li>';
                  }
                  if(menus(cadenaPrivilegio, 'admCampeonato')){
-                    html +=	'<li>'+
-			 				    '<a onclick="admCampeonato()"><i class="menu-icon fa fa-caret-right"></i>Campeonato</a>'+
-			 					'<b class="arrow"></b>'+
-			 				'</li>';
+                    html+='<li><a onclick="admCampeonato()">Campeonato</a></li>';
                  }
                  if(menus(cadenaPrivilegio, 'admFaseGrupos')){
-					 html +='<li>'+
-			 				    '<a onclick="admFaseGrupos()"><i class="menu-icon fa fa-caret-right"></i>Crear Fase de Grupos</a>'+
-			 					'<b class="arrow"></b>'+
-			 				'</li>';
-                 }
+                    html+='<li><a onclick="admFaseGrupos()">Crear Fase de Grupos</a></li>';
+                 }                 
                  if(menus(cadenaPrivilegio, 'admCalendario')){
-                     html +='<li>'+
-			 					'<a onclick="admCalendario()"><i class="menu-icon fa fa-caret-right"></i>Administración de Calendario</a>'+
-			 					'<b class="arrow"></b>'+
-			 				'</li>';
+                    html+='<li><a onclick="admCalendario()">Administracion de Calendario</a></li>';
                  }
                  if(menus(cadenaPrivilegio, 'admFichaControl')){
-                    html +=	'<li>'+
-			 				    '<a onclick="admFichaControl()"><i class="menu-icon fa fa-caret-right"></i>Administración de Fichas de Control</a>'+
-			 					'<b class="arrow"></b>'+
-			 				'</li>';
+                    html+='<li><a onclick="admFichaControl()">Administracion de Fichas de Control</a></li>';
                  }
-        html += '</ul></li>';
+        html+='</ul></li>';        
     }
+    
 
     if (menus(cadenaPrivilegio, 'admEquipos')) {
-			html += '<li class="">'+
-								'<a href="#" class="dropdown-toggle">'+
-									'<i class="menu-icon fa fa-futbol-o"></i>'+
-									'<span class="menu-text">EQUIPOS</span>'+
-									'<b class="arrow fa fa-angle-down"></b>'+
-								'</a>'+
-								'<b class="arrow"></b><ul class="submenu">';
+        html+='<li class="uk-parent">'+
+        '<a><span class="uk-margin-small-right" uk-icon="icon: bookmark"></span>EQUIPOS</a>'+
+            '<ul class="uk-nav-sub">';
             if(menus(cadenaPrivilegio, 'admEquipos')){
-                html +=	'<li>'+
-						  '<a onclick="admEquipos()"><i class="menu-icon fa fa-caret-right"></i>Administración de Equipos</a>'+
-						  '<b class="arrow"></b>'+
-						'</li>';
+                    html+='<li><a onclick="admEquipos()">Nuevo Equipo</a></li>';
                  }
         html+='</ul></li>';
     }
+    
 
-		html+='<li class="">'+
-				    '<a href="../index.php">'+
-					   '<i class="menu-icon fa fa-power-off red"></i>'+
-						'<span class="menu-text red"> CERRAR SESION </span>'+
-					'</a>'+
-					'<b class="arrow"></b>'+
-				'</li>';
+    html+='<li class="uk-nav-divider"></li>'+
+        '<li><a href="../index.php"><span class="uk-margin-small-right" uk-icon="icon: sign-out"></span>CERRAR SESION</a></li>';
 
     document.getElementById("divOpciones").innerHTML=html;
 }
-
-function activaTab(tab){
-	$('a[href="#'+tab+'"]').tab('show');
-}
-
-function timepicker(time){
-	$('#'+time+'').timepicker({
-		minuteStep: 1,
-		showSeconds: false,
-		showMeridian: false,
-		disableFocus: true,
-		icons: {
-			up: 'fa fa-chevron-up',
-			down: 'fa fa-chevron-down'
-		}
-	}).on('focus', function() {
-		//$('#'+time+'').timepicker('showWidget');
-	}).next().on(ace.click_event, function(){
-		$(this).prev().focus();
-	});
-}
-
-function mensajeError(mensaje){
-    $.gritter.add({
-        // (string | mandatory) the heading of the notification
-        title: 'Error',
-        // (string | mandatory) the text inside the notification
-        text: mensaje,
-        class_name: 'gritter-error'
-    });
-    return false;
-}
-
-function mensajeCorrecto(mensaje){
-    $.gritter.add({
-        // (string | mandatory) the heading of the notification
-        title: 'Correcto',
-        // (string | mandatory) the text inside the notification
-        text: mensaje,
-        class_name: 'gritter-successss'
-    });
-    return false;
-}
-
-/**
- * @param  var select datos seleccionados de la tabla
- * @param  var head Cabecera de la tabla
- * @param  var tamanio tamanio de la columna representada en %
- * @param  var from nombre de la tabla
- * @param  var where opciones a escojer
- * @param  var onclick funcion que va a realizar al hacer click
- * @return Datos de la tabla
- */
-function datos(select, head, tamanio, from, where, onclick){
+function datos(select, from, where, onclick){
     var xmlhttp;
     if (window.XMLHttpRequest){
         xmlhttp=new XMLHttpRequest();
@@ -211,26 +119,21 @@ function datos(select, head, tamanio, from, where, onclick){
         if (xmlhttp.readyState==4 && xmlhttp.status==200){
             //var id=xmlhttp.responseText;
             document.getElementById("div1").innerHTML=xmlhttp.responseText;
-            tablaPagination("dynamic-table");
         }
     }
     xmlhttp.open("POST","WEB/busqueda.php",true);
     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded;");
     xmlhttp.send("select="+encodeURIComponent(select)
-        +"&head="+encodeURIComponent(head)
         +"&from="+encodeURIComponent(from)
         +"&where="+encodeURIComponent(where)
-        +"&tamanio="+encodeURIComponent(tamanio)
         +"&onclick="+encodeURIComponent(onclick));
 }
 
-/**
- * @return vacia todo los datos de la pantalla principal
- */
 function encerar(){
     document.getElementById("div1").innerHTML="";
     document.getElementById("div2").innerHTML="";
-    //document.getElementById("divInfo").innerHTML="";
+    document.getElementById("divInfo").innerHTML="";
+    UIkit.tab("#js-control").show(0);
 }
 
 function uploadAjax(){
@@ -291,39 +194,34 @@ function ingresoSistema(){
         if (xmlhttp.readyState==4 && xmlhttp.status==200){
             var id=xmlhttp.responseText;
             if(document.getElementById("usuario").value==""){
-                document.getElementById("usuariolabel").className += ' has-error ';
-                document.getElementById("usuarioicon").className += ' red ';
-                mensajeError("El campo usuario esta vacio");
+                document.getElementById("usuario").className += ' uk-form-danger';
+                UIkit.notification("<span uk-icon='icon: warning'></span> El campo usuario esta vacio",{status:'warning'});
             }
             if(document.getElementById("pass").value==""){
-                document.getElementById("passlabel").className += ' has-error ';
-                document.getElementById("passicon").className += ' red ';
-                mensajeError("El campo de Contraseña esta vacia");
+                document.getElementById("pass").className += ' uk-form-danger';
+                UIkit.notification("<span uk-icon='icon: warning'></span> El campo Contraseña esta vacia.",{status:'warning'});
             }
             else{
+                UIkit.notification("<span uk-icon='icon: close'></span>"+id+"",{status:'danger'});
                 if(id=='0'){
                     window.open('pags/index.php', '_parent');
                 }
-                else{
-                    mensajeError(id);
-                }
             }
-
+            
             //document.getElementById("datos").innerHTML=xmlhttp.responseText;
         }
     }
     xmlhttp.open("POST","pags/usuarios/ingresoUsuario.php",true);
     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     xmlhttp.send("usuario="+document.getElementById("usuario").value
-        +"&pass="+document.getElementById("pass").value
-        +"&idRol="+document.getElementById("cmbRol").value);
+        +"&pass="+document.getElementById("pass").value);
 }
 
 function enviarFormGuardar(form, valores){
 
     var json = JSON.parse(valores);
     //console.log(json);
-
+    
     $.ajax({
         data:  json,
         url:   form+'.php',
@@ -340,15 +238,13 @@ function enviarFormGuardar(form, valores){
                 var from = response[0]['from'];
                 var where = response[0]['where'];
                 var onclick = response[0]['onclick'];
-                var head = response[0]['head'];
-                var tamanio = response[0]['tamanio'];
 
                if(res==true){
-                    mensajeCorrecto(msg);
-                    datos(select, head, tamanio, from, where, onclick);
+                    UIkit.notification("<span uk-icon='icon: check'></span>"+msg+"",{status:'success'});
+                    datos(select, from, where, onclick);
                }
                if(res==false){
-                    mensajeError(msg);
+                    UIkit.notification("<span uk-icon='icon: check'></span>"+msg+"",{status:'danger'});
                }
 
             }
@@ -375,7 +271,7 @@ function enviarForm(form,send){
 
 function getids(tab){
     var lista = '';
-    $("input[name="+tab+"]").each(function (index) {
+    $("input[name="+tab+"]").each(function (index) {  
        if($(this).is(':checked')){
           lista += $(this).val()+',';
        }
@@ -386,20 +282,13 @@ function getids(tab){
 
 function getidsText(tab){
     var lista = '';
-    $("input[name="+tab+"]").each(function (index) {
+    $("input[name="+tab+"]").each(function (index) {  
         if($(this).val()!=('')){
           lista += $(this).val()+',';
-       }
+       }       
     });
     lista = lista.substring(0, lista.length-1);
     return lista;
-}
-
-function tablaPagination(name){
-    //$('#dynamic-table').DataTable();
-    //Inicializa el plugion del dataTable
-    var myTable =
-        $('#'+name+'').DataTable();
 }
 
 //ROLES
@@ -408,19 +297,23 @@ function admRoles(){
     var html="";
     var html2="";
 
-    html += '<div class="input-group col-xs-4">'+
-                '<input type="text" class="form-control"  id="buscar_rol" name="buscar_rol" onKeypress="if(event.keyCode == 13) {busquedaRol();}" placeholder="Buscar.." />'+
-                '<span class="input-group-btn">'+
-                    '<button onclick=busquedaRol(); type="button" class="btn btn-primary btn-sm">'+
-                        '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
-                    '</button>'+
-                '</span>'+
+    html += '<div class="uk-margin uk-padding uk-padding-remove-left">'+
+                '<div class="uk-inline">'+
+                    '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
+                    '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_rol" name="buscar_rol" onKeypress="if(event.keyCode == 13) {busquedaRol();}"/>'+
+                '</div>'+
+                '<button class="uk-button uk-button-default" onclick=UIkit.tab("#js-control").show(0);busquedaRol(); >Buscar</button>'+
             '</div>';
+    /*'<div class="uk-grid-small uk-padding" uk-grid>'+
+                '<input class="uk-form-width-medium" placeholder="Buscar..." type="text" >'+
+                '<button class="uk-button uk-button-default" onclick=busquedaRol() >Buscar</button>'+
+            '</div>';*/
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="btn btn-success" onclick=admRolForm(-1);activaTab("div2");>Nuevo</button>';
+    html2 += '<button class="uk-button uk-button-primary " onclick=UIkit.tab("#js-control").show(1);admRolForm(-1);>Nuevo</button>';
     document.getElementById("divMenu2").innerHTML=html2;
+    document.getElementById("divInfo").innerHTML="ROLES";
     busquedaRol();
     admRolForm(-1);
 }
@@ -431,7 +324,7 @@ function busquedaRol(){
         where = " where lower(rol) like lower('%"+$("#buscar_rol").val()+"%') ";
     }
     where += " order by rol";
-    datos("id_rol,rol", "ROL", "100", "tbl_rol", where,"activaTab('div2');admRolForm");
+    datos("id_rol,rol", "tbl_rol", where,"UIkit.tab('#js-control').show(1);admRolForm");
 }
 
 function admRolForm(id){
@@ -460,19 +353,19 @@ function admDiciplina(){
     var html="";
     var html2="";
 
-		html += '<div class="input-group col-xs-4">'+
-                '<input type="text" class="form-control" id="buscar_diciplina" name="buscar_diciplina" onKeypress="if(event.keyCode == 13) busquedaDiciplina()" placeholder="Buscar.." />'+
-                '<span class="input-group-btn">'+
-                    '<button onclick=activaTab("div1");busquedaDiciplina(); type="button" class="btn btn-primary btn-sm">'+
-                        '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
-                    '</button>'+
-                '</span>'+
+    html += '<div class="uk-margin uk-padding uk-padding-remove-left">'+
+                '<div class="uk-inline">'+
+                    '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
+                    '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_diciplina" name="buscar_diciplina" onKeypress="if(event.keyCode == 13) busquedaDiciplina()"/>'+
+                '</div>'+
+                '<button class="uk-button uk-button-default" onclick=UIkit.tab("#js-control").show(0);busquedaDiciplina();>Buscar</button>'+
             '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-		html2 += '<button class="btn btn-success" onclick=activaTab("div2");admDiciplinaForm(-1);>Nuevo</button>';
+    html2 += '<button class="uk-button uk-button-primary " onclick=UIkit.tab("#js-control").show(1);admDiciplinaForm(-1);>Nuevo</button>';
     document.getElementById("divMenu2").innerHTML=html2;
+    document.getElementById("divInfo").innerHTML="DICIPLINAS";
     busquedaDiciplina();
     admDiciplinaForm(-1);
 }
@@ -483,7 +376,7 @@ function busquedaDiciplina(){
         where = " where lower(diciplina) like lower('%"+$("#buscar_diciplina").val()+"%') ";
     }
     where += " order by diciplina";
-    datos("id_diciplina,diciplina,hora,txt_estado", "DISCIPLINA, DURACION ESTIMADA, ESTADO","40,30,30","vta_diciplina", where,"activaTab('div2');admDiciplinaForm");
+    datos("id_diciplina,diciplina, txt_estado", "vta_diciplina", where,"UIkit.tab('#js-control').show(1);admDiciplinaForm");
 }
 
 function admDiciplinaForm(id){
@@ -492,9 +385,8 @@ function admDiciplinaForm(id){
 
 function admDiciplinaGuardar(){
     var estado=$('input:radio[name=estado]:checked').val();
-		//console.log(estado);
     enviarFormGuardar('usuarios/frmDiciplinaGuardar','{"id": "'+$("#id_diciplina").val()+'", "estado" : "'+estado+'", "hora" : "'+$("#id_hora").val()+'", '+
-        ' "diciplina" : "'+$("#nuevo_diciplina").val()+'"}');
+        ' "minuto" : "'+$("#id_minuto").val()+'", "diciplina" : "'+$("#nuevo_diciplina").val()+'"}');
 }
 //USUARIOS
 function admUsuario(){
@@ -502,32 +394,32 @@ function admUsuario(){
     var html="";
     var html2="";
 
-		html += '<div class="input-group col-xs-4">'+
-		            '<input type="text" class="form-control" id="buscar_usuario" name="buscar_usuario" onKeypress="if(event.keyCode == 13) busquedaUsuario()" placeholder="Buscar.." />'+
-		            '<span class="input-group-btn">'+
-		                '<button onclick=activaTab("div1");busquedaUsuario(); type="button" class="btn btn-primary btn-sm">'+
-		                    '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
-		                '</button>'+
-		            '</span>'+
-		        '</div>';
+    html += '<div class="uk-margin uk-padding uk-padding-remove-left">'+
+                '<div class="uk-inline">'+
+                    '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
+                    '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_usuario" name="buscar_usuario" onKeypress="if(event.keyCode == 13) busquedaUsuario()"/>'+
+                '</div>'+
+                '<button class="uk-button uk-button-default" onclick=UIkit.tab("#js-control").show(0);busquedaUsuario();>Buscar</button>'+
+            '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-		html2 += '<button class="btn btn-success" onclick=admUsuarioForm(-1);activaTab("div2");>Nuevo</button>';
+    html2 += '<button class="uk-button uk-button-primary" onclick=UIkit.tab("#js-control").show(1);admUsuarioForm(-1);>Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
+    document.getElementById("divInfo").innerHTML="USUARIOS";
     busquedaUsuario();
     admUsuarioForm(-1);
 }
 
 function busquedaUsuario(){
-
+    
     var where = "";
     if ($("#buscar_usuario").val()!="") {
         where = " where lower(alias) like lower('%"+$("#buscar_usuario").val()+"%') ";
     }
-    where += " order by alias ";
-		datos("alias, alias, rol, txt_estado", "USUARIO, ROL, ESTADO", "40,30,30", "vta_usuario", where,"activaTab('div2');admUsuarioForm");
+    where += " order by alias";
+    datos("alias,alias", "tbl_usuario", where,"UIkit.tab('#js-control').show(1);admUsuarioForm");
 }
 
 function admUsuarioForm(id){
@@ -547,32 +439,32 @@ function admCampeonato(){
     var html="";
     var html2="";
 
-		html += '<div class="input-group col-xs-4">'+
-		            '<input type="text" class="form-control" id="buscar_campeonato" name="buscar_campeonato" onKeypress="if(event.keyCode == 13) busquedaCampeonato()" placeholder="Buscar.." />'+
-		            '<span class="input-group-btn">'+
-		                '<button onclick=activaTab("div1");busquedaCampeonato(); type="button" class="btn btn-primary btn-sm">'+
-		                    '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
-		                '</button>'+
-		            '</span>'+
-		        '</div>';
+    html += '<div class="uk-margin uk-padding uk-padding-remove-left">'+
+                '<div class="uk-inline">'+
+                    '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
+                    '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_campeonato" name="buscar_campeonato" onKeypress="if(event.keyCode == 13) busquedaCampeonato()"/>'+
+                '</div>'+
+                '<button class="uk-button uk-button-default" onclick=UIkit.tab("#js-control").show(0);busquedaCampeonato(); >Buscar</button>'+
+            '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-		html2 += '<button class="btn btn-success" onclick=admCampeonatoForm(-1);activaTab("div2");>Nuevo</button>';
+    html2 += '<button class="uk-button uk-button-primary" onclick=UIkit.tab("#js-control").show(1);admCampeonatoForm(-1);>Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
+    document.getElementById("divInfo").innerHTML="CAMPEONATO";
     busquedaCampeonato();
     admCampeonatoForm(-1);
 }
 
 function busquedaCampeonato(){
-
+    
     var where = "";
     if ($("#buscar_campeonato").val()!="") {
         where += " where lower(campeonato) like lower('%"+$("#buscar_campeonato").val()+"%') ";
     }
     where += " order by id_campeonato";
-		datos("id_campeonato,campeonato, fecha_inicio, fecha_max_inscripcion, fecha_inauguracion", "CAMPEONATO, F. DE INICIO, F. MAX DE INSCRIPCIÓN, F. DE INAUGURACIÓN", "40,20,20,20", "tbl_campeonato", where,"activaTab('div2');admCampeonatoForm");
+    datos("id_campeonato,campeonato", "tbl_campeonato", where,"UIkit.tab('#js-control').show(1);admCampeonatoForm");
 }
 
 function admCampeonatoForm(id){
@@ -583,17 +475,16 @@ function admCampeonatoForm(id){
        },
        complete: function(){
          // Handle the complete event
-         // $( "#f_inicio" ).datepicker({ dateFormat: 'dd-mm-yy', minDate: -0 }).val();
-         $( "#f_inicio" ).datepicker({ startDate: '-0d' }).val();
-         $( "#f_inscripcion" ).datepicker({ startDate: '-0d' }).val();
-         $( "#f_inauguracion" ).datepicker({ startDate: '-0d' }).val();
+         $( "#f_inicio" ).datepicker({ dateFormat: 'dd-mm-yy' }).val();
+         $( "#f_inscripcion" ).datepicker({ dateFormat: 'dd-mm-yy' }).val();
+         $( "#f_inauguracion" ).datepicker({ dateFormat: 'dd-mm-yy' }).val();
        }
        // ......
      });
 }
 
 function admCampeonatoGuardar(){
-
+    
     /*console.log($("#arbitraje").val());
     console.log(document.getElementById("ch").checked);
     console.log(document.getElementById("cm").checked);
@@ -613,7 +504,7 @@ function admCampeonatoGuardar(){
     console.log($("#p_equipos").val());
     console.log($("#v_garantia").val());
     console.log($("#v_inscripcion").val());*/
-
+    
     idsDiciplina = getids("diciplinaTab");
     enviarFormGuardar('usuarios/frmCampeonatoGuardar','{"id": "'+$("#id_campeonato").val()+'", "nombre_campeonato" : "'+$("#nombre_campeonato").val()+'", '+
         ' "f_inicio" : "'+$("#f_inicio").val()+'", "f_inscripcion" : "'+$("#f_inscripcion").val()+'", "diciplina" : "'+idsDiciplina+'", '+
@@ -631,32 +522,32 @@ function admEquipos(){
     var html="";
     var html2="";
 
-    html += '<div class="input-group col-xs-4">'+
-            '<input type="text" class="form-control" id="buscar_equipos" name="buscar_equipos" onKeypress="if(event.keyCode == 13) busquedaEquipo()" placeholder="Buscar.." />'+
-            '<span class="input-group-btn">'+
-                '<button onclick=activaTab("div1");busquedaEquipo(); type="button" class="btn btn-primary btn-sm">'+
-                    '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
-                '</button>'+
-            '</span>'+
-        '</div>';
+    html += '<div class="uk-margin uk-padding uk-padding-remove-left">'+
+                '<div class="uk-inline">'+
+                    '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
+                    '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_equipos" name="buscar_equipos" onKeypress="if(event.keyCode == 13) busquedaEquipo()"/>'+
+                '</div>'+
+                '<button class="uk-button uk-button-default" onclick=UIkit.tab("#js-control").show(0);busquedaEquipo();>Buscar</button>'+
+            '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="btn btn-success" onclick=admEquipoForm(-1);activaTab("div2");>Nuevo</button>';
+    html2 += '<button class="uk-button uk-button-primary" onclick=UIkit.tab("#js-control").show(1);admEquipoForm(-1);>Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
+    document.getElementById("divInfo").innerHTML="EQUIPOS";
     busquedaEquipo();
     admEquipoForm(-1);
 }
 
 function busquedaEquipo(){
-
+    
     var where = " ";
     if ($("#buscar_equipos").val()!="") {
         where += " where lower(equipo) like lower('%"+$("#buscar_equipos").val()+"%') ";
     }
-    where += " order by equipo, genero";
-    datos("id_equipo,equipo, diciplina, txt_genero", "EQUIPO, DISCIPLINA, GENERO", "60,40,40", "vta_equipo_solo", where,"activaTab('div2');admEquipoForm");
+    where += " order by diciplina, genero";
+    datos("id_equipo,equipo, diciplina, txt_genero ", " vta_equipo_solo ", where,"UIkit.tab('#js-control').show(1);admEquipoForm");
 }
 
 function admEquipoForm(id){
@@ -709,7 +600,7 @@ function admFutbolGuardar(){
     //console.log(idsa);
 
     enviarFormGuardar('usuarios/frmEquipoGuardar','{"id": "'+$("#id_futbol").val()+'", "nuevo_equipo" : "'+$("#nuevo_equipo").val()+'", '+
-        ' "cmbCampeonato" : "'+$("#cmbCampeonato").val()+'", "cmbCarrea" : "'+$("#cmbCarrea").val()+'", "cmbDiciplina" : "'+$("#cmbDiciplina").val()+'", "ids" : "'+ids+'", '+
+        ' "cmbCampeonato" : "'+$("#cmbCampeonato").val()+'", "cmbCarrea" : "'+$("#cmbCarrea").val()+'", "cmbDiciplina" : "'+$("#cmbDiciplina").val()+'", "ids" : "'+ids+'", '+ 
         ' "idsNum" : "'+idsNum+'", "genero" : "'+sexo+'", "modalidad" : "'+modalidad+'" }');
 }
 
@@ -730,32 +621,32 @@ function admEstudiantes(){
     var html="";
     var html2="";
 
-    html += '<div class="input-group col-xs-4">'+
-            '<input type="text" class="form-control" id="buscar_estudiantes" name="buscar_estudiantes" onKeypress="if(event.keyCode == 13) busquedaEstudiantes()" placeholder="Buscar.." />'+
-            '<span class="input-group-btn">'+
-                '<button onclick=activaTab("div1");busquedaEstudiantes(); type="button" class="btn btn-primary btn-sm">'+
-                    '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
-                '</button>'+
-            '</span>'+
-        '</div>';
+    html += '<div class="uk-margin uk-padding uk-padding-remove-left">'+
+                '<div class="uk-inline">'+
+                    '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
+                    '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_estudiantes" name="buscar_estudiantes" onKeypress="if(event.keyCode == 13) busquedaEstudiantes()"/>'+
+                '</div>'+
+                '<button class="uk-button uk-button-default" onclick=UIkit.tab("#js-control").show(0);busquedaEstudiantes();>Buscar</button>'+
+            '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="btn btn-success" onclick=admEstudianteForm(-1);activaTab("div2");>Nuevo</button>';
+    html2 += '<button class="uk-button uk-button-primary" onclick=UIkit.tab("#js-control").show(1);admEstudianteForm(-1);>Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
+    document.getElementById("divInfo").innerHTML="ESTUDIANTES";
     busquedaEstudiantes();
     admEstudianteForm(-1);
 }
 
 function busquedaEstudiantes(){
-
+    
     var where = "";
     if ($("#buscar_estudiantes").val()!="") {
         where += " where lower(razon_social) like lower('%"+$("#buscar_estudiantes").val()+"%') ";
     }
-    where += " ";
-    datos("id_alumno,razon_social,carrera,nivel", "RAZON SOCIAL, CARRERA, NIVEL", "50,25,25", "vta_alumno_carrera", where,"activaTab('div2');admEstudianteForm");
+    where += " limit 10";
+    datos("id_alumno,razon_social,carrera,nivel", "vta_alumno_carrera", where,"UIkit.tab('#js-control').show(1);admEstudianteForm");
 }
 
 function admEstudianteForm(id){
@@ -790,20 +681,27 @@ function admFaseGrupos(){
     cmbFaseCampeonato=getCombo("id_campeonato, campeonato", "tbl_campeonato","","cmbCampeonato");
     //$html .= $comboCampeonato.
 
-    html += '<select class="form-control input-xlarge" name="cmbCampeonato" id="cmbCampeonato">'+cmbFaseCampeonato+'</select>';
+    html += '<div class="uk-margin uk-padding uk-padding-remove-left uk-width-1-2@s">'+
+                '<select class="uk-select" name="cmbCampeonato" id="cmbCampeonato">'+cmbFaseCampeonato+
+                '</select><button class="uk-button uk-button-primary uk-button-small" onclick=UIkit.tab("#js-control").show(0);busquedaFaseGrupo();>Buscar</button>'+
+                /*'<div class="uk-inline">'+
+                    '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
+                    '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_equipos" name="buscar_equipos" onKeypress="if(event.keyCode == 13) busquedaBasquet()"/>'+
+                '</div>'+*/
+                //'<button class="uk-button uk-button-default" onclick=busquedaBasquet() >Buscar</button>'+
+            '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button type="button" onclick=activaTab("div2");admFaseGrupo(-1); class="btn btn-primary btn-sm">'+
-                '<i class="ace-icon fa fa-key bigger-110"></i>Generar Nuevo'+
-            '</button>';
+    html2 += '<button class="uk-button uk-button-primary" onclick=UIkit.tab("#js-control").show(1);admFaseGrupo(-1);>Generar Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
+    document.getElementById("divInfo").innerHTML="FASE DE GRUPOS";
     busquedaFaseGrupo();
 }
 
 function busquedaFaseGrupo(){
-
+    
     var where = "";
     /*if ($("#buscar_estudiantes").val()!="") {
         where += " where lower(razon_social) like lower('%"+$("#buscar_estudiantes").val()+"%') ";
@@ -812,8 +710,8 @@ function busquedaFaseGrupo(){
         where += " where id_campeonato="+$("#cmbCampeonato").val()+" ";
     }
     where += " order by diciplina";
-
-    datos("id_diciplina,diciplina", "DISCIPLINA", "100", "vta_diciplina_campeonato", where,"activaTab('div2');admFaseGrupoForm");
+    //datos("id_equipo,equipo,diciplina, grupo_futbol, txt_genero", "vta_grupo_futbol", where,"admFaseGrupoForm");
+    datos("id_diciplina,diciplina", "vta_diciplina_campeonato", where,"UIkit.tab('#js-control').show(1);admFaseGrupoForm");
 }
 
 function admFaseGrupo(id){
@@ -842,27 +740,35 @@ function admCalendario(){
     cmbFaseCampeonato=getCombo("id_campeonato, campeonato", "tbl_campeonato","","cmbCampeonato");
     //$html .= $comboCampeonato.
 
-    html += '<select class="form-control input-xlarge" name="cmbCampeonato" id="cmbCampeonato">'+cmbFaseCampeonato+'</select>';
+    html += '<div class="uk-margin uk-padding uk-padding-remove-left uk-width-1-2@s">'+
+                '<select class="uk-select" name="cmbCampeonato" id="cmbCampeonato">'+cmbFaseCampeonato+'</select>'+
+                /*'<div class="uk-inline">'+
+                    '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
+                    '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_equipos" name="buscar_equipos" onKeypress="if(event.keyCode == 13) busquedaBasquet()"/>'+
+                '</div>'+*/
+                //'<button class="uk-button uk-button-default" onclick=busquedaBasquet() >Buscar</button>'+
+            '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
+    document.getElementById("divInfo").innerHTML="CALENDARIOS";
 
     $.ajax({
        beforeSend: function(){
          // Handle the beforeSend event
-         html2 += 'Fecha de Inicio: <input type="text" id="f_inicio" name="f_inicio" placeholder="dd/mm/YYYY..." data-date-format="dd-mm-yyyy" >';
+         html2 += 'Fecha de Inicio: <input type="text" id="f_inicio" name="f_inicio" placeholder="dd/mm/YYYY..." class="uk-input uk-form-width-medium uk-form-small">';
        },
        complete: function(){
          // Handle the complete event
-         $( "#f_inicio" ).datepicker({ startDate: '-0d' }).val();
+         $( "#f_inicio" ).datepicker({ dateFormat: 'dd-mm-yy', minDate: -0 }).val();
        }
        // ......
      });
 
-    html2 += ' Hora Inicio: <input id="id_horai" name="id_horai" class="input-small" type="text" placeholder="hh">';
-    html2 += ':<input class="input-small" id="id_minutoi" name="id_minutoi" type="text" placeholder="mm">';
-    html2 += ' Hora Final: <input class=" input-small" id="id_horaf" name="id_horaf" type="text" placeholder="hh">';
-    html2 += ':<input class="input-small" id="id_minutof" name="id_minutof" type="text" placeholder="mm">';
-    html2 += '<br><button class="btn btn-success" onclick=admCalendarios(-1);activaTab("div2");>Nuevo</button>';
+    html2 += ' Hora Inicio: <input id="id_horai" name="id_horai" class="uk-input uk-form-width-xsmall" type="text" placeholder="hh">';
+    html2 += ':<input id="id_minutoi" name="id_minutoi" class="uk-input uk-form-width-xsmall" type="text" placeholder="mm">';
+    html2 += ' Hora Final: <input id="id_horaf" name="id_horaf" class="uk-input uk-form-width-xsmall" type="text" placeholder="hh">';
+    html2 += ':<input id="id_minutof" name="id_minutof" class="uk-input uk-form-width-xsmall" type="text" placeholder="mm">';
+    html2 += '<br><button class="uk-button uk-button-primary" onclick=UIkit.tab("#js-control").show(1);admCalendarios(-1);>Generar Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
     busquedaCalendario();
@@ -893,14 +799,13 @@ function busquedaCalendario(){
     }
     where += " order by diciplina";
     //datos("id_equipo,equipo,diciplina, grupo_futbol, txt_genero", "vta_grupo_futbol", where,"admFaseGrupoForm");
-    datos("id_diciplina,diciplina", "DISCIPLINA", "100", "vta_diciplina_campeonato", where,"activaTab('div2');admCalendarioForm");
+    datos("id_diciplina,diciplina", "vta_diciplina_campeonato", where,"UIkit.tab('#js-control').show(1);admCalendarioForm");
 }
 
 function admCalendarioForm(id){
     enviarForm('usuarios/frmCalendarioGrupo','idCampeonato='+$("#cmbCampeonato").val()+"&id="+id);
 }
 
-//FICHA DE CONTROL
 function admFichaControl(){
     /*console.log(equipoa);
     console.log(equipob);
@@ -910,35 +815,32 @@ function admFichaControl(){
     var html="";
     var html2="";
 
-    html += '<div class="input-group col-xs-4">'+
-            '<input type="text" class="form-control" id="buscar_ficha" name="buscar_ficha" onKeypress="if(event.keyCode == 13) busquedaFicha()" placeholder="Buscar.." />'+
-            '<span class="input-group-btn">'+
-                '<button onclick=activaTab("div1");busquedaFicha(); type="button" class="btn btn-primary btn-sm">'+
-                    '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
-                '</button>'+
-            '</span>'+
-        '</div>';
+    html += '<div class="uk-margin uk-padding uk-padding-remove-left">'+
+                '<div class="uk-inline">'+
+                    '<a class="uk-form-icon" uk-icon="icon: search"></a>'+
+                    '<input class="uk-input" placeholder="Buscar..." type="text" id="buscar_ficha" name="buscar_ficha" onKeypress="if(event.keyCode == 13) busquedaFicha()"/>'+
+                '</div>'+
+                '<button class="uk-button uk-button-default" onclick=UIkit.tab("#js-control").show(0);busquedaFicha();>Buscar</button>'+
+            '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="btn btn-success" onclick=admFichaForm(-1);activaTab("div2");>Nuevo</button>';
+    html2 += '<button class="uk-button uk-button-primary" onclick=UIkit.tab("#js-control").show(1);admFichaForm(-1);>Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
+    document.getElementById("divInfo").innerHTML="FICHA DE CONTROL";
     busquedaFicha();
     admEstudianteForm(-1);
 }
 
 function busquedaFicha(){
-
+    
     var where = "";
     if ($("#buscar_ficha").val()!="") {
         where += " where lower(razon_social) like lower('%"+$("#buscar_ficha").val()+"%') ";
     }
     where += " order by estado desc, fecha, hora limit 10";
-
-    datos("id_ficha_control,equipo_a,equipo_b,diciplina, fecha, hora, txt_estado", "EQUIPO A,EQUIPO B,DISCIPLINA, Fecha, HORA, ESTADO", "20,20,15,15,15,15", "vta_ficha_control", where,"activaTab('div2');admFichaForm");
-
-    datos("id_ficha_control,equipo_a,equipo_b,diciplina, fecha, hora, txt_estado", "vta_ficha_control", where,"activaTab('div2');admFichaForm");
+    datos("id_ficha_control,equipo_a,equipo_b,diciplina, fecha, hora, txt_estado", "vta_ficha_control", where,"UIkit.tab('#js-control').show(1);admFichaForm");
 }
 
 function admFichaForm(id){

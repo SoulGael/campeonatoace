@@ -6,9 +6,10 @@ conectarse();
 session_start();
 //Recibir los datos ingresados en el formulario
 $usuario= $_POST['usuario'];
+$idRol= $_POST['idRol'];
 $pass= md5($_POST['pass']);
 //Consultar si los datos son están guardados en la base de datos
-$consulta="SELECT * FROM tbl_usuario WHERE alias='".$usuario."' AND clave ='".$pass."'"; 
+$consulta="SELECT * FROM tbl_usuario WHERE alias='".$usuario."' and id_rol=".$idRol." AND clave ='".$pass."'"; 
 $resultado=pg_query($consulta) or die (pg_last_error());
 $fila=pg_fetch_array($resultado);
 

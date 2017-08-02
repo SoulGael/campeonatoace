@@ -9,10 +9,10 @@ autenticar();
 	<title>CAMPEONATO UNIANDES</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../../css/uikit.min.css" />
-	<script src="../../js/jquery.js"></script>
-	<script src="../../js/uikit.min.js"></script>
-	<script src="../../js/uikit-icons.min.js"></script>
+	<link rel="stylesheet" href="datos/css/uikit.min.css" />
+	<script src="datos/js/jquery.js"></script>
+	<script src="datos/js/uikit.min.js"></script>
+	<script src="datos/js/uikit-icons.min.js"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
@@ -20,10 +20,10 @@ autenticar();
 
 	</script>
 	
-	<link rel="stylesheet" href="../../css/jquery-ui.css">
+	<link rel="stylesheet" href="datos/css/jquery-ui.css">
   <script src="funcion/js.js"></script>
-  <script src="../../js/jquery-1.12.4.js"></script>
-  <script src="../../js/jquery-ui.js"></script>
+  <script src="datos/js/jquery-1.12.4.js"></script>
+  <script src="datos/js/jquery-ui.js"></script>
 </head>
 <body>
 	<input type="hidden" id="id" name="id" value="<?php echo $_SESSION['usu']; ?>">  
@@ -44,7 +44,7 @@ autenticar();
 				    <div class="uk-card uk-card-default uk-card-small uk-card-body uk-margin-left" id="goles_b">0</div>
 				</div>
 	        </div>
-	        <!--<div id="datosEquipoA"></div>-->
+	        <div id="resultadosEquipos"></div>
 	        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	        <div id="prediccion" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	    </div>

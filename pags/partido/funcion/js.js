@@ -147,7 +147,7 @@ Highcharts.chart('prediccion', {
         text: equipo_a+' Vs '+equipo_b
     },
     subtitle: {
-        text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+        text: 'Posible Resultado'
     },
     xAxis: {
         categories: ['0-0', '1-0', '1-1', '2-1', '2-2', '3-1'],
@@ -205,5 +205,10 @@ function gola(){
 }
 function golb(){
     
+}
+
+function mensaje(getmensaje){
+    console.log(getmensaje);
+    //UIkit.notification("<span uk-icon='icon: warning'></span> El campo Contraseña esta vacia.",{status:'warning'});
 }
 

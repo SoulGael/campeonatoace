@@ -43,6 +43,36 @@ session_destroy();
 		<!-- ace scripts -->
 		<script src="assets/js/ace-elements.min.js"></script>
 		<script src="assets/js/ace.min.js"></script>
+		<script type="text/javascript">
+			$(document).on("ready", start);
+			function start(){
+				cmbFaseCampeonato=getCombo("id_rol, rol", "tbl_rol"," order by rol ","cmbRol");
+			}
+
+			function getCombo(select, from, where, div){
+			    var xmlhttp;
+			    if (window.XMLHttpRequest){
+			        xmlhttp=new XMLHttpRequest();
+			    }
+			    else{
+			        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			    }
+			    xmlhttp.onreadystatechange=function(){
+			        if (xmlhttp.readyState==4 && xmlhttp.status==200){
+			            //console.log(xmlhttp.responseText);
+			            //var id=xmlhttp.responseText;
+			            document.getElementById(div).innerHTML=xmlhttp.responseText;
+			            //return xmlhttp.responseText;
+			        }
+			    }
+			    xmlhttp.open("POST","pags/WEB/combo.php",true);
+			    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded;");
+			    xmlhttp.send("select="+encodeURIComponent(select)
+			        +"&from="+encodeURIComponent(from)
+			        +"&where="+encodeURIComponent(where));
+			}
+			
+		</script>
 	</head>
 
 	<body class="no-skin">
@@ -72,6 +102,13 @@ session_destroy();
 											<div class="space-6"></div>
 											<form>
 												<fieldset>
+
+													<label id="rollabel" class="block clearfix">
+														<span class="block input-icon input-icon-right">
+															<select class="form-control" id="cmbRol" name="cmbRol"></select>
+														</span>
+													</label>
+
 													<label id="usuariolabel" class="block clearfix">
 														<span class="block input-icon input-icon-right">
 															<input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuario" required/>

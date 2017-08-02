@@ -33,7 +33,7 @@ else {
 	}
 }
 
-$resultadoArray[] = array('msg' => $mensaje, 'res' => $res, 'select' => "id_alumno,razon_social,carrera,nivel", 'from' => "vta_alumno_carrera", 'where' => " ", 'onclick' => "admEstudianteForm");
+$resultadoArray[] = array('msg' => $mensaje, 'res' => $res, 'select' => "id_alumno,razon_social,carrera,nivel", 'head' => "RAZON SOCIAL, CARRERA, NIVEL", 'tamanio' => "50,25,25", 'from' => "vta_alumno_carrera", 'where' => " ", 'onclick' => "activaTab('div2');admEstudianteForm");
 echo $_GET['callback']."(".json_encode($resultadoArray).");";
 
 pg_close();

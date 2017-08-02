@@ -14,8 +14,8 @@ $mf = $_POST['mf'];
 $equipo = "";
 $Seleccionados = "";
 
-$htmlCabecera = 'CALENDARIO | <button class="uk-button uk-button-primary  uk-button-small" onclick="admCalendarioGuardar()">Guardar</button> <hr class="uk-divider-icon"><ul uk-tab>';
-$htmlCuerpo = "<ul class='uk-switcher uk-margin'>";
+$htmlCabecera = 'CALENDARIO |  <button class="btn btn-success" onclick=admCalendarioGuardar(-1);>Guardar</button><div class="tabbable">';
+$htmlCuerpo = "<div class='tab-content'>";
 
 //$fechaInicio = date('Y-m-d H:i', strtotime("$fecha $hi:$mi + 1 day + 1 hour"));
 //$fechaFin = date('Y-m-d H:i', strtotime("$fecha $hf:$mf + 1 day + 1 hour"));
@@ -33,14 +33,15 @@ if(strcmp($idCampeonato, '-1')!=0){
 		$idDiciplina = $filaDiciplina['id_diciplina'];
 		$diciplina = $filaDiciplina['diciplina'];
 		$hora = $filaDiciplina['hora'];
-		$minuto = $filaDiciplina['minuto'];
 
-		$htmlCabecera .= "<li><a href='#'>".$diciplina."</a></li>";
+		list($hora, $minuto, $s) = explode(':', $hora);
+
+		$htmlCabecera .= "<li><a data-toggle='tab' href='#".$diciplina."'>".$diciplina."</a></li>";
 		
 		$htmlVarones = "";
 		$htmlMujeres = "";
 
-		$htmlCuerpo .= '<li>'.
+		$htmlCuerpo .= '<div id='.$diciplina.' class="tab-pane">'.
 						  '<ul uk-tab><li><a href="#">MASCULINO</a></li>'.
 						  '<li><a href="#">FEMENINO</a></li></ul><ul class="uk-switcher uk-margin">';
 						
@@ -146,14 +147,14 @@ if(strcmp($idCampeonato, '-1')!=0){
 
 		$htmlVarones .= '</tbody></table></li>';
 		$htmlMujeres .= "</tbody></table></li>";
-		$htmlCuerpo .= $htmlVarones;
+		$htmlCuerpo .= $htmlVarones.'</div>';
 		$htmlCuerpo .= $htmlMujeres."</ul></li>";
 
 	}
 		
 }
-$htmlCabecera .= "</ul>";
-$htmlCuerpo .= "</ul>";
+$htmlCabecera .= "</ul</div>";
+$htmlCuerpo .= "</div>";
 
 //
 ini_set('max_execution_time', 300);

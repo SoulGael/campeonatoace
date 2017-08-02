@@ -34,45 +34,69 @@ if(pg_num_rows($resultado)!=0){
 			$paralelo=$filaA['paralelo'];
 			if($i==0){
 				$nivelMenu.='<li>
-											<a data-toggle="tab" href="#'.$nivel.'"><i class="pink ace-icon fa fa-tachometer bigger-110"></i>'.$nivel.'</a>
-										</li>';
+								<a data-toggle="tab" href="#'.$nivel.'"><i class="blue ace-icon fa fa-tachometer bigger-110"></i><b>'.$nivel.'</b></a>
+							</li>';
 				$nivelMenuContenido.='<div id="'.$nivel.'" class="tab-pane">';
 				$i++;
 			}
 			if($j==0){
 				$paraleloAnterior=$paralelo;
 				$nivelParalelo.='<li>
-													<a data-toggle="tab" href="#'.$paralelo.'">Paralelo '.$paralelo.'</a>
-												</li>';
+									<a data-toggle="tab" href="#'.$paralelo.'-'.$nivel.'">Paralelo '.$paralelo.'</a>
+								</li>';
+				$nivelParaleloContenido.='<div id="'.$paralelo.'-'.$nivel.'" class="tab-pane"><table id="simple-table" class="table  table-bordered table-hover">';
 				$j++;
 			}
 			if(strcmp($paralelo, $paraleloAnterior)==0){
-				//$nivelMenuContenido.='<input class="uk-checkbox" type="checkbox" value="'.$id_alumno.'" name="alumnosTab">'.$razon_social.' ('.$genero.')
-				//										<input class="uk-input uk-form-width-xsmall" type="text" name="alumnoNumTab" placeholder="Nro">';
-				//$j++;
+				$nivelParaleloContenido.='<tr>
+											<td class="center" width="10%">
+												<input type="checkbox" class="ace" value="'.$id_alumno.'" name="alumnosTab">
+												<span class="lbl"></span>
+											</td>
+											<td>
+												'.$razon_social.'
+											</td>
+											<td>
+												<span class="input-icon input-icon-right">
+													<input name="alumnoNumTab" type="text" placeholder="Nro.."/>
+													<i class="ace-icon fa fa-leaf green"></i>
+												</span>
+											</td>
+										</tr>';
 			}else{
-				//$listaParaleo .= '</tbody></table>';
 				$nivelParalelo.='<li>
-													<a data-toggle="tab" href="#'.$paralelo.'">Paralelo '.$paralelo.'</a>
-												</li>';
-			/*	$listaParaleo.='<li><h6 class="uk-accordion-title">'.$paralelo.'</h6><div class="uk-accordion-content">';
-				$listaParaleo.='<table class="uk-table uk-table-hover uk-table-middle uk-table-small uk-table-divider"><tbody>';
-				$listaParaleo.='<tr><td><input class="uk-checkbox" type="checkbox" value="'.$id_alumno.'" name="alumnosTab"></td> <td class="uk-table-link"><a class="uk-link-reset" >'.$razon_social.' ('.$genero.')</a> </td> <td><input class="uk-input uk-form-width-xsmall" type="text" name="alumnoNumTab" placeholder="Nro"></td> </tr>';
-				*/$paraleloAnterior=$paralelo;
+									<a data-toggle="tab" href="#'.$paralelo.'-'.$nivel.'">Paralelo '.$paralelo.'</a>
+								</li>';
+				$nivelParaleloContenido.='</table></div><div id="'.$paralelo.'-'.$nivel.'" class="tab-pane">
+											<table id="simple-table" class="table  table-bordered table-hover">
+											<tr>
+												<td class="center" width="10%">
+													<input type="checkbox" class="ace" value="'.$id_alumno.'" name="alumnosTab">
+													<span class="lbl"></span>
+												</td>
+												<td>
+													'.$razon_social.'
+												</td>
+												<td>
+													<span class="input-icon input-icon-right">
+														<input name="alumnoNumTab" type="text" placeholder="Nro.."/>
+														<i class="ace-icon fa fa-leaf green"></i>
+													</span>
+												</td>
+											</tr>';
+				$paraleloAnterior=$paralelo;
 			}
 
 		}
 
 		if($j==1){
 			$nivelParalelo .= '</ul>';
-			$nivelParaleloContenido .='</ul>';
-			$nivelMenuContenido .= '<div class="tabbable">'.$nivelParalelo.'</div>';
+			$nivelParaleloContenido .='</table></div></div>';
+			$nivelMenuContenido .= '<div class="tabbable">'.$nivelParalelo.' '.$nivelParaleloContenido.'</div>';
 		}
 
 		if($i==1){
 			$nivelMenuContenido .= '</div>';
-			//$lista .= $listaParaleo.'</tbody></table></div></li>';
-			//$lista .= $listaParaleo.'</div></li>';
 		}
 	}
 }

@@ -42,13 +42,19 @@ if(strcmp($id, '-1')!=0){
 			$id_al =  $filaSe['id_alumno'];
 			$id_ca =  $filaSe['id_campeonato'];
 			$num =  $filaSe['num_camiseta'];
-			$Seleccionados .= '<tr><td>'.$al.'</td>'.
-				'<td><input class="uk-input uk-form-width-xsmall" type="text" placeholder="Nro" id="camiseta_'.$id_al.'" name="camiseta_'.$id_al.'" value='.$num.'></td> '.
-				'<td><div class="uk-button-group">
-				        <button class="uk-button uk-button-secondary uk-button-small" onclick="admJugadorQuitar('.$id.','.$id_al.','.$id_ca.',\'m\')">Modificar</button>
-				        <button class="uk-button uk-button-danger uk-button-small" onclick="admJugadorQuitar('.$id.','.$id_al.','.$id_ca.',\'e\')">Eliminar</button>
-				    </div></td>'.
-				'</tr>';
+			$Seleccionados .= '<tr>
+								<td width="40%">'.$al.'</td>
+								<td class="center" width="10%">
+									<span class="input-icon input-icon-right">
+										<input placeholder="Nro" id="camiseta_'.$id_al.'" name="camiseta_'.$id_al.'" value='.$num.' type="text" "/>
+										<i class="ace-icon fa fa-leaf green"></i>
+									</span>
+								</td>
+								<td width="500%">
+									<button class="btn btn-warning" onclick="admJugadorQuitar('.$id.','.$id_al.','.$id_ca.',\'m\')">Modificar</button>
+									<button class="btn btn-danger" onclick="admJugadorQuitar('.$id.','.$id_al.','.$id_ca.',\'e\')">Eliminar</button>
+								</td>
+							</tr>';
 		}
 		$Seleccionados .= '</tbody>';
 	}
@@ -60,7 +66,7 @@ $comboDiciplina = diciplinaCombo($diciplina);
 
 $html = "";
 
-$html .= "EQUIPOS <hr class='uk-divider-icon'>";
+$html .= '<input type="hidden" id="id_futbol" name="id_futbol" value="'.$id.'">';
 
 $html .= '
 	<div class="tabbable">
@@ -167,7 +173,7 @@ $html .= '
 
 			</div>
 			<div id="messages" class="tab-pane fade">
-				<table class="table  table-bordered table-hover">'.$Seleccionados.'</table>
+				<table id="simple-table" class="table  table-bordered table-hover">'.$Seleccionados.'</table>
 			</div>
 		</div>
 	</div>';
