@@ -10,7 +10,7 @@ $id = $_POST['id'];
 $resultado=getEquipo($id);
 $lista = '<thead>
 			<tr>
-				<th>Capitan</th>
+				<th>--</th>
 				<th>Nombres</th>
 				<th>Camiseta</th>
 				<th>Gol</th>
@@ -24,19 +24,21 @@ if(pg_num_rows($resultado)!=0){
 		$jugador=$fila['razon_social'];
 		$id_alumno=$fila['id_alumno'];
 		$num_camiseta=$fila['num_camiseta'];
+		$por= rand(0, 10);
 
 		$lista.='<tr class="uk-text-left">
 					<td><input type="hidden" id="id_ficha_control" name="id_ficha_control" value="'.$id.'">
-					    <input class="uk-radio" type="radio" name="capitan"></td> 
-					<td class="uk-table-link"><a class="uk-link-reset" >'.$jugador.'</a> </td> 
-					<td><input class="uk-input uk-form-width-xsmall" type="text" name="alumnoNumTab" value="'.$jugador.'"placeholder="Nro"></td>
+					    <input class="uk-radio" type="checkbox" name="capitan" onclick=dat('.$por.')></td>
+							<td><progress class="uk-progress" value="'.$por.'" max="10"></progress></td>
+					<td class="uk-table-link"><a class="uk-link-reset" >'.$jugador.'</a> </td>
+					<td><input class="uk-input uk-form-width-xsmall" type="text" name="alumnoNumTab" value="'.$num_camiseta.'"placeholder="Nro"></td>
 					<td><button class="uk-button uk-button-secondary uk-button-small" onclick=gola();mensaje("GOL de '.$jugador.'")>Gol</button></td>
 				</tr>';
 		$lista.='<tr><td colspan="4"><p uk-margin>
-				    <button class="uk-button uk-button-default uk-button-small" onclick=mensaje(\"'.$jugador.'\"); >Tiro Puerta</button>
-				    <button class="uk-button uk-button-default uk-button-small" onclick="mensaje("Asistencia de '.$jugador.'")">Asitencia</button>
-				    <button class="uk-button uk-button-primary uk-button-small" onclick="mensaje("Infraccion: Tarjeta Amarilla para '.$jugador.'")">Amarilla</button>
-				    <button class="uk-button uk-button-danger uk-button-small" onclick="mensaje("Infraccion; Tarjeta Roja para '.$jugador.'")">Roja</button>
+				    <button class="uk-button uk-button-default uk-button-small" onclick=mensaje(); >Tiro Puerta</button>
+				    <button class="uk-button uk-button-default uk-button-small" onclick="mensaje()">Asitencia</button>
+				    <button class="uk-button uk-button-primary uk-button-small" onclick="mensaje()">Amarilla</button>
+				    <button class="uk-button uk-button-danger uk-button-small" onclick="mensaje()">Roja</button>
 				</p></td><tr>';
 	}
 }

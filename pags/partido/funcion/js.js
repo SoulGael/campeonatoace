@@ -31,7 +31,7 @@ function inicio(){
         },
             success:  function (response) {
                // console.log(response[0]['Roles']);
-                var equipo_a=response[0]['equipo_a'];   
+                var equipo_a=response[0]['equipo_a'];
                 var equipo_b=response[0]['equipo_b'];
                 var id_a=response[0]['id_a'];
                 var id_b=response[0]['id_b'];
@@ -47,8 +47,10 @@ function inicio(){
                 cargarDatosGanador(equipo_a, equipo_b, numeroPorc1, numeroPorc2);
                 datos("../frmCampeonatoCargar", "datosA", "id="+id_a);
                 datos("../frmCampeonatoCargar", "datosB", "id="+id_b);
-                document.getElementById("equipo_a").innerHTML=equipo_a;
-                document.getElementById("equipo_b").innerHTML=equipo_b;
+                document.getElementById("equipo_a").value=equipo_a;
+                document.getElementById("equipo_b").value=equipo_b;
+                document.getElementById("datosCambiarA").value=numeroPorc1;
+                document.getElementById("datosCambiarB").value=numeroPorc2;
             }
     });
 }
@@ -204,11 +206,45 @@ function gola(){
     document.getElementById("goles_a").innerHTML=(gol+1);
 }
 function golb(){
-    
+
 }
 
 function mensaje(getmensaje){
-    console.log(getmensaje);
+    console.log("s");
+    //UIkit.notification("<span uk-icon='icon: warning'></span> El campo Contraseña esta vacia.",{status:'warning'});
+}
+function mensaje(getmensaje){
+    console.log("E_WARNIN");
     //UIkit.notification("<span uk-icon='icon: warning'></span> El campo Contraseña esta vacia.",{status:'warning'});
 }
 
+function dat(a){
+  var ea = document.getElementById("equipo_a").value;
+  var eb = document.getElementById("equipo_b").value;
+
+  var da = document.getElementById("datosCambiarA").value;
+  var db = document.getElementById("datosCambiarB").value;
+
+  console.log(a);
+
+  var datosA = document.getElementById("datosCambiarA").value;
+  var datosB = document.getElementById("datosCambiarB").value;
+
+  var resA = datosA.split(",");
+  var resB = datosB.split(",");
+  resA[0] = parseInt(resA[0])+parseInt(a);
+
+  console.log(ea);
+  console.log(eb);
+  console.log(resA);
+  console.log(resB);
+
+  for(var i=0; i<resA.length;i++){
+    resA[i] = parseInt((resA[i]+a), 10);
+    resB[i] = parseInt((resB[i]+a), 10);
+  }
+
+  cargarDatosGanador(ea, eb, resA, resB);
+
+  //console.log(document.getElementById("datosB").value);
+}
