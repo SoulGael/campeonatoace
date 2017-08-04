@@ -789,8 +789,14 @@ function admFaseGrupos(){
 
     cmbFaseCampeonato=getCombo("id_campeonato, campeonato", "tbl_campeonato","","cmbCampeonato");
     //$html .= $comboCampeonato.
-
-    html += '<select class="form-control input-xlarge" name="cmbCampeonato" id="cmbCampeonato">'+cmbFaseCampeonato+'</select>';
+    html += '<div class="input-group col-xs-4">'+
+            '<select class="form-control input-xlarge" name="cmbCampeonato" id="cmbCampeonato">'+cmbFaseCampeonato+'</select>'+
+            '<span class="input-group-btn">'+
+                '<button onclick=activaTab("div1");busquedaFaseGrupo(); type="button" class="btn btn-primary btn-sm">'+
+                    '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
+                '</button>'+
+            '</span>'+
+        '</div>';
 
     document.getElementById("divMenu1").innerHTML=html;
 
@@ -893,7 +899,7 @@ function busquedaCalendario(){
     }
     where += " order by diciplina";
     //datos("id_equipo,equipo,diciplina, grupo_futbol, txt_genero", "vta_grupo_futbol", where,"admFaseGrupoForm");
-    datos("id_diciplina,diciplina", "DISCIPLINA", "100", "vta_diciplina_campeonato", where,"activaTab('div2');admCalendarioForm");
+    datos("id_diciplina,diciplina", "DISCIPLINA", "100", "vta_diciplina_campeonato", where,"admCalendarioForm");
 }
 
 function admCalendarioForm(id){
