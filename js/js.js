@@ -133,6 +133,18 @@ function inicioPrivilegio(){
 						  '<b class="arrow"></b>'+
 						'</li>';
                  }
+            if(menus(cadenaPrivilegio, 'admGarantia')){
+                html += '<li>'+
+                          '<a onclick="admGarantia()"><i class="menu-icon fa fa-caret-right"></i>Administración de Garantias</a>'+
+                          '<b class="arrow"></b>'+
+                        '</li>';
+                 }
+            if(menus(cadenaPrivilegio, 'admTarjetas')){
+                html += '<li>'+
+                          '<a onclick="admTarjetas()"><i class="menu-icon fa fa-caret-right"></i>Administración de Tarjetas</a>'+
+                          '<b class="arrow"></b>'+
+                        '</li>';
+                 }
         html+='</ul></li>';
     }
 
@@ -927,11 +939,11 @@ function admFichaControl(){
 
     document.getElementById("divMenu1").innerHTML=html;
 
-    html2 += '<button class="btn btn-success" onclick=admFichaForm(-1);activaTab("div2");>Nuevo</button>';
+    html2 += '<button class="btn btn-success" onclick=admFichaForm(-1);>Nuevo</button>';
 
     document.getElementById("divMenu2").innerHTML=html2;
     busquedaFicha();
-    admEstudianteForm(-1);
+    //admEstudianteForm(-1);
 }
 
 function busquedaFicha(){
@@ -940,14 +952,101 @@ function busquedaFicha(){
     if ($("#buscar_ficha").val()!="") {
         where += " where lower(razon_social) like lower('%"+$("#buscar_ficha").val()+"%') ";
     }
-    where += " order by estado desc, fecha, hora limit 10";
+    where += " order by estado desc, fecha, hora";
 
-    datos("id_ficha_control,equipo_a,equipo_b,diciplina, fecha, hora, txt_estado", "EQUIPO A,EQUIPO B,DISCIPLINA, Fecha, HORA, ESTADO", "20,20,15,15,15,15", "vta_ficha_control", where,"activaTab('div2');admFichaForm");
-
-    datos("id_ficha_control,equipo_a,equipo_b,diciplina, fecha, hora, txt_estado", "vta_ficha_control", where,"activaTab('div2');admFichaForm");
+    datos("id_ficha_control,equipo_a,equipo_b,diciplina, fecha, hora, txt_estado", "EQUIPO A,EQUIPO B,DISCIPLINA, Fecha, HORA, ESTADO", "20,20,15,15,15,15", "vta_ficha_control", where,"admFichaForm");
 }
 
 function admFichaForm(id){
  //   enviarForm('usuarios/frmCalendarioGrupo','idCampeonato='+$("#cmbCampeonato").val()+"&id="+id);
- window.open('partido/index.php?id='+id,'_blank');
+ window.open('control/index.php?id='+id,'_blank');
+}
+
+
+//GARANTIAS
+function admGarantia(){
+    /*console.log(equipoa);
+    console.log(equipob);
+    window.open('partido/index.php?varA='+equipoa+'&varB='+equipob,'_blank');
+    enviarForm('partido/index','idEquipoA='+equipoa+'&idEquipoB='+equipob);*/
+    encerar();
+    var html="";
+    var html2="";
+
+    html += '<div class="input-group col-xs-4">'+
+            '<input type="text" class="form-control" id="buscar_garantia" name="buscar_garantia" onKeypress="if(event.keyCode == 13) busquedaGarantia()" placeholder="Buscar.." />'+
+            '<span class="input-group-btn">'+
+                '<button onclick=activaTab("div1");busquedaGarantia(); type="button" class="btn btn-primary btn-sm">'+
+                    '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
+                '</button>'+
+            '</span>'+
+        '</div>';
+
+    document.getElementById("divMenu1").innerHTML=html;
+
+    html2 += '';
+
+    document.getElementById("divMenu2").innerHTML=html2;
+    busquedaGarantia();
+    //admEstudianteForm(-1);
+}
+
+function busquedaGarantia(){
+
+    var where = "";
+    if ($("#buscar_ficha").val()!="") {
+        where += " where lower(equipo) like lower('%"+$("#buscar_garantia").val()+"%') ";
+    }
+    where += " ";
+
+    datos("id_perdida_garantia,equipo,fecha,txt_genero,diciplina", "EQUIPO,FECHA,GENERO,DISCIPLINA", "40,20,20,20", "vta_perdida_garantia", where,"activaTab('div2');admGarantiaForm");
+}
+
+function admGarantiaForm(id){
+    enviarForm('usuarios/frmGarantia',"id="+id);
+}
+
+//GARANTIAS
+function admTarjetas(){
+    encerar();
+    var html="";
+    var html2="";
+
+    html += '<div class="input-group col-xs-4">'+
+            '<input type="text" class="form-control" id="buscar_tarjeta" name="buscar_tarjeta" onKeypress="if(event.keyCode == 13) busquedaTarjeta()" placeholder="Buscar.." />'+
+            '<span class="input-group-btn">'+
+                '<button onclick=activaTab("div1");busquedaTarjeta(); type="button" class="btn btn-primary btn-sm">'+
+                    '<span class="ace-icon fa fa-search icon-on-right"></span>Buscar'+
+                '</button>'+
+            '</span>'+
+        '</div>';
+
+    document.getElementById("divMenu1").innerHTML=html;
+
+    html2 += '';
+
+    document.getElementById("divMenu2").innerHTML=html2;
+    busquedaTarjeta();
+    //admEstudianteForm(-1);
+}
+
+function busquedaTarjeta(){
+
+    var where = "";
+    if ($("#buscar_ficha").val()!="") {
+        where += " where lower(razon_social) like lower('%"+$("#buscar_tarjeta").val()+"%') ";
+    }
+    where += " ";
+
+    datos("id_tarjeta,cedula,razon_social,carrera,nivel,tarjeta,fecha", "CEDULA,NOMBRES,CARRERA,NIVEL,TARJETA,FECHA", "20,30,20,10,10,10", "vta_tarjeta", where,"activaTab('div2');admTarjetaForm");
+}
+
+function admTarjetaForm(id){
+    enviarForm('usuarios/frmTarjeta',"id="+id);
+}
+
+function admTarjetaGuardar(){
+    //console.log($("#cmbCampeonato").val());
+    enviarFormGuardar('usuarios/frmTarjetaGuardar','{"id": "'+$("#id_tarjeta").val()+'" }');
+
 }

@@ -58,6 +58,8 @@ insert into tbl_pagina (modulo,pagina,descripcion) values ('1','admEstudiantes',
 insert into tbl_pagina (modulo,pagina,descripcion) values ('1','admDiciplinas','Acceso para Administrar las Diciplinas');
 insert into tbl_pagina (modulo,pagina,descripcion) values ('1','admCalendario','Acceso para Administrar los Calendarios');
 insert into tbl_pagina (modulo,pagina,descripcion) values ('1','admFichaControl','Acceso para Administrar las Fichas de Control');
+insert into tbl_pagina (modulo,pagina,descripcion) values ('1','admGarantia','Acceso para Administrar las Garantias');
+insert into tbl_pagina (modulo,pagina,descripcion) values ('1','admTarjetas','Acceso para Administrar las Multas de Tarjetas');
 
 create or replace view vta_privilegio as
 select r.*, pa.* 
@@ -519,7 +521,45 @@ constraint fk_id_equipo_tbl_equipo foreign key (id_equipo) references tbl_equipo
 constraint fk_id_alumno_tbl_alumno foreign key (id_alumno) references tbl_alumno(id_alumno)
 );
 
+create table perdida_garantia(
+id_perdida_garantia serial,
+id_campeonato integer,
+id_equipo integer,
+nombre_equipo text,
+id_ficha_control integer,
+fecha date,
+CONSTRAINT pk_id_perdida_garantia PRIMARY KEY (id_perdida_garantia)
+)
 
+create table tbl_tarjeta(
+id_tarjeta serial,
+tarjeta character varying (10),
+id_estudiante integer,
+id_ficha_control integer,
+fecha date,
+estado boolean default false,
+CONSTRAINT pk_id_tarjeta PRIMARY KEY (id_tarjeta)
+)
+
+create or replace view vta_tarjeta as
+select * from tbl_tarjeta t
+join vta_alumno_carrera c on t.id_estudiante=c.id_alumno
+
+--drop table tbl_tarjeta 
+
+create or replace view vta_perdida_garantia as
+select g.*, e.equipo, e.id_campeonato_actual, e.txt_genero, e.diciplina from perdida_garantia g
+join vta_equipo_solo e on g.id_equipo=e.id_equipo
+
+select * from vta_perdida_garantia where lower(equipo) like (select lower(equipo) from tbl_equipo where id_equipo=31)
+
+select * from vta_perdida_garantia where lower(equipo) like (select lower(equipo) from tbl_equipo where id_equipo=(select id_equipo from perdida_garantia where id_perdida_garantia=3))
+
+select * from tbl_ficha_control
+select * from tbl_equipo
+
+select (select id_campeonato_actual,id_equipo from tbl_equipo where id_equipo=(select id_equipo from tbl_grupo_futbol where id_grupo_futbol=(select id_grupo_futbol_a from tbl_ficha_control where id_ficha_control=224) )), 
+id_grupo_futbol_a, equipo from 
 ------CONSULTAS GENERALES
 
 -- delete from tbl_equipo

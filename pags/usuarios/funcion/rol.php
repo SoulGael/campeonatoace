@@ -369,5 +369,29 @@ function diciplinaModificar($id, $diciplina, $estado, $hora) {
 	return false;
 }
 
+function getGarantia($id) {
+	$consulta="select * from vta_perdida_garantia where lower(equipo) like (select lower(equipo) from tbl_equipo where id_equipo=
+				(select id_equipo from perdida_garantia where id_perdida_garantia=".$id.")) ;";
+	$resultado=pg_query($consulta) or die (pg_last_error());
+
+	return $resultado;
+}
+
+function getTarjeta($id) {
+	$consulta="select * from vta_tarjeta where id_tarjeta=".$id." ;";
+	$resultado=pg_query($consulta) or die (pg_last_error());
+
+	return $resultado;
+}
+
+function tarjetaPagar($id) {
+
+	$resultado = "";
+	if($resultado = pg_query("update tbl_tarjeta set estado=true where id_tarjeta=".$id." ") or die (pg_last_error())){
+		return true;
+	}
+
+	return false;
+}
 
 ?>
