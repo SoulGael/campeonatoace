@@ -59,6 +59,8 @@ function inicio(){
     });
 }
 
+
+
 function mensajeError(mensaje){
     $.gritter.add({
         // (string | mandatory) the heading of the notification
@@ -272,7 +274,7 @@ function gol(id){
     if(id==document.getElementById("equipoB").value){
         var gol=document.getElementById("resultadoGolB").value;
         document.getElementById("resultadoGolB").value=(parseInt(gol)+1);
-    }    
+    }
 }
 
 function noGol(id){
@@ -284,17 +286,17 @@ function noGol(id){
     if(id==document.getElementById("equipoB").value){
         var gol=document.getElementById("resultadoGolB").value;
         document.getElementById("resultadoGolB").value=(parseInt(gol)-1);
-    }  
+    }
 }
 
 function sumarGol(id_alumno){
     var gol=document.getElementById("resulSpan"+id_alumno+"").innerHTML;
-    document.getElementById("resulSpan"+id_alumno+"").innerHTML=(parseInt(gol)+1); 
+    document.getElementById("resulSpan"+id_alumno+"").innerHTML=(parseInt(gol)+1);
 }
 
 function restarGol(id_alumno){
     var gol=document.getElementById("resulSpan"+id_alumno+"").innerHTML;
-    document.getElementById("resulSpan"+id_alumno+"").innerHTML=(parseInt(gol)-1); 
+    document.getElementById("resulSpan"+id_alumno+"").innerHTML=(parseInt(gol)-1);
 }
 
 function mensaje(getmensaje){
@@ -303,7 +305,7 @@ function mensaje(getmensaje){
 }
 
 function dat(id){
-        
+
 var ataque=0;
 var defensa=0;
 var atajada=0;
@@ -325,7 +327,7 @@ if(id==document.getElementById("equipoA").value){
                     atajada = parseInt(getVal[2])+atajada;
                   }
                }
-            });    
+            });
 
           var ea = document.getElementById("equipo_a").value;
           var eb = document.getElementById("equipo_b").value;
@@ -373,7 +375,7 @@ if(id==document.getElementById("equipoA").value){
                     atajada = parseInt(getVal[2])+atajada;
                   }
                }
-            });    
+            });
 
           var ea = document.getElementById("equipo_a").value;
           var eb = document.getElementById("equipo_b").value;
@@ -402,9 +404,9 @@ if(id==document.getElementById("equipoA").value){
 
           cargarDatosGanador(ea, eb, resA, resB);
           document.getElementById("datosCambiarB").value=resB;
-    } 
+    }
 
-  
+
 
   //console.log(document.getElementById("datosB").value);
 }
@@ -423,15 +425,15 @@ function admFichaGuardar(){
 
 function amarilla(id_alumno){
     var gol=document.getElementById("amarillaSpan"+id_alumno+"").innerHTML;
-    document.getElementById("amarillaSpan"+id_alumno+"").innerHTML=(parseInt(gol)+1); 
+    document.getElementById("amarillaSpan"+id_alumno+"").innerHTML=(parseInt(gol)+1);
     if(gol==1){
         document.getElementById("roja2"+id_alumno+"").innerHTML="<td colspan='4'><button class='btn btn-danger btn-block'>EXPULSADO</button></td>";
-    } 
+    }
     enviarFormGuardar('frmTarjetaGuardar','{"id": "'+$("#idFichaCamp").val()+'", "id_alumno" : "'+id_alumno+'", "tipo": "amarilla"}');
 }
 
 function roja(id_alumno){
-    document.getElementById("roja2"+id_alumno+"").innerHTML="<td colspan='4'><button class='btn btn-danger btn-block'>EXPULSADO</button></td>"; 
+    document.getElementById("roja2"+id_alumno+"").innerHTML="<td colspan='4'><button class='btn btn-danger btn-block'>EXPULSADO</button></td>";
     enviarFormGuardar('frmTarjetaGuardar','{"id": "'+$("#idFichaCamp").val()+'", "id_alumno" : "'+id_alumno+'", "tipo": "roja" }');
 }
 
@@ -439,7 +441,7 @@ function pagar(id_alumno,id_tarjeta){
     document.getElementById("roja2"+id_alumno+"").innerHTML="<td colspan='4'><p uk-margin>"+
                     "<button class='btn btn-sm btn-primary' onclick=mensaje(); >Tiro Puerta</button>"+
                     "<button class='btn btn-sm btn-primary' onclick=mensaje(); >Despeje</button>"+
-                    "<button class='btn btn-sm btn-primary' onclick=mensaje()>Asitencia</button>"+                    
+                    "<button class='btn btn-sm btn-primary' onclick=mensaje()>Asitencia</button>"+
                     "<a href='#' class='btn btn-app btn-warning btn-xs no-radius' onclick='amarilla("+id_alumno+")';>"+
                         "Amarilla"+
                         "<span class='label label-inverse arrowed-in' id='amarillaSpan"+id_alumno+"'>0</span>"+

@@ -22,7 +22,11 @@ while($fila=pg_fetch_array($resultado)){
 	$tarjeta = $fila['tarjeta'];;
 }
 
-$html .= '<input type="hidden"  id="id_tarjeta" name="id_tarjeta" value="'.$id.'">';
+$html .= '<input type="hidden"  id="id_tarjeta" name="id_tarjeta" value="'.$id.'">
+<button type="button" onclick="admImprimirTarjetas('.$id.')" class="btn btn-primary btn-sm">
+	<i class="ace-icon fa fa-key bigger-110"></i>Imprimir
+</button>';
+
 $html .= '<form class="form-horizontal" role="form">
 			<div class="form-group">
 				<label class="col-sm-2 control-label no-padding-right">Nombres</label>
@@ -65,8 +69,8 @@ $html .= '<form class="form-horizontal" role="form">
 			</div>
 		</form>';
 
-			
-					
+
+
 $html .='</tbody>
 		</table>
 

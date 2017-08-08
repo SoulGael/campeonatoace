@@ -36,7 +36,7 @@ autenticar();
 		<link rel="stylesheet" href="../../assets/css/daterangepicker.min.css" />
 		<link rel="stylesheet" href="../../assets/css/bootstrap-datetimepicker.min.css" />
 
-		<!--[if lte IE 9]>
+		<!--[if lte IE 9]><script src="assets/js/bootbox.js"></script>
 		  <link rel="stylesheet" href="../assets/css/ace-ie.min.css" />
 		<![endif]-->
 
@@ -44,6 +44,7 @@ autenticar();
 		<script src="funcion/highcharts.js"></script>
 		<script src="funcion/exporting.js"></script>
 
+		<script src="../../assets/js/bootbox.js"></script>
 		<script src="../../assets/js/jquery-2.1.4.min.js"></script>
 		<script src="../../assets/js/ace-extra.min.js"></script>
 		<script src="funcion/js.js"></script>
@@ -66,6 +67,44 @@ autenticar();
 		<!-- ace scripts -->
 		<script src="../../assets/js/ace-elements.min.js"></script>
 		<script src="../../assets/js/ace.min.js"></script>
+
+		<script type="text/javascript">$("#bootbox-options").on(ace.click_event, function() {
+		  bootbox.dialog({
+		    message: "<span class='bigger-110'>I am a custom dialog with smaller buttons</span>",
+		    buttons:
+		    {
+		      "success" :
+		       {
+		        "label" : "<i class='ace-icon fa fa-check'></i> Success!",
+		        "className" : "btn-sm btn-success",
+		        "callback": function() {
+		          //Example.show("great success");
+		        }
+		      },
+		      "danger" :
+		      {
+		        "label" : "Danger!",
+		        "className" : "btn-sm btn-danger",
+		        "callback": function() {
+		          //Example.show("uh oh, look out!");
+		        }
+		      },
+		      "click" :
+		      {
+		        "label" : "Click ME!",
+		        "className" : "btn-sm btn-primary",
+		        "callback": function() {
+		          //Example.show("Primary button");
+		        }
+		      },
+		      "button" :
+		      {
+		        "label" : "Just a button...",
+		        "className" : "btn-sm"
+		      }
+		    }
+		  });
+		}); </script>
 	</head>
 
 	<body class="no-skin">
@@ -127,42 +166,42 @@ autenticar();
 						<div class="row">
 
 							<div class="col-xs-4 center">
-								<div class="hr hr-double hr-dotted hr18"></div>	
+								<div class="hr hr-double hr-dotted hr18"></div>
 								<input type="text" id="equipo_a" name="equipo_a" value="Campeonato" disabled>
 								<input type="checkbox" class="ace" name="checkA" id="checkA" />
 								<span class="lbl">No se presento</span>
-								
+
 								<div class="hr hr-double hr-dotted hr18"></div>
 	            				<div id="datosA"></div>
 							</div>
-							
+
 							<div class="col-xs-4 center">
-							<button class="btn btn-sm btn-primary" onclick="admFichaInicio();" >INICIO</button>
+							<button class="btn btn-sm btn-primary" id="bootbox-options" >INICIO</button>
 							<button class="btn btn-sm btn-primary" onclick="admFichaGuardar();" >GUARDAR</button>
-								<div class="hr hr-double hr-dotted hr18"></div>	
+								<div class="hr hr-double hr-dotted hr18"></div>
 								<h3>FICHA DE CONTROL</h3>
-								
+
 								<input type="hidden" id="equipoA" name="equipoA">
 								<input type="hidden" id="equipoB" name="equipoB">
 								<input class="input-mini" type="text" id="resultadoGolA" name="resultadoGolA" value="0" disabled>/
 								<input class="input-mini" type="text" id="resultadoGolB" name="resultadoGolB" value="0" disabled>
 
-								<div class="hr hr-double hr-dotted hr18"></div>	
-								<input type="text" id="datosCambiarA" name="datosA">
-								<input type="text" id="datosCambiarB" name="datosB">
-						        
+								<div class="hr hr-double hr-dotted hr18"></div>
+								<input type="hidden" id="datosCambiarA" name="datosA">
+								<input type="hidden" id="datosCambiarB" name="datosB">
+
 						        <div id="container"></div>
 						        <div id="prediccion"></div>
-						        
+
 							</div>
 
 							<div class="col-xs-4 center">
-								<div class="hr hr-double hr-dotted hr18"></div>	
+								<div class="hr hr-double hr-dotted hr18"></div>
 								<input  type="text" id="equipo_b" name="equipo_b" value="Campeonato" disabled>
 								<input type="checkbox" class="ace" name="checkB" id="checkB" />
 								<span class="lbl">No se Presento</span>
 
-								<div class="hr hr-double hr-dotted hr18"></div>	
+								<div class="hr hr-double hr-dotted hr18"></div>
 	            				<div id="datosB"></div>
 							</div>
 

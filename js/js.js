@@ -1006,6 +1006,16 @@ function admGarantiaForm(id){
     enviarForm('usuarios/frmGarantia',"id="+id);
 }
 
+function admImprimirGarantiaForm(id){
+	 window.open('usuarios/reportegarantia.php?id='+id,'_blank');
+  //  enviarForm('usuarios/reportegarantia',"id="+id);
+}
+
+function admImprimirTarjetas(id){
+	 window.open('usuarios/reportetarjetas.php?id='+id,'_blank');
+  //  enviarForm('usuarios/reportegarantia',"id="+id);
+}
+
 //GARANTIAS
 function admTarjetas(){
     encerar();

@@ -7,14 +7,12 @@ conectarse();
 //Recibir los datos ingresados en el formulario
 $id = $_POST['id'];
 
-
-
-
-
-
 $html = "";
 
-$html .= '<input type="hidden"  id="id_garantia" name="id_garantia" value="'.$id.'">';
+$html .= '<input type="hidden"  id="id_garantia" name="id_garantia" value="'.$id.'">
+<button type="button" onclick="admImprimirGarantiaForm('.$id.')" class="btn btn-primary btn-sm">
+	<i class="ace-icon fa fa-key bigger-110"></i>Imprimir
+</button>';
 $html .= '<table id="simple-table" class="table  table-bordered table-hover">
 			<thead>
 				<tr>
@@ -39,7 +37,7 @@ $html .= '<table id="simple-table" class="table  table-bordered table-hover">
 						<td>'.$genero.'</td>
 						<td>'.$diciplina.'</td></tr>';
 			}
-					
+
 $html .='</tbody>
 		</table>
 
