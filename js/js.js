@@ -911,10 +911,11 @@ function busquedaCalendario(){
     }
     where += " order by diciplina";
     //datos("id_equipo,equipo,diciplina, grupo_futbol, txt_genero", "vta_grupo_futbol", where,"admFaseGrupoForm");
-    datos("id_diciplina,diciplina", "DISCIPLINA", "100", "vta_diciplina_campeonato", where,"admCalendarioForm");
+    datos("id_diciplina,diciplina", "DISCIPLINA", "100", "vta_diciplina_campeonato", where,"activaTab('div2');admCalendarioForm");
 }
 
 function admCalendarioForm(id){
+	console.log("s");
     enviarForm('usuarios/frmCalendarioGrupo','idCampeonato='+$("#cmbCampeonato").val()+"&id="+id);
 }
 

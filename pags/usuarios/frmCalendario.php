@@ -25,7 +25,54 @@ $fechaFin = date('Y-m-d H:i', strtotime("$fecha $hf:$mf - 1 hour"));
 $contHoras=0;
 $contMinutos=0;
 
+$html = '<div class="tabbable">';
+$htmlDiciplinas="";
+$htmlContenidoDiciplinas="";
+
 if(strcmp($idCampeonato, '-1')!=0){
+
+  $htmlDiciplinas.='<ul class="nav nav-tabs" id="myTab">';
+
+  $resultadoDiciplina=getDiciplinaCampeonato($idCampeonato);
+  while($filaDiciplina=pg_fetch_array($resultadoDiciplina)){
+		$idDiciplina = $filaDiciplina['id_diciplina'];
+		$diciplina = $filaDiciplina['diciplina'];
+		$hora = $filaDiciplina['hora'];
+
+		list($hora, $minuto, $s) = explode(':', $hora);
+
+    $htmlDiciplinas.='<li class="active">
+        			<a data-toggle="tab" href="#'.$diciplina.'">
+        				<i class="green ace-icon fa fa-home bigger-120"></i>
+        				'.$diciplina.'
+        			</a>
+        		</li>';
+
+    for ($i=1;  ; $i++) {
+    	$resultadoVarones=getArrayGrupo($idCampeonato, $i, $idDiciplina,"true");
+  		$arrayVarones = explode( ',', $resultadoVarones );
+
+			if($resultadoVarones== "-1"){
+				break;
+			}else {
+        $htmlContenidoDiciplinas.='<div class="tabbable">
+                                    <ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">';
+
+        $htmlVarones .= '<tr class="uk-text-left"><td><h3>Grupo: '. $i.'</h3></td></tr>';
+
+      }
+    }
+
+  }
+
+  $htmlDiciplinas.='</ul>';
+
+}
+
+$html.= $htmlDiciplinas.'</div>';
+
+/*if(strcmp($idCampeonato, '-1')!=0){
+
 
 	$resultadoDiciplina=getDiciplinaCampeonato($idCampeonato);
 
@@ -37,14 +84,14 @@ if(strcmp($idCampeonato, '-1')!=0){
 		list($hora, $minuto, $s) = explode(':', $hora);
 
 		$htmlCabecera .= "<li><a data-toggle='tab' href='#".$diciplina."'>".$diciplina."</a></li>";
-		
+
 		$htmlVarones = "";
 		$htmlMujeres = "";
 
 		$htmlCuerpo .= '<div id='.$diciplina.' class="tab-pane">'.
 						  '<ul uk-tab><li><a href="#">MASCULINO</a></li>'.
 						  '<li><a href="#">FEMENINO</a></li></ul><ul class="uk-switcher uk-margin">';
-						
+
 		$htmlVarones .=	'<li><table class="uk-table uk-table-divider">'.
 					    '<tbody>';
 
@@ -58,15 +105,15 @@ if(strcmp($idCampeonato, '-1')!=0){
 			if($resultadoVarones== "-1"){
 				break;
 			}else {
-				
-				
-				
+
+
+
 				//$htmlVarones .= '<tr><td>'. $fechaInicio .'</td></tr>';
 				$htmlVarones .= '<tr class="uk-text-left"><td><h3>Grupo: '. $i.'</h3></td></tr>';
 
-				for ($j=0; $j <count($arrayVarones) ; $j++) { 
+				for ($j=0; $j <count($arrayVarones) ; $j++) {
 					for ($k=$j+1; $k < (count($arrayVarones)) ; $k++) {
-						
+
 						$equipoa=getNombreEquipo($arrayVarones[$j]);
 						$equipob=getNombreEquipo($arrayVarones[$k]);
 						if($fechaInicio>$fechaFin){
@@ -86,21 +133,13 @@ if(strcmp($idCampeonato, '-1')!=0){
 						$fechaInicio = date('Y-m-d H:i', strtotime("$fechaInicio + $hora hour + $minuto minutes"));
 						$contHoras++;
 						$contMinutos++;
-					}					
+					}
 				}
 				//$fechaInicio = date('Y-m-d H:i', strtotime("$fechaInicio + 1 day - $contHoras hour"));
 				//$fechaFin = date('Y-m-d H:i', strtotime("$fechaFin + 1 day"));
 				//$contHoras=0;
 			}
 		}
-
-
-
-		
-
-		/*foreach ($resultadoVarones as $valor) {
-			$htmlVarones .= '<tr><td>'. $valor .'</td></tr>';
-		}*/
 
 		for ($i=1;  ; $i++) {
 			$resultadoMujeres=getArrayGrupo($idCampeonato, $i, $idDiciplina,"false");
@@ -110,7 +149,7 @@ if(strcmp($idCampeonato, '-1')!=0){
 			}else {
 				$htmlMujeres .= '<tr class="uk-text-left"><td><h4>Grupo '. $i.'</h4></td></tr>';
 
-				for ($j=0; $j < count($arrayMujeres) ; $j++) { 
+				for ($j=0; $j < count($arrayMujeres) ; $j++) {
 					for ($k=$j+1; $k < (count($arrayMujeres)) ; $k++) {
 						$equipoa=getNombreEquipo($arrayMujeres[$j]);
 						$equipob=getNombreEquipo($arrayMujeres[$k]);
@@ -132,18 +171,15 @@ if(strcmp($idCampeonato, '-1')!=0){
 						$contHoras++;
 						$contMinutos++;
 					}
-					
+
 				}
 				//$fechaInicio = date('Y-m-d H:i', strtotime("$fechaInicio + 1 day - $contHoras hour"));
 				//$fechaFin = date('Y-m-d H:i', strtotime("$fechaFin + 1 day"));
 				//$contHoras=0;
-				
+
 			}
-		}		
-		
-		/*foreach ($resultadoMujeres as $valor) {
-			$htmlMujeres .= '<tr><td>'. $valor .'</td></tr>';
-		}*/
+		}
+
 
 		$htmlVarones .= '</tbody></table></li>';
 		$htmlMujeres .= "</tbody></table></li>";
@@ -151,7 +187,7 @@ if(strcmp($idCampeonato, '-1')!=0){
 		$htmlCuerpo .= $htmlMujeres."</ul></li>";
 
 	}
-		
+
 }
 $htmlCabecera .= "</ul</div>";
 $htmlCuerpo .= "</div>";
@@ -159,12 +195,10 @@ $htmlCuerpo .= "</div>";
 //
 ini_set('max_execution_time', 300);
 
-$html = "";
-
 $html .= $htmlCabecera;
 
-$html .= $htmlCuerpo;
-		
+$html .= $htmlCuerpo;*/
+
 
 echo $html;
 pg_close();
