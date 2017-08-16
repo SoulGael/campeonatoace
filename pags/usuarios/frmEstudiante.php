@@ -35,7 +35,11 @@ $comboCarrera = equiposCombo($id_carrera);
 
 $html = "";
 
-$html .= '<input type="hidden" id="id_estudiante" name="id_estudiante" value="'.$id.'">';
+$html .= '<input type="hidden" id="id_estudiante" name="id_estudiante" value="'.$id.'">
+			
+			<button type="button" onclick="admImprimirCarnet('.$id.')" class="btn btn-primary btn-sm">
+				<i class="ace-icon fa fa-key bigger-110"></i>Imprimir
+			</button>';
 
 $html .= '
 <div class="tabbable">

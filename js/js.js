@@ -880,7 +880,8 @@ function admCalendario(){
     html2 += ':<input class="input-small" id="id_minutoi" name="id_minutoi" type="text" placeholder="mm">';
     html2 += ' Hora Final: <input class=" input-small" id="id_horaf" name="id_horaf" type="text" placeholder="hh">';
     html2 += ':<input class="input-small" id="id_minutof" name="id_minutof" type="text" placeholder="mm">';
-    html2 += '<br><button class="btn btn-success" onclick=admCalendarios(-1);activaTab("div2");>Nuevo</button>';
+    html2 += '<br><br><button class="btn btn-success" onclick=admCalendarios(-1);activaTab("div2");>Nuevo</button>';
+    html2 += ' <a  href="usuarios/calendar.html" target="_blank"><button class="btn btn-success">Ver Calendario Completo</button></a>';
 
     document.getElementById("divMenu2").innerHTML=html2;
     busquedaCalendario();
@@ -1014,6 +1015,11 @@ function admImprimirGarantiaForm(id){
 
 function admImprimirTarjetas(id){
 	 window.open('usuarios/reportetarjetas.php?id='+id,'_blank');
+  //  enviarForm('usuarios/reportegarantia',"id="+id);
+}
+
+function admImprimirCarnet(id){
+     window.open('usuarios/reporteCarnet.php?id='+id,'_blank');
   //  enviarForm('usuarios/reportegarantia',"id="+id);
 }
 

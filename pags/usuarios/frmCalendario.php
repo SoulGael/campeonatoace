@@ -27,13 +27,14 @@ $contMinutos=0;
 
 $html = '<div class="tabbable">';
 $htmlDiciplinas="";
-$htmlContenidoDiciplinas="";
+$htmlContenidoDiciplinas="<div class='tab-content'>";
 
 if(strcmp($idCampeonato, '-1')!=0){
 
   $htmlDiciplinas.='<ul class="nav nav-tabs" id="myTab">';
 
   $resultadoDiciplina=getDiciplinaCampeonato($idCampeonato);
+
   while($filaDiciplina=pg_fetch_array($resultadoDiciplina)){
 		$idDiciplina = $filaDiciplina['id_diciplina'];
 		$diciplina = $filaDiciplina['diciplina'];
@@ -41,35 +42,76 @@ if(strcmp($idCampeonato, '-1')!=0){
 
 		list($hora, $minuto, $s) = explode(':', $hora);
 
-    $htmlDiciplinas.='<li class="active">
-        			<a data-toggle="tab" href="#'.$diciplina.'">
-        				<i class="green ace-icon fa fa-home bigger-120"></i>
-        				'.$diciplina.'
-        			</a>
-        		</li>';
+		$htmlVarones = "";
+		$htmlMujeres = "";
 
-    for ($i=1;  ; $i++) {
-    	$resultadoVarones=getArrayGrupo($idCampeonato, $i, $idDiciplina,"true");
-  		$arrayVarones = explode( ',', $resultadoVarones );
+	    $htmlDiciplinas.='<li>
+	        			<a data-toggle="tab" href="#'.$diciplina.'">
+	        				<i class="green ace-icon fa fa-home bigger-120"></i>
+	        				'.$diciplina.'
+	        			</a>
+	        		</li>';
+
+	    $htmlContenidoDiciplinas.='<div id="'.$diciplina.'" class="tab-pane"><div class="row">';
+
+	    for ($i=1;  ; $i++) {
+	    	$resultadoVarones=getArrayGrupo($idCampeonato, $i, $idDiciplina,"true");
+	  		$arrayVarones = explode( ',', $resultadoVarones );
 
 			if($resultadoVarones== "-1"){
 				break;
 			}else {
-        $htmlContenidoDiciplinas.='<div class="tabbable">
-                                    <ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">';
+				$htmlContenidoDiciplinas.=' <div class="col-sm-6">
+											<table id="simple-table" class="table  table-bordered table-hover"> 
+												<tr><td colspan="4"><div class="col-xs-11 label label-lg label-info arrowed-in arrowed-right">
+															<b>Grupo: '. $i.' '.$diciplina.'</b>
+														</div> 
+												</td></tr>';
 
-        $htmlVarones .= '<tr class="uk-text-left"><td><h3>Grupo: '. $i.'</h3></td></tr>';
+				for ($j=0; $j <count($arrayVarones) ; $j++) {
+					for ($k=$j+1; $k < (count($arrayVarones)) ; $k++) {
 
-      }
-    }
+						$equipoa=getNombreEquipo($arrayVarones[$j]);
+						$equipob=getNombreEquipo($arrayVarones[$k]);
+						if($fechaInicio>$fechaFin){
 
-  }
+							$fechaInicio = date('Y-m-d H:i', strtotime("$fechaInicio + 1 day - $contHoras hour - $minuto minutes"));
+							$fechaFin = date('Y-m-d H:i', strtotime("$fechaFin + 1 day"));
+							$diaLaborable=date('w',strtotime($fechaInicio));
+							while (strcmp($diaLaborable, '0')==0||strcmp($diaLaborable, '6')==0) {
+								$fechaInicio = date('Y-m-d H:i', strtotime("$fechaInicio + 1 day"));
+								$fechaFin = date('Y-m-d H:i', strtotime("$fechaFin + 1 day"));
+								$diaLaborable=date('w',strtotime($fechaInicio));
+							}
+							$contHoras=0;
+							$contMinutos=0;
+						}
+						$htmlContenidoDiciplinas .= '<tr class="uk-text-left" onclick=admFichaControl('.$arrayVarones[$j].','.$arrayVarones[$k].')>
+														<td>'. $equipoa .'</td>
+														<td>vs</td>
+														<td> '.$equipob.' </td>
+														<td>'.$fechaInicio.'</td>
+													</tr>';
+						$fechaInicio = date('Y-m-d H:i', strtotime("$fechaInicio + $hora hour + $minuto minutes"));
+						$contHoras++;
+						$contMinutos++;
+					}
+				}
+				//$fechaInicio = date('Y-m-d H:i', strtotime("$fechaInicio + 1 day - $contHoras hour"));
+				//$fechaFin = date('Y-m-d H:i', strtotime("$fechaFin + 1 day"));
+				//$contHoras=0;
+				$htmlContenidoDiciplinas .= '</table></div>';
+	        }
+	    }
+	    $htmlContenidoDiciplinas.='</div></div>';
+	}
 
   $htmlDiciplinas.='</ul>';
 
 }
 
-$html.= $htmlDiciplinas.'</div>';
+$htmlContenidoDiciplinas .= '</div>';
+$html.= $htmlDiciplinas.' '.$htmlContenidoDiciplinas.'</div>';
 
 /*if(strcmp($idCampeonato, '-1')!=0){
 
